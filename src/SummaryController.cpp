@@ -42,6 +42,7 @@ void SummaryController::getInfos() {
 
     emit dateChanged();
 
+    QSettings settings("Amonchakai", "Workout");
 
     // --------------------------------------------------------------------
     // general statistics about the last exercise
@@ -65,7 +66,11 @@ void SummaryController::getInfos() {
         }
     }
     m_Stats += QString::number(nbReps) + tr(" reps completed\n");
-    m_Stats += QString::number(weight) + tr(" Kg total lifted\n");
+
+    if(settings.value("unit", 2).toInt() == 2)
+        m_Stats += QString::number(weight) + tr(" Kg total lifted\n");
+    else
+        m_Stats += QString::number(weight) + tr(" lbs total lifted\n");
 
     int distance = 0;
     int duration = 0;
@@ -75,7 +80,12 @@ void SummaryController::getInfos() {
             duration += exercises_cardio.at(i).second.at(k)->getDuration();
         }
     }
-    m_Stats += QString::number(distance) + tr("m in ");
+
+    if(settings.value("unit", 2).toInt() == 2)
+        m_Stats += QString::number(distance) + tr("m in ");
+    else
+        m_Stats += QString::number(distance) + tr("ft in ");
+
     m_Stats += QString::number(duration/60) + tr(" min\n");
 
 
@@ -114,13 +124,18 @@ void SummaryController::getInfos() {
     // ----------------------------------------------------------------------------------------------
     // push data to the view
 
+    bool metric = settings.value("unit", 2).toInt() == 2;
+
     QList<QObject*> datas;
     for(int i = 0 ; i < exercises_strength.length() ; ++i) {
         for(int k = 0 ; k < exercises_strength.at(i).second.length() ; ++k) {
             Detail *d = new Detail();
             d->setTitle(exercises_strength.at(i).first);
             const Set *set = exercises_strength.at(i).second.at(k);
-            d->setText(tr("SET ") + QString::number(set->getId()) + ": " + QString::number(set->getRepetition()) + " REPS @ " + QString::number(set->getWeight()) + tr("Kg") );
+            if(metric)
+                d->setText(tr("SET ") + QString::number(set->getId()) + ": " + QString::number(set->getRepetition()) + " REPS @ " + QString::number(set->getWeight()) + tr("Kg") );
+            else
+                d->setText(tr("SET ") + QString::number(set->getId()) + ": " + QString::number(set->getRepetition()) + " REPS @ " + QString::number(set->getWeight()) + tr("lbs") );
 
             datas.push_back(d);
         }
@@ -131,7 +146,10 @@ void SummaryController::getInfos() {
             Detail *d = new Detail();
             d->setTitle(exercises_cardio.at(i).first);
             const Cardio *cardio = exercises_cardio.at(i).second.at(k);
-            d->setText(QString::number(cardio->getDistance()) + tr("m in ") + QString::number(cardio->getDuration()/60) + tr("min"));
+            if(metric)
+                d->setText(QString::number(cardio->getDistance()) + tr("m in ") + QString::number(cardio->getDuration()/60) + tr("min"));
+            else
+                d->setText(QString::number(cardio->getDistance()) + tr("ft in ") + QString::number(cardio->getDuration()/60) + tr("min"));
 
             datas.push_back(d);
         }

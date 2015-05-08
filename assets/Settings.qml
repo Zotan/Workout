@@ -114,6 +114,7 @@ Page {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 }
+                horizontalAlignment: HorizontalAlignment.Fill
                 Button {
                     text: qsTr("Save")
                     horizontalAlignment: HorizontalAlignment.Fill

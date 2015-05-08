@@ -116,173 +116,199 @@
 <context>
     <name>Practice</name>
     <message>
-        <location filename="../assets/Practice.qml" line="45"/>
+        <location filename="../assets/Practice.qml" line="46"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="50"/>
+        <location filename="../assets/Practice.qml" line="51"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="55"/>
+        <location filename="../assets/Practice.qml" line="56"/>
         <source>Graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="146"/>
+        <location filename="../assets/Practice.qml" line="147"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="248"/>
-        <location filename="../assets/Practice.qml" line="763"/>
+        <location filename="../assets/Practice.qml" line="249"/>
+        <location filename="../assets/Practice.qml" line="769"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="277"/>
-        <location filename="../assets/Practice.qml" line="768"/>
+        <location filename="../assets/Practice.qml" line="278"/>
+        <location filename="../assets/Practice.qml" line="774"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="306"/>
-        <location filename="../assets/Practice.qml" line="772"/>
+        <location filename="../assets/Practice.qml" line="307"/>
+        <location filename="../assets/Practice.qml" line="778"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="335"/>
+        <location filename="../assets/Practice.qml" line="336"/>
         <source>Set: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="429"/>
+        <location filename="../assets/Practice.qml" line="430"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="457"/>
+        <location filename="../assets/Practice.qml" line="430"/>
+        <source>lbs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="458"/>
         <source>You have to perform at least one repetition!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="530"/>
+        <location filename="../assets/Practice.qml" line="531"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="548"/>
+        <location filename="../assets/Practice.qml" line="549"/>
         <source>Completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="577"/>
-        <location filename="../assets/Practice.qml" line="683"/>
+        <location filename="../assets/Practice.qml" line="578"/>
+        <location filename="../assets/Practice.qml" line="682"/>
         <source>SET: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="577"/>
-        <location filename="../assets/Practice.qml" line="683"/>
+        <location filename="../assets/Practice.qml" line="596"/>
+        <location filename="../assets/Practice.qml" line="704"/>
         <source> Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="617"/>
+        <location filename="../assets/Practice.qml" line="596"/>
+        <location filename="../assets/Practice.qml" line="704"/>
+        <source> lbs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="622"/>
         <source>No history available. You need to do some excercise!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="669"/>
+        <location filename="../assets/Practice.qml" line="674"/>
         <source> </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="727"/>
+        <location filename="../assets/Practice.qml" line="700"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="700"/>
+        <source>ft</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="674"/>
+        <source> in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="733"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="740"/>
+        <location filename="../assets/Practice.qml" line="746"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="755"/>
-        <location filename="../assets/Practice.qml" line="785"/>
+        <location filename="../assets/Practice.qml" line="761"/>
+        <location filename="../assets/Practice.qml" line="791"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="759"/>
+        <location filename="../assets/Practice.qml" line="765"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="789"/>
+        <location filename="../assets/Practice.qml" line="795"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="794"/>
+        <location filename="../assets/Practice.qml" line="800"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="798"/>
+        <location filename="../assets/Practice.qml" line="804"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="802"/>
+        <location filename="../assets/Practice.qml" line="808"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="806"/>
+        <location filename="../assets/Practice.qml" line="812"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="810"/>
+        <location filename="../assets/Practice.qml" line="816"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="814"/>
+        <location filename="../assets/Practice.qml" line="820"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="818"/>
+        <location filename="../assets/Practice.qml" line="824"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="918"/>
+        <location filename="../assets/Practice.qml" line="924"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="918"/>
+        <location filename="../assets/Practice.qml" line="924"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="950"/>
+        <location filename="../assets/Practice.qml" line="956"/>
         <source>You have to enter a duration!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="957"/>
+        <location filename="../assets/Practice.qml" line="963"/>
         <source>Prev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="957"/>
+        <location filename="../assets/Practice.qml" line="963"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,7 +427,7 @@ You can add some using the &quot;add&quot; button.</source>
     </message>
     <message>
         <location filename="../assets/Settings.qml" line="10"/>
-        <location filename="../assets/Settings.qml" line="118"/>
+        <location filename="../assets/Settings.qml" line="119"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -426,12 +452,12 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="123"/>
+        <location filename="../assets/Settings.qml" line="124"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="129"/>
+        <location filename="../assets/Settings.qml" line="130"/>
         <source>Export to CSV</source>
         <translation type="unfinished"></translation>
     </message>
@@ -480,53 +506,72 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="53"/>
+        <location filename="../src/SummaryController.cpp" line="54"/>
         <source> exercises completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="58"/>
+        <location filename="../src/SummaryController.cpp" line="59"/>
         <source> sets completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="67"/>
+        <location filename="../src/SummaryController.cpp" line="68"/>
         <source> reps completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="68"/>
+        <location filename="../src/SummaryController.cpp" line="71"/>
         <source> Kg total lifted
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="78"/>
-        <location filename="../src/SummaryController.cpp" line="134"/>
+        <location filename="../src/SummaryController.cpp" line="73"/>
+        <source> lbs total lifted
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="85"/>
+        <location filename="../src/SummaryController.cpp" line="150"/>
         <source>m in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="79"/>
+        <location filename="../src/SummaryController.cpp" line="87"/>
+        <location filename="../src/SummaryController.cpp" line="152"/>
+        <source>ft in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="89"/>
         <source> min
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="123"/>
+        <location filename="../src/SummaryController.cpp" line="136"/>
+        <location filename="../src/SummaryController.cpp" line="138"/>
         <source>SET </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="123"/>
+        <location filename="../src/SummaryController.cpp" line="136"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="134"/>
+        <location filename="../src/SummaryController.cpp" line="138"/>
+        <source>lbs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="150"/>
+        <location filename="../src/SummaryController.cpp" line="152"/>
         <source>min</source>
         <translation type="unfinished"></translation>
     </message>

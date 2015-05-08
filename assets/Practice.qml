@@ -1,6 +1,7 @@
 import bb.cascades 1.3
 import bb.system 1.0
 import Utility.PracticeController 1.0
+import Utility.AppSettings 1.0
 
 Page {
     id: practicePage
@@ -426,7 +427,7 @@ Page {
                         
                         
                         Label {
-                            text: qsTr("Kg")
+                            text: appSettings.unit == 2 ? qsTr("Kg") : qsTr("lbs")
                             textStyle.textAlign: TextAlign.Center
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Center
@@ -574,7 +575,7 @@ Page {
                                     }
                                     
                                     Label {
-                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + qsTr(" Kg");
+                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }
@@ -590,6 +591,10 @@ Page {
                                 }
                             }
                         ]
+                        
+                        function getUnitStr() {
+                            return (appSettings.unit == 2 ? qsTr(" Kg") :  qsTr(" lbs"));
+                        }
                     
                     }
                 }
@@ -666,27 +671,20 @@ Page {
                                     
                                     Label {
                                         visible: mainContainerHistListView.ListItem.view.getCategory() == 1
-                                        text: qsTr(" ") + ListItemData.distance + "m  in  " + ListItemData.duration + " min";
+                                        text: qsTr(" ") + ListItemData.distance +  mainContainerHistListView.ListItem.view.getUnit() + qsTr(" in ") + ListItemData.duration + " min";
+                                        verticalAlignment: VerticalAlignment.Center
+                                        horizontalAlignment: HorizontalAlignment.Left
+                                    }
+                                    
+                                    
+                                    Label {
+                                        visible: mainContainerHistListView.ListItem.view.getCategory() == 2
+                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + mainContainerHistListView.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }
                                     
                                     Label {
-                                        visible: mainContainerHistListView.ListItem.view.getCategory() == 1
-                                        text:  ListItemData.note
-                                        verticalAlignment: VerticalAlignment.Center
-                                        horizontalAlignment: HorizontalAlignment.Right
-                                    }
-                                    
-                                    Label {
-                                        visible: mainContainerHistListView.ListItem.view.getCategory() == 2
-                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + qsTr(" Kg");
-                                        verticalAlignment: VerticalAlignment.Center
-                                        horizontalAlignment: HorizontalAlignment.Left
-                                    }
-                                    
-                                    Label {
-                                        visible: mainContainerHistListView.ListItem.view.getCategory() == 2
                                         text:  ListItemData.note
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Right
@@ -697,6 +695,14 @@ Page {
                                 }
                             }
                         ]
+                        
+                        function getUnit() {
+                            return appSettings.unit == 2 ? qsTr("m") :  qsTr("ft");
+                        }
+                        
+                        function getUnitStr() {
+                            return (appSettings.unit == 2 ? qsTr(" Kg") :  qsTr(" lbs"));
+                        }
                         
                         function getCategory() {
                             return category;
@@ -1031,6 +1037,9 @@ Page {
     attachedObjects: [
         PracticeController {
             id: practiceController
+        },
+        AppSettings {
+            id: appSettings
         }
     ]
 }
