@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3892"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   width="76.375"
+   height="81.5"
+   sodipodi:docname="icon_up_rounded_refresh.svg"
+   inkscape:export-filename="/Users/pierre/Documents/Code/momentics/Workout/assets/images/icon_rounded_refresh_black.png"
+   inkscape:export-xdpi="82"
+   inkscape:export-ydpi="82">
+  <metadata
+     id="metadata3898">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3896" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="1006"
+     id="namedview3894"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.1850485"
+     inkscape:cx="73.498935"
+     inkscape:cy="73.344007"
+     inkscape:window-x="131"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3892" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect3049"
+     width="73.551712"
+     height="78.672401"
+     x="1.4153519"
+     y="1.4127403"
+     ry="18.349495"
+     inkscape:export-filename="/Users/pierre/Documents/Code/momentics/HFR10/assets/images/icon_refresh_rounded_black.png"
+     inkscape:export-xdpi="82"
+     inkscape:export-ydpi="82" />
+  <rect
+     style="fill:#000000;fill-opacity:1;stroke:none"
+     id="rect2983"
+     width="12.872643"
+     height="55.572155"
+     x="32.652565"
+     y="14.311071"
+     ry="4.9961691" />
+  <rect
+     style="fill:#000000;fill-opacity:1;stroke:none"
+     id="rect2983-9"
+     width="12.872643"
+     height="55.572155"
+     x="-47.434582"
+     y="11.773758"
+     ry="4.9961691"
+     transform="matrix(0,-1,1,0,0,0)" />
+</svg>

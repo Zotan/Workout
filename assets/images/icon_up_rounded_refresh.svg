@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3892"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   width="76.375"
+   height="81.5"
+   sodipodi:docname="icon_up_rounded_refresh.svg"
+   inkscape:export-filename="/Users/pierre/Documents/Code/momentics/Workout/assets/images/icon_rounded_refresh_black.png"
+   inkscape:export-xdpi="82"
+   inkscape:export-ydpi="82">
+  <metadata
+     id="metadata3898">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3896" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="1006"
+     id="namedview3894"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.1850485"
+     inkscape:cx="9.4496753"
+     inkscape:cy="73.344007"
+     inkscape:window-x="356"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3892" />
+  <rect
+     style="fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect3049"
+     width="73.551712"
+     height="78.672401"
+     x="1.4153519"
+     y="1.4127403"
+     ry="18.349495"
+     inkscape:export-filename="/Users/pierre/Documents/Code/momentics/HFR10/assets/images/icon_refresh_rounded_black.png"
+     inkscape:export-xdpi="82"
+     inkscape:export-ydpi="82" />
+  <image
+     width="59.604462"
+     height="51.222584"
+     xlink:href="data:image/png;base64,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 "
+     id="image3125"
+     x="11.013475"
+     y="14.440164"
+     inkscape:export-filename="/Users/pierre/Documents/Code/momentics/Workout/assets/images/icon_rounded_refresh.png"
+     inkscape:export-xdpi="73"
+     inkscape:export-ydpi="73" />
+</svg>
