@@ -117,6 +117,8 @@ public Q_SLOTS:
 
     QString getDateFromTime          (qint64 time);
 
+    void deletePracticeEntry         (int id, int category, int exercise_id);
+
 
     void startStopWatch              ();
     void resetStopWatch              ();

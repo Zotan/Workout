@@ -343,7 +343,7 @@ void Database::saveSet(int exercise_id, const Set *set) {
     QSqlQuery query(m_Database);
     query.prepare("INSERT INTO Sets (exercise_id, repetition_id, time, note, repetition, weight) VALUES(:exercise_id, :repetition_id, :time, :note, :repetition, :weight)");
     query.bindValue(":exercise_id", exercise_id);
-    query.bindValue(":repetition_id", set->getId());
+    query.bindValue(":repetition_id", set->getRepId());
     query.bindValue(":time", set->getTime());
     query.bindValue(":note", set->getNote());
     query.bindValue(":repetition", set->getRepetition());
@@ -358,6 +358,24 @@ void Database::saveSet(int exercise_id, const Set *set) {
         // the last error is reset every time exec is called.
         const QSqlError error = query.lastError();
         qDebug() << "insert set record error:" << error.text();
+    }
+}
+
+void Database::deletePracticeStrengthEntry(int id) {
+
+    QSqlQuery query(m_Database);
+    query.prepare("DELETE FROM Sets WHERE id = :id");
+    query.bindValue(":id", id);
+
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "set deleted.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "set deleted error:" << error.text();
     }
 }
 
@@ -389,6 +407,24 @@ void Database::saveCardio(int exerciseId,
         // the last error is reset every time exec is called.
         const QSqlError error = query.lastError();
         qDebug() << "insert cardio record error:" << error.text();
+    }
+}
+
+void Database::deletePracticeCardioEntry(int id) {
+
+    QSqlQuery query(m_Database);
+    query.prepare("DELETE FROM Cardio WHERE id = :id");
+    query.bindValue(":id", id);
+
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "cardio entry deleted.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "cardio entry deleted error:" << error.text();
     }
 }
 
@@ -524,7 +560,8 @@ QList<Set*> Database::getHistoryStrength(int exerciseId, qint64 begin, qint64 en
 
 
         Set *ex = new Set();
-        ex->setId(repetition_id);
+        ex->setId(query.value(0).toInt());
+        ex->setRepId(repetition_id);
         ex->setRepetition(repetition);
         ex->setWeight(weight);
         ex->setNote(notes);
@@ -568,7 +605,8 @@ QList<QPair<QString, QList<Set*> > > Database::getHistoryStrength(qint64 begin, 
 
 
         Set *ex = new Set();
-        ex->setId(repetition_id);
+        ex->setId(query.value(0).toInt());
+        ex->setRepId(repetition_id);
         ex->setRepetition(repetition);
         ex->setWeight(weight);
         ex->setNote(notes);

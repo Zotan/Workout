@@ -10,6 +10,8 @@ Page {
     property bool   playlistMode
     property int    category
     
+    property variant editPracticePage
+    
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm
         kindProperties: FreeFormTitleBarKindProperties {
@@ -175,12 +177,12 @@ Page {
                             
                             onTextChanged: {
                                 var num = 0;
-                                if(!isNaN(parseInt(hh.text)))
+                                if(!isNaN(parseInt(hh.text, 10)))
                                     num += parseInt(hh.text)*60*60;
-                                if(!isNaN(parseInt(mm.text)))
-                                    num += parseInt(mm.text)*60;
-                                if(!isNaN(parseInt(ss.text)))
-                                    num += parseInt(ss.text);    
+                                if(!isNaN(parseInt(mm.text, 10)))
+                                    num += parseInt(mm.text, 10)*60;
+                                if(!isNaN(parseInt(ss.text, 10)))
+                                    num += parseInt(ss.text, 10);    
                                 
                                 practiceController.duration = num;
                             }
@@ -203,12 +205,12 @@ Page {
                             
                             onTextChanged: {
                                 var num = 0;
-                                if(!isNaN(parseInt(hh.text)))
+                                if(!isNaN(parseInt(hh.text, 10)))
                                     num += parseInt(hh.text)*60*60;
-                                if(!isNaN(parseInt(mm.text)))
-                                    num += parseInt(mm.text)*60;
-                                if(!isNaN(parseInt(ss.text)))
-                                    num += parseInt(ss.text);    
+                                if(!isNaN(parseInt(mm.text, 10)))
+                                    num += parseInt(mm.text, 10)*60;
+                                if(!isNaN(parseInt(ss.text, 10)))
+                                    num += parseInt(ss.text, 10);   
                                 
                                 practiceController.duration = num;
                             }
@@ -231,12 +233,12 @@ Page {
                             
                             onTextChanged: {
                                 var num = 0;
-                                if(!isNaN(parseInt(hh.text)))
+                                if(!isNaN(parseInt(hh.text, 10)))
                                     num += parseInt(hh.text)*60*60;
-                                if(!isNaN(parseInt(mm.text)))
-                                    num += parseInt(mm.text)*60;
-                                if(!isNaN(parseInt(ss.text)))
-                                    num += parseInt(ss.text);    
+                                if(!isNaN(parseInt(mm.text, 10)))
+                                    num += parseInt(mm.text, 10)*60;
+                                if(!isNaN(parseInt(ss.text, 10)))
+                                    num += parseInt(ss.text, 10);   
                                 
                                 practiceController.duration = num;
                             }
@@ -268,7 +270,7 @@ Page {
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
                         onTextChanged: {
-                            practiceController.distance = parseInt(text);
+                            practiceController.distance = parseInt(text, 10);
                         }
                     }
                     
@@ -297,7 +299,7 @@ Page {
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
                         onTextChanged: {
-                            practiceController.heartRate = parseInt(text);
+                            practiceController.heartRate = parseInt(text, 10);
                         }
                     }
                     
@@ -326,7 +328,7 @@ Page {
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
                         onTextChanged: {
-                            practiceController.calories = parseInt(text);
+                            practiceController.calories = parseInt(text, 10);
                         }
                     }
                     
@@ -365,7 +367,7 @@ Page {
                             inputMode: TextFieldInputMode.NumbersAndPunctuation
                             
                             onTextChanged: {
-                                practiceController.repetition = parseInt(text);
+                                practiceController.repetition = parseInt(text,10);
                             }
                             
                             input {
@@ -655,7 +657,7 @@ Page {
                             ListItemComponent {
                                 type: "header"
                                 Header {
-                                    title: ListItem.view.indexToCatName(parseInt(ListItemData))
+                                    title: ListItem.view.indexToCatName(parseInt(ListItemData, 10))
                                 }
                             },
                             ListItemComponent {
@@ -679,7 +681,7 @@ Page {
                                     
                                     Label {
                                         visible: mainContainerHistListView.ListItem.view.getCategory() == 2
-                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + mainContainerHistListView.ListItem.view.getUnitStr();
+                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + mainContainerHistListView.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }
@@ -691,10 +693,45 @@ Page {
                                     }
                                     
                                     Divider { }
+                                    
+                                    contextActions: [
+                                        ActionSet {
+                                            title: qsTr("Practice")
+                                            
+                                            ActionItem {
+                                                title: qsTr("Edit")
+                                                imageSource: "asset:///images/icon_write_context.png"
+                                                onTriggered: {
+                                                    mainContainerHistListView.ListItem.view.editEntry(ListItemData.id);
+                                                }
+                                            }
+                                            
+                                            DeleteActionItem {
+                                                title: qsTr("Delete")
+                                                onTriggered: {
+                                                    mainContainerHistListView.ListItem.view.deleteEntry(ListItemData.id);
+                                                }
+                                            }
+                                        }
+                                    ]
                                 
                                 }
                             }
                         ]
+                        
+                        function editEntry(id) {
+                            if(!editPracticePage)
+                                editPracticePage = editPractice.createObject();
+                            
+                            editPracticePage.category = category;
+                            editPracticePage.id = id;
+                            nav.push(editPracticePage);
+                            
+                        }
+                        
+                        function deleteEntry(id) {
+                            practiceController.deletePracticeEntry(id, category, exercise_id);
+                        }
                         
                         function getUnit() {
                             return appSettings.unit == 2 ? qsTr("m") :  qsTr("ft");
@@ -1040,6 +1077,10 @@ Page {
         },
         AppSettings {
             id: appSettings
+        },
+        ComponentDefinition {
+            id: editPractice
+            source: "EditPractice.qml"
         }
     ]
 }

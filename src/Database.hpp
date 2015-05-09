@@ -40,6 +40,7 @@ public:
     void renameExercise             (int id, const QString &label);
 
     void saveSet                    (int exercise_id, const Set *set);
+    void deletePracticeStrengthEntry(int id);
 
     void saveCardio                 (int exerciseId,
                                     int duration,
@@ -48,6 +49,8 @@ public:
                                     int heartRate,
                                     int calories,
                                     const QString &notes) ;
+
+    void deletePracticeCardioEntry  (int id);
 
     void addExerciseToRoutine       (int routine_id, int exercise_id, int position = -1);
     void removeExerciseFromRoutine  (int routine_exercise_id);

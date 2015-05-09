@@ -122,6 +122,7 @@ class Set : public QObject {
     Q_OBJECT
 
     Q_PROPERTY( int id              READ getId          WRITE setId             NOTIFY idChanged)
+    Q_PROPERTY( int rep_id          READ getRepId       WRITE setRepId          NOTIFY repIdChanged)
     Q_PROPERTY( qint64 time         READ getTime        WRITE setTime           NOTIFY timeChanged)
     Q_PROPERTY( QString note        READ getNote        WRITE setNote           NOTIFY noteChanged)
     Q_PROPERTY( int repetition      READ getRepetition  WRITE setRepetition     NOTIFY repetitionChanged)
@@ -132,6 +133,7 @@ class Set : public QObject {
 
 private:
     int m_Id;
+    int m_RepId;
     qint64 m_Time;
     QString m_Note;
     int m_Repetition;
@@ -141,12 +143,15 @@ private:
     // ----------------------------------------------------------------------------------------------
 
 public:
-    Set(QObject *parent = 0) : QObject(parent), m_Id(0), m_Time(0), m_Repetition(0), m_Weight(0) {}
+    Set(QObject *parent = 0) : QObject(parent), m_Id(0), m_RepId(0), m_Time(0), m_Repetition(0), m_Weight(0) {}
     virtual ~Set() {}
 
 
     inline int            getId() const                     { return m_Id; }
     inline void           setId(int c)                      { m_Id = c; }
+
+    inline int            getRepId() const                  { return m_RepId; }
+    inline void           setRepId(int c)                   { m_RepId = c; }
 
     inline qint64         getTime() const                   { return m_Time; }
     inline void           setTime(qint64 c)                 { m_Time = c; }
@@ -165,6 +170,7 @@ public:
     // ----------------------------------------------------------------------------------------------
     Q_SIGNALS:
         void idChanged();
+        void repIdChanged();
         void timeChanged();
         void noteChanged();
         void repetitionChanged();

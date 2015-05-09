@@ -32,7 +32,7 @@ PracticeController::PracticeController(QObject *parent) : QObject(parent), m_Lis
 void PracticeController::saveSet(const QString &note) {
     Set *set = new Set();
 
-    set->setId(m_SetsNumber);
+    set->setRepId(m_SetsNumber);
     set->setNote(note);
     set->setRepetition(m_Repetition);
     set->setWeight(m_Weight);
@@ -443,6 +443,19 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
     qDebug() << datas;
 
     m_HistoryWeb->evaluateJavaScript(datas);
+
+}
+
+
+
+void PracticeController::deletePracticeEntry(int id, int category, int exercise_id) {
+    if(category == 1) {
+        Database::get()->deletePracticeCardioEntry(id);
+        loadHistory(exercise_id);
+    } else {
+        Database::get()->deletePracticeStrengthEntry(id);
+        loadStrengthHistory(exercise_id);
+    }
 
 }
 

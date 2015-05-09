@@ -106,12 +106,19 @@ TabbedPane {
                 }
             }
         },
+        Delegate {
+            id: policyDelegate
+            source: "Policy.qml"
+        },
         Sheet {
             id: about
-            Policy {
-                onDone: {
-                    about.close();
-                }
+            content: policyDelegate.object
+            onOpenedChanged: {
+                if (opened)
+                    policyDelegate.active = true;
+            }
+            onClosed: {
+                policyDelegate.active = false;
             }
         },
         Delegate {

@@ -1,5 +1,5 @@
 1
-73
+74
 BugReport.qml
 bugReportIcons/BlablaRequest.png
 bugReportIcons/BlablaRequest_white.png
@@ -18,6 +18,7 @@ bugReportIcons/icon_quoted.png
 bugReportIcons/icon_quoted_white.png
 ComposeComment.qml
 ComposeIssue.qml
+EditPractice.qml
 Exercise.qml
 ExercisePicker.qml
 images/calendar.png
