@@ -34,6 +34,20 @@ TabbedPane {
                 onTriggered: {
                     settings.open();
                 }
+            },
+            ActionItem {
+                title: qsTr("Report")
+                imageSource: "asset:///bugReportIcons/BugReport_white.png"
+                onTriggered: {
+                    bugReportSheet.open();
+                }
+            },
+            ActionItem {
+                title: qsTr("Donate")
+                imageSource: "asset:///images/icon_credit.png"
+                onTriggered: {
+                    payment.open();
+                }
             }
         ]
     }
@@ -98,6 +112,37 @@ TabbedPane {
                 onDone: {
                     about.close();
                 }
+            }
+        },
+        Delegate {
+            id: bugReportDelegate
+            source: "BugReport.qml"
+        },
+        Sheet {
+            id: bugReportSheet
+            content: bugReportDelegate.object
+            onOpenedChanged: {
+                if (opened)
+                    bugReportDelegate.active = true;
+            }
+            onClosed: {
+                bugReportDelegate.active = false;
+            }
+        },
+        Delegate {
+            id: paymentDelegate
+            source: "Payment.qml"
+        
+        },
+        Sheet {
+            id: payment
+            content: paymentDelegate.object
+            onOpenedChanged: {
+                if (opened)
+                    paymentDelegate.active = true;
+            }
+            onClosed: {
+                paymentDelegate.active = false;
             }
         }
     ]

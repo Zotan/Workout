@@ -28,6 +28,8 @@
 #include "RoutineController.hpp"
 #include "AppSettings.hpp"
 
+#include "BugReportController.hpp"
+
 using namespace bb::cascades;
 
 ApplicationUI::ApplicationUI() :
@@ -54,6 +56,7 @@ ApplicationUI::ApplicationUI() :
     qmlRegisterType<RoutineController>("Utility.RoutineController", 1, 0, "RoutineController");
     qmlRegisterType<AppSettings>("Utility.AppSettings", 1, 0, "AppSettings");
 
+    qmlRegisterType<BugReportController>("Lib.BugReport", 1, 0, "BugReport");
 
 
     // Create scene document from main.qml asset, the parent is set

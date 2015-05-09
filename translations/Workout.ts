@@ -2,6 +2,127 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>BugReport</name>
+    <message>
+        <location filename="../assets/BugReport.qml" line="65"/>
+        <source>Simple Workout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReport.qml" line="73"/>
+        <source>Bug report center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReport.qml" line="107"/>
+        <location filename="../assets/BugReport.qml" line="112"/>
+        <source>Bug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReport.qml" line="134"/>
+        <location filename="../assets/BugReport.qml" line="140"/>
+        <source>Enhancement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReport.qml" line="163"/>
+        <location filename="../assets/BugReport.qml" line="168"/>
+        <source>Need Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReport.qml" line="191"/>
+        <location filename="../assets/BugReport.qml" line="198"/>
+        <source>Comments</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BugReportController</name>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="484"/>
+        <source>A title is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="496"/>
+        <source>Create a new issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="497"/>
+        <source>Do you want to submit this issue? Please make sure that the content of the message is anonymous.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="591"/>
+        <source>A comment should not be empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="603"/>
+        <source>Create a new comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/BugReportController.cpp" line="604"/>
+        <source>Do you want to submit this comment? Please make sure that the content of the message is anonymous.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ComposeComment</name>
+    <message>
+        <location filename="../assets/ComposeComment.qml" line="8"/>
+        <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeComment.qml" line="10"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeComment.qml" line="18"/>
+        <source>Post</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeComment.qml" line="35"/>
+        <source>What is on your mind?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ComposeIssue</name>
+    <message>
+        <location filename="../assets/ComposeIssue.qml" line="8"/>
+        <source>Compose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeIssue.qml" line="10"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeIssue.qml" line="18"/>
+        <source>Post</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeIssue.qml" line="35"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ComposeIssue.qml" line="40"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Exercise</name>
     <message>
         <location filename="../assets/Exercise.qml" line="22"/>
@@ -97,6 +218,61 @@
     <message>
         <location filename="../assets/ExercisePicker.qml" line="59"/>
         <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IssueViewer</name>
+    <message>
+        <location filename="../assets/IssueViewer.qml" line="31"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListIssues</name>
+    <message>
+        <location filename="../assets/ListIssues.qml" line="75"/>
+        <source>Loading, please wait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ListIssues.qml" line="75"/>
+        <source>No issues in this category.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/ListIssues.qml" line="222"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Payment</name>
+    <message>
+        <location filename="../assets/Payment.qml" line="11"/>
+        <source>Donation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Payment.qml" line="13"/>
+        <location filename="../assets/Payment.qml" line="87"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Payment.qml" line="42"/>
+        <source>http://amonchakai.github.io/Workout/donate_en.html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Payment.qml" line="50"/>
+        <source>Donate 1$</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Payment.qml" line="82"/>
+        <source>Excellent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -589,17 +765,27 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="39"/>
+        <source>Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/main.qml" line="46"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="60"/>
         <source>Summary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="61"/>
+        <location filename="../assets/main.qml" line="75"/>
         <source>Exercise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="75"/>
+        <location filename="../assets/main.qml" line="89"/>
         <source>Routine</source>
         <translation type="unfinished"></translation>
     </message>

@@ -520,7 +520,7 @@ Page {
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Center
                             onClicked: {
-                                practiceController.repetition = practiceController.weight-1 >= 0 ? practiceController.weight-1 : 0;
+                                practiceController.weight = practiceController.weight-1 >= 0 ? practiceController.weight-1 : 0;
                             }
                         
                         }

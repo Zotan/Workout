@@ -453,9 +453,10 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
 
 void PracticeController::startStopWatch() {
     m_StopWatchMutex.lockForWrite();
+    m_TargetTimeStopWatch = QDateTime::currentMSecsSinceEpoch() + m_TimeStopWatchSec * 1000;
+
     if(!m_StopWatchRunning) {
         m_StopWatchRunning = true;
-        m_TargetTimeStopWatch = QDateTime::currentMSecsSinceEpoch() + m_TimeStopWatchSec * 1000;
         QTimer::singleShot(1000, this, SLOT(stopWatchTick()));
     }
     m_StopWatchMutex.unlock();
