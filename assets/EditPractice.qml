@@ -1,4 +1,5 @@
 import bb.cascades 1.3
+import Utility.PracticeController 1.0
 
 Page {
     property int category
@@ -10,6 +11,27 @@ Page {
             ActionItem {
                 title: qsTr("Save")
                 onTriggered: {
+                    
+                    var num = 0;
+                    if(!isNaN(parseInt(hh.text, 10)))
+                        num += parseInt(hh.text)*60*60;
+                    if(!isNaN(parseInt(mm.text, 10)))
+                        num += parseInt(mm.text, 10)*60;
+                    if(!isNaN(parseInt(ss.text, 10)))
+                        num += parseInt(ss.text, 10);    
+                        
+                    practiceController.duration = num;
+                    practiceController.distance = parseInt(inputCardio2.text,10);
+                    practiceController.heartRate = parseInt(inputCardio3.text, 10);
+                    practiceController.calories = parseInt(inputCardio4.text, 10);
+                    practiceController.notes = inputNotes.text;
+                    
+                    practiceController.repetition = parseInt(inputStrength1.text, 10);
+                    practiceController.weight = parseFloat(inputStrength2.text);
+                    
+                    practiceController.updatePractice(category);
+                    
+                    refresh_history = true;
                     
                     nav.pop();                
                 }
@@ -34,6 +56,7 @@ Page {
             Container {
                 preferredHeight: ui.du(1)
             }
+            horizontalAlignment: HorizontalAlignment.Fill
             
             Container {
                 id: cardioContainer
@@ -41,7 +64,7 @@ Page {
                 layout: StackLayout {
                     orientation: LayoutOrientation.TopToBottom
                 }
-                
+                horizontalAlignment: HorizontalAlignment.Fill
                 
                 
                 Label {
@@ -69,6 +92,7 @@ Page {
                     TextField {
                         id: hh
                         hintText: "hh"
+                        text: Math.floor(practiceController.duration / 3600)
                         textStyle.fontSize: FontSize.Small
                         textStyle.textAlign: TextAlign.Center
                         preferredWidth: ui.du(10)
@@ -76,16 +100,6 @@ Page {
                         clearButtonVisible: false
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
-                        onTextChanged: {
-                            var num = 0;
-                            if(!isNaN(parseInt(hh.text, 10)))
-                                num += parseInt(hh.text)*60*60;
-                            if(!isNaN(parseInt(mm.text, 10)))
-                                num += parseInt(mm.text, 10)*60;
-                            if(!isNaN(parseInt(ss.text, 10)))
-                                num += parseInt(ss.text, 10);    
-                            
-                        }
                     }
                     
                     Label {
@@ -96,6 +110,7 @@ Page {
                     TextField {
                         id: mm
                         hintText: "mm"
+                        text: Math.floor((practiceController.duration - Math.floor(practiceController.duration / 3600)) / 60)
                         textStyle.fontSize: FontSize.Small
                         textStyle.textAlign: TextAlign.Center
                         preferredWidth: ui.du(10)
@@ -103,16 +118,6 @@ Page {
                         clearButtonVisible: false
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
-                        onTextChanged: {
-                            var num = 0;
-                            if(!isNaN(parseInt(hh.text, 10)))
-                                num += parseInt(hh.text)*60*60;
-                            if(!isNaN(parseInt(mm.text, 10)))
-                                num += parseInt(mm.text, 10)*60;
-                            if(!isNaN(parseInt(ss.text, 10)))
-                                num += parseInt(ss.text, 10);   
-                            
-                        }
                     }
                     
                     Label {
@@ -123,6 +128,7 @@ Page {
                     TextField {
                         id: ss
                         hintText: "ss"
+                        text: practiceController.duration % 60
                         textStyle.fontSize: FontSize.Small
                         textStyle.textAlign: TextAlign.Center
                         preferredWidth: ui.du(10)
@@ -130,16 +136,7 @@ Page {
                         clearButtonVisible: false
                         inputMode: TextFieldInputMode.NumbersAndPunctuation
                         
-                        onTextChanged: {
-                            var num = 0;
-                            if(!isNaN(parseInt(hh.text, 10)))
-                                num += parseInt(hh.text)*60*60;
-                            if(!isNaN(parseInt(mm.text, 10)))
-                                num += parseInt(mm.text, 10)*60;
-                            if(!isNaN(parseInt(ss.text, 10)))
-                                num += parseInt(ss.text, 10);   
-                            
-                        }
+                       
                     }
                 }
                 
@@ -159,6 +156,7 @@ Page {
                 TextField {
                     id: inputCardio2
                     visible: category == 1
+                    text: practiceController.distance
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -187,6 +185,7 @@ Page {
                 TextField {
                     id: inputCardio3
                     visible: category == 1
+                    text: practiceController.heartRate
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -215,6 +214,7 @@ Page {
                 TextField {
                     id: inputCardio4
                     visible: category == 1
+                    text: practiceController.calories
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -232,6 +232,7 @@ Page {
             Container {
                 id: strengthContainer
                 visible: category == 2
+                horizontalAlignment: HorizontalAlignment.Fill
                 
                 Label {
                     id: labelStrength1
@@ -249,6 +250,7 @@ Page {
                 TextField {
                     id: inputStrength1
                     visible: category == 2
+                    text: practiceController.repetition
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -277,6 +279,7 @@ Page {
                 TextField {
                     id: inputStrength2
                     visible: category == 2
+                    text: practiceController.weight
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -290,6 +293,7 @@ Page {
                 }
             }
             
+            
             Label {
                 text: qsTr("Notes")
                 textStyle.fontSize: FontSize.Large
@@ -301,11 +305,11 @@ Page {
             
             TextField {
                 id: inputNotes
+                text: practiceController.notes
                 textStyle.fontSize: FontSize.Small
                 textStyle.textAlign: TextAlign.Center
-                preferredWidth: ui.du(42)
                 verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Fill
                 clearButtonVisible: false
                 inputMode: TextFieldInputMode.NumbersAndPunctuation
                 
@@ -317,5 +321,16 @@ Page {
         }
         
     }
+    
+    
+    onIdChanged: {
+        practiceController.loadPractice(id, category);
+    }
+    
+    attachedObjects: [
+        PracticeController {
+            id: practiceController
+        }
+    ]
 
 }

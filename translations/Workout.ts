@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>AppSettings</name>
+    <message>
+        <location filename="../src/AppSettings.cpp" line="75"/>
+        <source>Load database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppSettings.cpp" line="76"/>
+        <source>Loading a new database will replace all data by the one from the selected file. Are you really sure you want to continue? This cannot be undone!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BugReport</name>
     <message>
         <location filename="../assets/BugReport.qml" line="65"/>
@@ -125,52 +138,52 @@
 <context>
     <name>EditPractice</name>
     <message>
-        <location filename="../assets/EditPractice.qml" line="8"/>
+        <location filename="../assets/EditPractice.qml" line="9"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="11"/>
+        <location filename="../assets/EditPractice.qml" line="12"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="21"/>
+        <location filename="../assets/EditPractice.qml" line="43"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="50"/>
+        <location filename="../assets/EditPractice.qml" line="73"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="149"/>
+        <location filename="../assets/EditPractice.qml" line="146"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="177"/>
+        <location filename="../assets/EditPractice.qml" line="175"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="205"/>
+        <location filename="../assets/EditPractice.qml" line="204"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="239"/>
+        <location filename="../assets/EditPractice.qml" line="240"/>
         <source>REPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="267"/>
+        <location filename="../assets/EditPractice.qml" line="269"/>
         <source>Weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/EditPractice.qml" line="294"/>
+        <location filename="../assets/EditPractice.qml" line="298"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -345,215 +358,228 @@
 <context>
     <name>Practice</name>
     <message>
-        <location filename="../assets/Practice.qml" line="48"/>
+        <location filename="../assets/Practice.qml" line="50"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="53"/>
+        <location filename="../assets/Practice.qml" line="55"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="58"/>
+        <location filename="../assets/Practice.qml" line="60"/>
         <source>Graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="149"/>
+        <location filename="../assets/Practice.qml" line="151"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="251"/>
-        <location filename="../assets/Practice.qml" line="806"/>
+        <location filename="../assets/Practice.qml" line="253"/>
+        <location filename="../assets/Practice.qml" line="809"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="280"/>
-        <location filename="../assets/Practice.qml" line="811"/>
+        <location filename="../assets/Practice.qml" line="282"/>
+        <location filename="../assets/Practice.qml" line="814"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="309"/>
-        <location filename="../assets/Practice.qml" line="815"/>
+        <location filename="../assets/Practice.qml" line="311"/>
+        <location filename="../assets/Practice.qml" line="818"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="338"/>
+        <location filename="../assets/Practice.qml" line="340"/>
         <source>Set: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="432"/>
+        <location filename="../assets/Practice.qml" line="434"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="432"/>
+        <location filename="../assets/Practice.qml" line="434"/>
         <source>lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="460"/>
+        <location filename="../assets/Practice.qml" line="462"/>
         <source>You have to perform at least one repetition!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="533"/>
+        <location filename="../assets/Practice.qml" line="535"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="551"/>
+        <location filename="../assets/Practice.qml" line="553"/>
         <source>Completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="580"/>
-        <location filename="../assets/Practice.qml" line="684"/>
+        <location filename="../assets/Practice.qml" line="583"/>
+        <location filename="../assets/Practice.qml" line="687"/>
         <source>SET: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="598"/>
-        <location filename="../assets/Practice.qml" line="741"/>
+        <location filename="../assets/Practice.qml" line="601"/>
+        <location filename="../assets/Practice.qml" line="744"/>
         <source> Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="598"/>
-        <location filename="../assets/Practice.qml" line="741"/>
+        <location filename="../assets/Practice.qml" line="601"/>
+        <location filename="../assets/Practice.qml" line="744"/>
         <source> lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="624"/>
+        <location filename="../assets/Practice.qml" line="627"/>
         <source>No history available. You need to do some excercise!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="676"/>
+        <location filename="../assets/Practice.qml" line="679"/>
         <source> </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="699"/>
+        <location filename="../assets/Practice.qml" line="702"/>
         <source>Practice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="702"/>
+        <location filename="../assets/Practice.qml" line="705"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="710"/>
+        <location filename="../assets/Practice.qml" line="713"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="737"/>
+        <location filename="../assets/Practice.qml" line="740"/>
         <source>m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="737"/>
+        <location filename="../assets/Practice.qml" line="740"/>
         <source>ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="676"/>
+        <location filename="../assets/Practice.qml" line="679"/>
         <source> in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="770"/>
+        <location filename="../assets/Practice.qml" line="773"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="783"/>
+        <location filename="../assets/Practice.qml" line="786"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="798"/>
-        <location filename="../assets/Practice.qml" line="828"/>
+        <location filename="../assets/Practice.qml" line="801"/>
+        <location filename="../assets/Practice.qml" line="831"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="802"/>
+        <location filename="../assets/Practice.qml" line="805"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="832"/>
+        <location filename="../assets/Practice.qml" line="835"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="837"/>
+        <location filename="../assets/Practice.qml" line="840"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="841"/>
+        <location filename="../assets/Practice.qml" line="844"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="845"/>
+        <location filename="../assets/Practice.qml" line="848"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="849"/>
+        <location filename="../assets/Practice.qml" line="852"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="853"/>
+        <location filename="../assets/Practice.qml" line="856"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="857"/>
+        <location filename="../assets/Practice.qml" line="860"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="861"/>
+        <location filename="../assets/Practice.qml" line="864"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="961"/>
+        <location filename="../assets/Practice.qml" line="964"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="961"/>
+        <location filename="../assets/Practice.qml" line="964"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="993"/>
+        <location filename="../assets/Practice.qml" line="996"/>
         <source>You have to enter a duration!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1000"/>
+        <location filename="../assets/Practice.qml" line="1003"/>
         <source>Prev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1000"/>
+        <location filename="../assets/Practice.qml" line="1003"/>
         <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PracticeController</name>
+    <message>
+        <location filename="../src/PacticeController.cpp" line="519"/>
+        <source>Delete practice record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/PacticeController.cpp" line="520"/>
+        <source>Are you sure you want to delete this record?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -696,12 +722,12 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="124"/>
+        <location filename="../assets/Settings.qml" line="127"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="130"/>
+        <location filename="../assets/Settings.qml" line="136"/>
         <source>Export to CSV</source>
         <translation type="unfinished"></translation>
     </message>
@@ -817,6 +843,147 @@ You can add some using the &quot;add&quot; button.</source>
         <location filename="../src/SummaryController.cpp" line="150"/>
         <location filename="../src/SummaryController.cpp" line="152"/>
         <source>min</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UnZip</name>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1180"/>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1181"/>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1182"/>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1183"/>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1184"/>
+        <source>Partially corrupted archive. Some files might be extracted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1185"/>
+        <source>Corrupted archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1186"/>
+        <source>Wrong password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1187"/>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1188"/>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1189"/>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1190"/>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1191"/>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1192"/>
+        <source>Unable to create a directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1193"/>
+        <source>Invalid device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1194"/>
+        <source>Invalid or incompatible zip archive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1195"/>
+        <source>Inconsistent headers. Archive might be corrupted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/unzip.cpp" line="1199"/>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Zip</name>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1604"/>
+        <source>ZIP operation completed successfully.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1605"/>
+        <source>Failed to initialize or load zlib library.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1606"/>
+        <source>zlib library error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1607"/>
+        <source>Unable to create or open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1608"/>
+        <source>No archive has been created yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1609"/>
+        <source>File or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1610"/>
+        <source>File read error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1611"/>
+        <source>File write error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1612"/>
+        <source>File seek error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/OSDaB/zip.cpp" line="1616"/>
+        <source>Unknown error.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -114,15 +114,21 @@ Page {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 }
-                horizontalAlignment: HorizontalAlignment.Fill
+                horizontalAlignment: HorizontalAlignment.Center
                 Button {
                     text: qsTr("Save")
                     horizontalAlignment: HorizontalAlignment.Fill
+                    onClicked: {
+                        appSettings.saveDB();
+                    }
                 }
 
                 Button {
                     text: qsTr("Load")
                     horizontalAlignment: HorizontalAlignment.Fill
+                    onClicked: {
+                        appSettings.loadDB();
+                    }
                 }
             }
 

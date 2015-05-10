@@ -14,6 +14,7 @@
 #include <QDateTime>
 #include <QReadWriteLock>
 #include <bb/device/Led>
+#include <bb/system/SystemUiResult>
 
 class Set;
 
@@ -38,12 +39,15 @@ class PracticeController : public QObject {
 
     // -----------------------------------------------------------------------------------------------------
 
+    Q_PROPERTY( QString notes   READ getNotes         WRITE setNotes         NOTIFY notesChanged)
+
 private:
 
     bb::cascades::ListView          *m_ListView;
     bb::cascades::ListView          *m_HistoryListView;
     bb::cascades::WebView           *m_HistoryWeb;
     bb::device::Led                 *m_Led;
+
 
     float                            m_Weight;
     int                              m_Repetition;
@@ -53,6 +57,8 @@ private:
     int                              m_Distance;
     int                              m_HeartRate;
     int                              m_Calories;
+
+    QString                          m_Notes;
 
     QString                          m_Date;
     QString                          m_Time;
@@ -64,6 +70,10 @@ private:
     QReadWriteLock                   m_StopWatchMutex;
 
     QList<Set*>                     m_Sets;
+
+
+    int                              m_CacheId, m_CacheCategory, m_CacheExerciseId;
+
 
 public:
     PracticeController              (QObject *parent = 0);
@@ -94,7 +104,8 @@ public:
     inline int            getCalories() const                   { return m_Calories; }
     inline void           setCalories(int c)                    { if(m_Calories != c) {m_Calories = c; emit caloriesChanged();} }
 
-
+    inline const QString &getNotes() const                      { return m_Notes; }
+    inline void           setNotes(const QString &c)            { if(m_Notes != c) {m_Notes = c; emit notesChanged();} }
 
 public Q_SLOTS:
 
@@ -108,7 +119,8 @@ public Q_SLOTS:
     void pushToDB                    (int exerciseId);
     void pushCardioToDB              (int exerciseId, const QString &notes);
 
-    void loadHistory                 (int exerciseId);
+    void loadPractice                (int exercise_id, int category);
+    void loadHistory                 (int exercise_id);
     void loadStrengthHistory         (int exercise_id);
     void restoreSession              (int exercise_id);
 
@@ -118,6 +130,8 @@ public Q_SLOTS:
     QString getDateFromTime          (qint64 time);
 
     void deletePracticeEntry         (int id, int category, int exercise_id);
+    void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type);
+    void updatePractice              (int category);
 
 
     void startStopWatch              ();
@@ -136,6 +150,7 @@ Q_SIGNALS:
     void distanceChanged();
     void heartRateChanged();
     void caloriesChanged();
+    void notesChanged();
 
 
     void timeChanged();

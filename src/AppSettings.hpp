@@ -9,7 +9,7 @@
 #define APPSETTINGS_HPP_
 
 
-
+#include <bb/system/SystemUiResult>
 
 
 
@@ -42,6 +42,16 @@ public Q_SLOTS:
 
 
     void save             ();
+
+    void saveDB           ();
+    void saveFileSelected (const QStringList&);
+
+    void loadDB           ();
+    void loadFileSelected (const QStringList&);
+
+    void canceled         ();
+
+    void onPromptFinishedLoadDB(bb::system::SystemUiResult::Type);
 
 
 Q_SIGNALS:

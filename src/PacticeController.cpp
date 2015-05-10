@@ -9,6 +9,7 @@
 
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/GroupDataModel>
+#include <bb/system/SystemDialog>
 
 #include <QDateTime>
 #include <QTimer>
@@ -16,7 +17,7 @@
 #include "DataObject.hpp"
 #include "Database.hpp"
 
-PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_HistoryWeb(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60) {
+PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_HistoryWeb(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
 
     updateDateTime();
 
@@ -111,6 +112,62 @@ void PracticeController::pushCardioToDB(int exerciseId, const QString &notes) {
 
 }
 
+
+void PracticeController::loadPractice(int exercise_id, int category) {
+    if(category == 1) {
+        Cardio *c = Database::get()->getCardio(exercise_id);
+        if(c == NULL) return;
+
+        this->setDuration(c->getDuration());
+        this->setDistance(c->getDistance());
+        this->setHeartRate(c->getHeartRate());
+        this->setCalories(c->getCalories());
+        this->setNotes(c->getNote());
+
+        m_CacheExerciseId = c->getId();
+
+        c->deleteLater();
+
+    } else {
+
+        Set *s = Database::get()->getSet(exercise_id);
+        if(s == NULL) return;
+
+        this->setRepetition(s->getRepetition());
+        this->setWeight(s->getWeight());
+        this->setNotes(s->getNote());
+
+        m_CacheExerciseId = s->getId();
+
+        s->deleteLater();
+    }
+}
+
+void PracticeController::updatePractice(int category) {
+    if(category == 1) {
+        Cardio c;
+
+        c.setId(m_CacheExerciseId);
+        c.setDistance(this->m_Distance);
+        c.setDuration(this->m_Duration);
+        c.setHeartRate(this->m_HeartRate);
+        c.setCalories(this->m_Calories);
+        c.setNote(this->m_Notes);
+
+        Database::get()->updatePractice(&c);
+
+    } else {
+
+        Set s;
+
+        s.setRepetition(this->m_Repetition);
+        s.setWeight(this->m_Weight);
+        s.setNote(this->m_Notes);
+        s.setId(m_CacheExerciseId);
+
+        Database::get()->updatePractice(&s);
+    }
+}
 
 void PracticeController::loadStrengthHistory(int exercise_id) {
 
@@ -448,15 +505,45 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
 
 
 
-void PracticeController::deletePracticeEntry(int id, int category, int exercise_id) {
-    if(category == 1) {
-        Database::get()->deletePracticeCardioEntry(id);
-        loadHistory(exercise_id);
-    } else {
-        Database::get()->deletePracticeStrengthEntry(id);
-        loadStrengthHistory(exercise_id);
-    }
 
+void PracticeController::deletePracticeEntry(int id, int category, int exercise_id) {
+    m_CacheId = id;
+    m_CacheCategory = category;
+    m_CacheExerciseId = exercise_id;
+
+    using namespace bb::cascades;
+    using namespace bb::system;
+
+    SystemDialog *dialog = new SystemDialog("Yes", "No");
+
+    dialog->setTitle(tr("Delete practice record"));
+    dialog->setBody(tr("Are you sure you want to delete this record?"));
+
+    bool success = connect(dialog,
+         SIGNAL(finished(bb::system::SystemUiResult::Type)),
+         this,
+         SLOT(onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type)));
+
+    if (success) {
+        dialog->show();
+    } else {
+        dialog->deleteLater();
+    }
+}
+
+void PracticeController::onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result) {
+
+    if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
+
+        if(m_CacheCategory == 1) {
+            Database::get()->deletePracticeCardioEntry(m_CacheId);
+            loadHistory(m_CacheExerciseId);
+        } else {
+            Database::get()->deletePracticeStrengthEntry(m_CacheId);
+            loadStrengthHistory(m_CacheExerciseId);
+        }
+
+    }
 }
 
 // -------------------------------------------------------------------

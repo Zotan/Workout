@@ -10,6 +10,8 @@ Page {
     property bool   playlistMode
     property int    category
     
+    property bool   refresh_history
+    
     property variant editPracticePage
     
     titleBar: TitleBar {
@@ -561,7 +563,8 @@ Page {
                         
                         dataModel: GroupDataModel {
                             id: theModel    
-                            grouping: ItemGrouping.None                
+                            grouping: ItemGrouping.None    
+                            
                         }
                         
                         listItemComponents: [
@@ -589,11 +592,11 @@ Page {
                                     }
                                     
                                     Divider { }
-                                
+                                                                        
                                 }
                             }
                         ]
-                        
+                                                
                         function getUnitStr() {
                             return (appSettings.unit == 2 ? qsTr(" Kg") :  qsTr(" lbs"));
                         }
@@ -1047,6 +1050,18 @@ Page {
         practiceController.setHistoryListView(historyList);    
         practiceController.setHistoryWebView(historyWeb); 
         playlistMode = false;   
+        refresh_history = false;
+    }
+    
+    onRefresh_historyChanged: {
+        if(refresh_history) {
+            refresh_history = false;
+            
+            if(category == 1)
+                practiceController.loadHistory(exercise_id);
+            else 
+                practiceController.loadStrengthHistory(exercise_id);
+        }
     }
     
     onExercise_idChanged: {

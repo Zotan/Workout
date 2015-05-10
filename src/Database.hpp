@@ -56,12 +56,26 @@ public:
     void removeExerciseFromRoutine  (int routine_exercise_id);
     void updateRoutineExercisePosition(int routine_exercise_id, int position);
 
+    Cardio*        getCardio        (int exerciseId);
+    Set*           getSet           (int exerciseId);
     QList<Cardio*> getHistoryCardio (int exerciseId, qint64 begin = 0, qint64 end = 0);
     QList<Set*>    getHistoryStrength(int exerciseId, qint64 begin = 0, qint64 end = 0);
     QDateTime      getLastExerciseDate();
 
+    void           updatePractice   (Cardio *c);
+    void           updatePractice   (Set *c);
+
     QList<QPair<QString, QList<Set*> > >    getHistoryStrength(qint64 begin = 0, qint64 end = 0);
     QList<QPair<QString, QList<Cardio*> > > getHistoryCardio  (qint64 begin = 0, qint64 end = 0);
+
+
+
+
+    void            saveDB(const QString &path);
+    void            loadDB(const QString &path);
+
+    bool            executeScript(const QString &path);
+
 
 private:
 

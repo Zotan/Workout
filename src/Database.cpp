@@ -7,8 +7,15 @@
 
 #include "Database.hpp"
 #include <qDebug>
+#include <QFile>
+#include <QDir>
+#include <QObject>
+
+#include <bb/system/SystemToast>
 
 #include "DataObject.hpp"
+#include "OSDaB/zip.h"
+#include "OSDaB/unzip.h"
 
 Database *Database::m_This = NULL;
 
@@ -387,8 +394,6 @@ void Database::saveCardio(int exerciseId,
                           int calories,
                           const QString &notes) {
 
-    QDateTime date(QDate(2015,01,01), QTime(00,00,00));
-
     QSqlQuery query(m_Database);
     query.prepare("INSERT INTO Cardio (exercise_id, duration, time, distance, heart_rate, calories, notes) VALUES(:exercise_id, :duration, :time, :distance, :heart_rate, :calories, :notes)");
     query.bindValue(":exercise_id", exerciseId);
@@ -504,6 +509,69 @@ void Database::removeExerciseFromRoutine  (int routine_exercise_id) {
         qDebug() << "exercise deleted from routine; record error:" << error.text();
     }
 }
+
+
+Cardio* Database::getCardio(int exerciseId) {
+    Cardio* ex = NULL;
+
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT * FROM Cardio WHERE id = :id ");
+    query.bindValue(":id", exerciseId);
+    query.exec();
+
+    while (query.next()) {
+        int id = query.value(0).toInt();
+        int duration = query.value(2).toInt();
+        qint64 time = static_cast<qint64>(query.value(3).toLongLong());
+        int distance = query.value(4).toInt();
+        int heartRate = query.value(5).toInt();
+        int calories = query.value(6).toInt();
+        QString notes = query.value(7).toString();
+
+        ex = new Cardio();
+        ex->setId(id);
+        ex->setCalories(calories);
+        ex->setDistance(distance);
+        ex->setHeartRate(heartRate);
+        ex->setNote(notes);
+        ex->setTime(time);
+        ex->setDuration(duration);
+
+    }
+
+    return ex;
+}
+
+Set* Database::getSet(int exerciseId) {
+    Set* ex = NULL;
+
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT * FROM Sets WHERE id = :id");
+    query.bindValue(":id", exerciseId);
+    query.exec();
+
+    // exercise_id, repetition_id, time, note, repetition, weight
+    while (query.next()) {
+        int repetition_id = query.value(2).toInt();
+        qint64 time = static_cast<qint64>(query.value(3).toLongLong());
+        QString notes = query.value(4).toString();
+        int repetition = query.value(5).toInt();
+        float weight = query.value(6).toInt();
+
+
+        ex = new Set();
+        ex->setId(query.value(0).toInt());
+        ex->setRepId(repetition_id);
+        ex->setRepetition(repetition);
+        ex->setWeight(weight);
+        ex->setNote(notes);
+        ex->setTime(time);
+    }
+
+    return ex;
+}
+
+
 
 QList<Cardio*> Database::getHistoryCardio (int exerciseId, qint64 begin, qint64 end) {
     QList<Cardio*> exercises;
@@ -665,6 +733,49 @@ QList<QPair<QString, QList<Cardio*> > > Database::getHistoryCardio  (qint64 begi
     return exercises;
 }
 
+void Database::updatePractice(Cardio *c) {
+    if(c == NULL) return;
+
+    QSqlQuery query(m_Database);
+    query.prepare("UPDATE Cardio SET duration = :duration, distance = :distance, heart_rate = :heart_rate, calories = :calories, notes = :notes WHERE id = :id");
+    query.bindValue(":id", c->getId());
+    query.bindValue(":duration", c->getDuration());
+    query.bindValue(":distance", c->getDistance());
+    query.bindValue(":heart_rate", c->getHeartRate());
+    query.bindValue(":calories", c->getCalories());
+    query.bindValue(":notes", c->getNote());
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "cardio record updated.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "update cardio record error:" << error.text();
+    }
+}
+
+void Database::updatePractice(Set *set) {
+    if(set == NULL) return;
+
+    QSqlQuery query(m_Database);
+    query.prepare("UPDATE Sets SET note = :note, repetition = :repetition, weight = :weight WHERE id = :id");
+    query.bindValue(":note", set->getNote());
+    query.bindValue(":repetition", set->getRepetition());
+    query.bindValue(":weight", set->getWeight());
+
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "set updated.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "update set record error:" << error.text();
+    }
+}
 
 
 QDateTime Database::getLastExerciseDate() {
@@ -701,6 +812,345 @@ QDateTime Database::getLastExerciseDate() {
 
     return date;
 }
+
+
+// ------------------------------------------------------------------------------------------------------
+// IO Database
+
+void Database::saveDB(const QString &path) {
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        if (!QFile::exists(directory)) {
+            QDir dir;
+            dir.mkpath(directory);
+        }
+
+        QFile file(directory + "/Exercises.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS Exercises ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                Title VARCHAR, "
+                                          "                Category INTEGER "
+                                          ");";
+
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM Exercises");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+                stream << "INSERT INTO Exercises (id, Title, Category) VALUES ( " + query.value(0).toString() + ", \'" + query.value(1).toString() + "\', " + query.value(2).toString() + ");\n";
+            }
+
+
+            file.close();
+        } else {
+            qDebug()<< "file NOT opened.";
+        }
+
+    }
+
+
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        QFile file(directory + "/Sets.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS Sets ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                exercise_id INTEGER, "
+                                          "                repetition_id INTEGER, "
+                                          "                time NUMERIC, "
+                                          "                note VARCHAR, "
+                                          "                repetition INTEGER, "
+                                          "                weight REAL "
+                                          ");";
+
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM Sets");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+                stream << "INSERT INTO Sets (id, exercise_id, repetition_id, time, note, repetition, weight) VALUES ( "
+                        + query.value(0).toString()
+                        + ", " + query.value(1).toString()
+                        + ", " + query.value(2).toString()
+                        + ", " + query.value(3).toString()
+                        + ", \'" + query.value(4).toString() + "\'"
+                        + ", " + query.value(5).toString()
+                        + ", " + query.value(6).toString() + "); \n";
+            }
+
+
+            file.close();
+        }
+
+    }
+
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        QFile file(directory + "/Cardio.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS Cardio ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                exercise_id INTEGER, "
+                                          "                duration INTEGER, "
+                                          "                time NUMERIC, "
+                                          "                distance INTEGER, "
+                                          "                heart_rate INTEGER, "
+                                          "                calories INTEGER, "
+                                          "                notes VARCHAR "
+                                          ");";
+
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM Cardio");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+                stream << "INSERT INTO Cardio (id, exercise_id, duration, time, distance, heart_rate, calories, note) VALUES ( "
+                        + query.value(0).toString()
+                        + ", " + query.value(1).toString()
+                        + ", " + query.value(2).toString()
+                        + ", " + query.value(3).toString()
+                        + ", " + query.value(4).toString()
+                        + ", " + query.value(5).toString()
+                        + ", " + query.value(6).toString()
+                        + ", \'" + query.value(7).toString() + "\'); \n";
+            }
+
+
+            file.close();
+        }
+
+    }
+
+
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        QFile file(directory + "/Routines.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS Routines ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                Title VARCHAR "
+                                          ");";
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM Routines");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+                stream << "INSERT INTO Routines (id, Title) VALUES ( "
+                        + query.value(0).toString()
+                        + ", \'" + query.value(1).toString() + "\'); \n";
+            }
+
+
+            file.close();
+        }
+
+    }
+
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        QFile file(directory + "/DetailRoutines.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS DetailRoutines ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                routine_id INTEGER, "
+                                          "                exercise_id INTEGER, "
+                                          "                position INTEGER "
+                                          ");";
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM DetailRoutines");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+                stream << "INSERT INTO DetailRoutines (id, routine_id, exercise_id, position) VALUES ( "
+                        + query.value(0).toString()
+                        + ", " + query.value(1).toString()
+                        + ", " + query.value(2).toString()
+                        + ", " + query.value(3).toString() + "); \n";
+            }
+
+
+            file.close();
+        }
+    }
+
+    Zip uz;
+    Zip::ErrorCode ec = uz.createArchive(path + ".zip");
+    if (ec != Zip::Ok)
+        return;
+
+    QString directory = QDir::homePath() + QLatin1String("/Backup");
+    uz.addFile(directory + "/Exercises.sql");
+    uz.addFile(directory + "/Sets.sql");
+    uz.addFile(directory + "/Cardio.sql");
+    uz.addFile(directory + "/Routines.sql");
+    uz.addFile(directory + "/DetailRoutines.sql");
+
+    ec = uz.closeArchive();
+}
+
+
+void Database::loadDB(const QString &path) {
+    QString directory = QDir::homePath() + QLatin1String("/Backup");
+    if (!QFile::exists(directory)) {
+        QDir dir;
+        dir.mkpath(directory);
+    }
+
+    QDir dir(directory);
+    QStringList fileList = dir.entryList();
+    for(int i = 2 ; i < fileList.length() ; ++i) {
+        QFile(directory + fileList[i]).remove();
+    }
+
+    UnZip uz;
+    UnZip::ErrorCode ec = uz.openArchive(path);
+
+    if (ec != UnZip::Ok) {
+        bb::system::SystemToast *toast = new bb::system::SystemToast();
+
+        toast->setBody("This is not a valid archive!");
+        toast->setPosition(bb::system::SystemUiPosition::MiddleCenter);
+        toast->show();
+        return;
+    }
+
+    ec = uz.extractAll(directory);
+    if (ec != UnZip::Ok) {
+        bb::system::SystemToast *toast = new bb::system::SystemToast();
+
+        toast->setBody("Oups.. cannot read the content of the file!");
+        toast->setPosition(bb::system::SystemUiPosition::MiddleCenter);
+        toast->show();
+        return;
+    }
+
+
+    bool exec_scripts = true;
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM Exercises WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        exec_scripts = exec_scripts && executeScript(directory + "/Exercises.sql");
+    }
+
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM Sets WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        exec_scripts = exec_scripts && executeScript(directory + "/Sets.sql");
+    }
+
+
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM Cardio WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        exec_scripts = exec_scripts && executeScript(directory + "/Cardio.sql");
+    }
+
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM Routines WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        executeScript(directory + "/Routines.sql");
+    }
+
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM DetailRoutines WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        exec_scripts = exec_scripts && executeScript(directory + "/DetailRoutines.sql");
+    }
+
+    if(!exec_scripts) {
+        bb::system::SystemToast *toast = new bb::system::SystemToast();
+
+        toast->setBody("Something went wrong during the loading process... All data will not be necessarily available... :(");
+        toast->setPosition(bb::system::SystemUiPosition::MiddleCenter);
+        toast->show();
+        return;
+    }
+}
+
+
+bool Database::executeScript(const QString &path) {
+    QFile file(path);
+
+    bool result = true;
+
+    if (file.open(QIODevice::ReadOnly)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+
+            QString line = in.readLine();
+
+            QSqlQuery query(m_Database);
+            query.prepare(line);
+
+            if (!query.exec()) {
+                result = false;
+                qWarning() << "Error.";
+            }
+        }
+        file.close();
+    } else {
+        return false;
+    }
+
+    return result;
+}
+
 
 
 

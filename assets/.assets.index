@@ -1,5 +1,5 @@
 1
-74
+77
 BugReport.qml
 bugReportIcons/BlablaRequest.png
 bugReportIcons/BlablaRequest_white.png
@@ -74,3 +74,6 @@ Routine.qml
 RoutineDetail.qml
 Settings.qml
 Summary.qml
+template.html
+template_black.html
+template_end.html
