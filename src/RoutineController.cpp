@@ -90,7 +90,8 @@ void RoutineController::onPromptFinishedAddRoutine (bb::system::SystemUiResult::
         SystemPrompt* prompt = qobject_cast<SystemPrompt*>(sender());
         if(prompt != NULL) {
             //qDebug() << "Prompt Accepted:" << prompt->inputFieldTextEntry();
-            Database::get()->addRoutine(prompt->inputFieldTextEntry());
+            if(!prompt->inputFieldTextEntry().isEmpty())
+                Database::get()->addRoutine(prompt->inputFieldTextEntry());
 
             prompt->deleteLater();
             updateRoutineList();

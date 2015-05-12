@@ -98,7 +98,7 @@ Page {
                         preferredWidth: ui.du(10)
                         verticalAlignment: VerticalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                     }
                     
@@ -116,7 +116,7 @@ Page {
                         preferredWidth: ui.du(10)
                         verticalAlignment: VerticalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                     }
                     
@@ -134,7 +134,7 @@ Page {
                         preferredWidth: ui.du(10)
                         verticalAlignment: VerticalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                        
                     }
@@ -163,7 +163,7 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                     clearButtonVisible: false
-                    inputMode: TextFieldInputMode.NumbersAndPunctuation
+                    input.keyLayout: KeyLayout.Alphanumeric
                     
                     onTextChanged: {
                     }
@@ -192,7 +192,7 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                     clearButtonVisible: false
-                    inputMode: TextFieldInputMode.NumbersAndPunctuation
+                    input.keyLayout: KeyLayout.Alphanumeric
                     
                     onTextChanged: {
                     }
@@ -221,7 +221,7 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                     clearButtonVisible: false
-                    inputMode: TextFieldInputMode.NumbersAndPunctuation
+                    input.keyLayout: KeyLayout.Alphanumeric
                     
                     onTextChanged: {
                     }
@@ -257,7 +257,7 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                     clearButtonVisible: false
-                    inputMode: TextFieldInputMode.NumbersAndPunctuation
+                    input.keyLayout: KeyLayout.Alphanumeric
                     
                     onTextChanged: {
                     }
@@ -286,7 +286,7 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                     clearButtonVisible: false
-                    inputMode: TextFieldInputMode.NumbersAndPunctuation
+                    input.keyLayout: KeyLayout.Alphanumeric
                     
                     onTextChanged: {
                     }
@@ -311,7 +311,7 @@ Page {
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Fill
                 clearButtonVisible: false
-                inputMode: TextFieldInputMode.NumbersAndPunctuation
+                input.keyLayout: KeyLayout.Alphanumeric
                 
                 onTextChanged: {
                     practiceController.calories = parseInt(text, 10);

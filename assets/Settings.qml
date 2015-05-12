@@ -135,6 +135,9 @@ Page {
             Button {
                 text: qsTr("Export to CSV")
                 horizontalAlignment: HorizontalAlignment.Fill
+                onClicked: {
+                    appSettings.exportDB();
+                }
             }
 
             

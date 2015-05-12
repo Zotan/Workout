@@ -15,12 +15,47 @@
 
 #include "Database.hpp"
 #include "DataObject.hpp"
+#include <QSettings>
+#include <QDir>
 
 ExerciseController::ExerciseController(QObject *parent) : QObject(parent), m_ListView(NULL), m_tmp_id(0) {
 
 }
 
 void ExerciseController::getExerciseList() {
+
+    QSettings settings("Amonchakait", "Workout");
+    if(settings.value("FIRST_START", "") == "") {
+        settings.setValue("FIRST_START", "DONE");
+
+        using namespace bb::cascades;
+        using namespace bb::system;
+
+        SystemDialog *dialog = new SystemDialog("Yes", "No");
+
+        dialog->setTitle(tr("Initialize exercises"));
+        dialog->setBody(tr("You are running the application for the first time, do you want to load the pre-defined list of exercises?"));
+
+        bool success = connect(dialog,
+             SIGNAL(finished(bb::system::SystemUiResult::Type)),
+             this,
+             SLOT(onPromptFinishedInitExercise(bb::system::SystemUiResult::Type)));
+
+        if (success) {
+            // Signal was successfully connected.
+            // Now show the dialog box in your UI.
+            dialog->show();
+        } else {
+            // Failed to connect to signal.
+            // This is not normal in most cases and can be a critical
+            // situation for your app! Make sure you know exactly why
+            // this has happened. Add some code to recover from the
+            // lost connection below this line.
+            dialog->deleteLater();
+        }
+
+    }
+
 
     QList<Exercise*> exercises = Database::get()->getExerciseList();
 
@@ -60,6 +95,16 @@ void ExerciseController::getExerciseList() {
 
     emit completed();
 
+}
+
+void ExerciseController::onPromptFinishedInitExercise(bb::system::SystemUiResult::Type result) {
+    using namespace bb::system;
+
+    if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
+        Database::get()->executeScript(QDir::currentPath() + "/app/native/assets/populate_exercises.sql");
+
+        getExerciseList();
+    }
 }
 
 void ExerciseController::filter(const QString &key) {
@@ -103,6 +148,8 @@ void ExerciseController::filter(const QString &key) {
 
 
 void ExerciseController::newExercise(const QString &label, int type) {
+    if(label.isEmpty()) return;
+
     Database::get()->addExercise(label, type);
 }
 

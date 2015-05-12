@@ -44,7 +44,7 @@ public Q_SLOTS:
     void onPromptFinishedDeleteExercise(bb::system::SystemUiResult::Type);
     void renameExercise             (int id, const QString &label);
     void onPromptFinishedRenameExercise(bb::system::SystemUiResult::Type);
-
+    void onPromptFinishedInitExercise(bb::system::SystemUiResult::Type);
 
 
 Q_SIGNALS:

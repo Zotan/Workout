@@ -73,6 +73,7 @@ public:
 
     void            saveDB(const QString &path);
     void            loadDB(const QString &path);
+    void            exportCSV(const QString &path);
 
     bool            executeScript(const QString &path);
 

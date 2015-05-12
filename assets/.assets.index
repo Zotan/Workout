@@ -1,5 +1,5 @@
 1
-77
+78
 BugReport.qml
 bugReportIcons/BlablaRequest.png
 bugReportIcons/BlablaRequest_white.png
@@ -67,6 +67,7 @@ ListIssues.qml
 main.qml
 Payment.qml
 Policy.qml
+populate_exercises.sql
 Practice.qml
 render_graph.html
 render_graph_black.html

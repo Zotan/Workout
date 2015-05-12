@@ -49,6 +49,9 @@ public Q_SLOTS:
     void loadDB           ();
     void loadFileSelected (const QStringList&);
 
+    void exportDB         ();
+    void exportFileSelected (const QStringList&);
+
     void canceled         ();
 
     void onPromptFinishedLoadDB(bb::system::SystemUiResult::Type);

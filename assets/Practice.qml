@@ -175,7 +175,7 @@ Page {
                             preferredWidth: ui.du(10)
                             verticalAlignment: VerticalAlignment.Center
                             clearButtonVisible: false
-                            inputMode: TextFieldInputMode.NumbersAndPunctuation
+                            input.keyLayout: KeyLayout.Alphanumeric
                             
                             onTextChanged: {
                                 var num = 0;
@@ -203,7 +203,7 @@ Page {
                             preferredWidth: ui.du(10)
                             verticalAlignment: VerticalAlignment.Center
                             clearButtonVisible: false
-                            inputMode: TextFieldInputMode.NumbersAndPunctuation
+                            input.keyLayout: KeyLayout.Alphanumeric
                             
                             onTextChanged: {
                                 var num = 0;
@@ -231,7 +231,7 @@ Page {
                             preferredWidth: ui.du(10)
                             verticalAlignment: VerticalAlignment.Center
                             clearButtonVisible: false
-                            inputMode: TextFieldInputMode.NumbersAndPunctuation
+                            input.keyLayout: KeyLayout.Alphanumeric
                             
                             onTextChanged: {
                                 var num = 0;
@@ -269,7 +269,7 @@ Page {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                         onTextChanged: {
                             practiceController.distance = parseInt(text, 10);
@@ -298,7 +298,7 @@ Page {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                         onTextChanged: {
                             practiceController.heartRate = parseInt(text, 10);
@@ -327,7 +327,7 @@ Page {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
                         clearButtonVisible: false
-                        inputMode: TextFieldInputMode.NumbersAndPunctuation
+                        input.keyLayout: KeyLayout.Alphanumeric
                         
                         onTextChanged: {
                             practiceController.calories = parseInt(text, 10);
@@ -366,7 +366,7 @@ Page {
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Center
                             clearButtonVisible: false
-                            inputMode: TextFieldInputMode.NumbersAndPunctuation
+                            input.keyLayout: KeyLayout.Alphanumeric
                             
                             onTextChanged: {
                                 practiceController.repetition = parseInt(text,10);
@@ -406,7 +406,7 @@ Page {
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Center
                             clearButtonVisible: false
-                            inputMode: TextFieldInputMode.NumbersAndPunctuation
+                            input.keyLayout: KeyLayout.Alphanumeric
                             
                             onTextChanged: {
                                 practiceController.weight = parseFloat(text);
@@ -580,7 +580,7 @@ Page {
                                     }
                                     
                                     Label {
-                                        text: qsTr("SET: ") + ListItemData.id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
+                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }

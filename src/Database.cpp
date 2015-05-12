@@ -691,7 +691,7 @@ QList<QPair<QString, QList<Cardio*> > > Database::getHistoryCardio  (qint64 begi
     QList<QPair<QString, QList<Cardio*> > > exercises;
 
     QSqlQuery query(m_Database);
-    query.prepare("SELECT * FROM Cardio, Exercises WHERE Cardio.exercise_id = Cardio.id AND Exercises.Category = 1 AND time > :bg_time AND time < :ed_time ORDER BY time DESC ");
+    query.prepare("SELECT * FROM Cardio, Exercises WHERE Cardio.exercise_id = Exercises.id AND Exercises.Category = 1 AND time > :bg_time AND time < :ed_time ORDER BY time DESC ");
     query.bindValue(":bg_time", begin == 0 ? QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch() : begin);
     query.bindValue(":ed_time", end == 0 ? QDateTime::currentDateTime().toMSecsSinceEpoch() : end);
     if (!query.exec()) {
@@ -700,6 +700,7 @@ QList<QPair<QString, QList<Cardio*> > > Database::getHistoryCardio  (qint64 begi
     }
 
     while (query.next()) {
+
         int id = query.value(0).toInt();
         int duration = query.value(2).toInt();
         qint64 time = static_cast<qint64>(query.value(3).toLongLong());
@@ -764,6 +765,7 @@ void Database::updatePractice(Set *set) {
     query.bindValue(":note", set->getNote());
     query.bindValue(":repetition", set->getRepetition());
     query.bindValue(":weight", set->getWeight());
+    query.bindValue(":id", set->getId());
 
 
     // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
@@ -847,7 +849,11 @@ void Database::saveDB(const QString &path) {
             }
 
             while (query.next()) {
-                stream << "INSERT INTO Exercises (id, Title, Category) VALUES ( " + query.value(0).toString() + ", \'" + query.value(1).toString() + "\', " + query.value(2).toString() + ");\n";
+
+                QString title = query.value(1).toString();
+                title.replace("\'", "\'\'");
+
+                stream << "INSERT INTO Exercises (id, Title, Category) VALUES ( " + query.value(0).toString() + ", \'" + title + " \', " + query.value(2).toString() + ");\n";
             }
 
 
@@ -887,12 +893,16 @@ void Database::saveDB(const QString &path) {
             }
 
             while (query.next()) {
+
+                QString notes = query.value(4).toString();
+                notes.replace("\'", "\'\'");
+
                 stream << "INSERT INTO Sets (id, exercise_id, repetition_id, time, note, repetition, weight) VALUES ( "
                         + query.value(0).toString()
                         + ", " + query.value(1).toString()
                         + ", " + query.value(2).toString()
                         + ", " + query.value(3).toString()
-                        + ", \'" + query.value(4).toString() + "\'"
+                        + ", \'" + notes + " \'"
                         + ", " + query.value(5).toString()
                         + ", " + query.value(6).toString() + "); \n";
             }
@@ -932,7 +942,11 @@ void Database::saveDB(const QString &path) {
             }
 
             while (query.next()) {
-                stream << "INSERT INTO Cardio (id, exercise_id, duration, time, distance, heart_rate, calories, note) VALUES ( "
+
+                QString notes = query.value(7).toString();
+                notes.replace("\'", "\'\'");
+
+                stream << "INSERT INTO Cardio (id, exercise_id, duration, time, distance, heart_rate, calories, notes) VALUES ( "
                         + query.value(0).toString()
                         + ", " + query.value(1).toString()
                         + ", " + query.value(2).toString()
@@ -940,7 +954,7 @@ void Database::saveDB(const QString &path) {
                         + ", " + query.value(4).toString()
                         + ", " + query.value(5).toString()
                         + ", " + query.value(6).toString()
-                        + ", \'" + query.value(7).toString() + "\'); \n";
+                        + ", \'" + notes + " \'); \n";
             }
 
 
@@ -972,9 +986,13 @@ void Database::saveDB(const QString &path) {
             }
 
             while (query.next()) {
+
+                QString title = query.value(1).toString();
+                title.replace("\'", "\'\'");
+
                 stream << "INSERT INTO Routines (id, Title) VALUES ( "
                         + query.value(0).toString()
-                        + ", \'" + query.value(1).toString() + "\'); \n";
+                        + ", \'" + title + "\'); \n";
             }
 
 
@@ -1140,7 +1158,7 @@ bool Database::executeScript(const QString &path) {
 
             if (!query.exec()) {
                 result = false;
-                qWarning() << "Error.";
+                qWarning() << "Error: " << query.lastError().text() << " " << line;
             }
         }
         file.close();
@@ -1151,6 +1169,85 @@ bool Database::executeScript(const QString &path) {
     return result;
 }
 
+
+void Database::exportCSV(const QString &path) {
+    QFile file(path + ".csv");
+
+
+    if (file.open(QIODevice::WriteOnly)) {
+        QTextStream stream(&file);
+
+        QSqlQuery query(m_Database);
+        query.prepare("SELECT * FROM Exercises, Sets WHERE Sets.exercise_id = Exercises.id;");
+        if (!query.exec()) {
+            const QSqlError error = query.lastError();
+            qDebug() << "query error:" << error.text();
+        }
+
+        /*
+         *             const QString createSQL = "CREATE TABLE IF NOT EXISTS Sets ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                exercise_id INTEGER, "
+                                          "                repetition_id INTEGER, "
+                                          "                time NUMERIC, "
+                                          "                note VARCHAR, "
+                                          "                repetition INTEGER, "
+                                          "                weight REAL "
+                                          ");";
+
+                        const QString createSQL = "CREATE TABLE IF NOT EXISTS Exercises ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                Title VARCHAR, "
+                                          "                Category INTEGER "
+                                          ");";
+
+
+         *             const QString createSQL = "CREATE TABLE IF NOT EXISTS Cardio ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                exercise_id INTEGER, "
+                                          "                duration INTEGER, "
+                                          "                time NUMERIC, "
+                                          "                distance INTEGER, "
+                                          "                heart_rate INTEGER, "
+                                          "                calories INTEGER, "
+                                          "                notes VARCHAR "
+                                          ");";
+         */
+
+        while (query.next()) {
+            stream << query.value(1).toString() << ", "
+                   << (query.value(2).toInt() == 1 ? "Cardio" : "Strength") << ", "
+                   << query.value(5).toString() << ", "
+                   << QDateTime::fromMSecsSinceEpoch(query.value(6).toLongLong()).toString() << ", "
+                   << query.value(7).toString() << ", "
+                   << query.value(8).toString() << ", "
+                   << query.value(9).toString() << "\n";
+        }
+
+
+        QSqlQuery query2(m_Database);
+        query2.prepare("SELECT * FROM Exercises, Cardio WHERE Cardio.exercise_id = Exercises.id;");
+        if (!query2.exec()) {
+            const QSqlError error = query2.lastError();
+            qDebug() << "query error:" << error.text();
+        }
+
+        while (query2.next()) {
+            stream << query2.value(1).toString() << ", "
+                   << (query2.value(2).toInt() == 1 ? "Cardio" : "Strength") << ", "
+                   << query2.value(5).toString() << ", "
+                   << QDateTime::fromMSecsSinceEpoch(query2.value(6).toLongLong()).toString() << ", "
+                   << query2.value(7).toString() << ", "
+                   << query2.value(8).toString() << ", "
+                   << query2.value(9).toString() << ", "
+                   << query2.value(10).toString() << "\n";
+        }
+
+
+        file.close();
+    }
+
+}
 
 
 

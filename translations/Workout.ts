@@ -4,12 +4,12 @@
 <context>
     <name>AppSettings</name>
     <message>
-        <location filename="../src/AppSettings.cpp" line="75"/>
+        <location filename="../src/AppSettings.cpp" line="101"/>
         <source>Load database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppSettings.cpp" line="76"/>
+        <location filename="../src/AppSettings.cpp" line="102"/>
         <source>Loading a new database will replace all data by the one from the selected file. Are you really sure you want to continue? This cannot be undone!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -254,17 +254,27 @@
 <context>
     <name>ExerciseController</name>
     <message>
-        <location filename="../src/ExerciseController.cpp" line="115"/>
+        <location filename="../src/ExerciseController.cpp" line="36"/>
+        <source>Initialize exercises</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExerciseController.cpp" line="37"/>
+        <source>You are running the application for the first time, do you want to load the pre-defined list of exercises?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ExerciseController.cpp" line="162"/>
         <source>Delete Exercise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ExerciseController.cpp" line="116"/>
+        <location filename="../src/ExerciseController.cpp" line="163"/>
         <source>Are you sure you want to delete this exercise? All related practices will be deleted as well...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ExerciseController.cpp" line="161"/>
+        <location filename="../src/ExerciseController.cpp" line="208"/>
         <source>Rename exercise</source>
         <translation type="unfinished"></translation>
     </message>
@@ -333,7 +343,7 @@
     </message>
     <message>
         <location filename="../assets/Payment.qml" line="50"/>
-        <source>Donate 1$</source>
+        <source>Donate ~1$</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -624,32 +634,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="109"/>
+        <location filename="../src/RoutineController.cpp" line="110"/>
         <source>Delete routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="110"/>
+        <location filename="../src/RoutineController.cpp" line="111"/>
         <source>Are you sure you want to delete this routine?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="155"/>
+        <location filename="../src/RoutineController.cpp" line="156"/>
         <source>Rename routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="311"/>
+        <location filename="../src/RoutineController.cpp" line="312"/>
         <source>End of routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="312"/>
+        <location filename="../src/RoutineController.cpp" line="313"/>
         <source>You have completed all the exercises, quit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="339"/>
+        <location filename="../src/RoutineController.cpp" line="340"/>
         <source>You are already at the first exercise of the list!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -776,72 +786,72 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="54"/>
+        <location filename="../src/SummaryController.cpp" line="55"/>
         <source> exercises completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="59"/>
+        <location filename="../src/SummaryController.cpp" line="60"/>
         <source> sets completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="68"/>
+        <location filename="../src/SummaryController.cpp" line="69"/>
         <source> reps completed
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="71"/>
+        <location filename="../src/SummaryController.cpp" line="72"/>
         <source> Kg total lifted
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="73"/>
+        <location filename="../src/SummaryController.cpp" line="74"/>
         <source> lbs total lifted
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="85"/>
-        <location filename="../src/SummaryController.cpp" line="150"/>
+        <location filename="../src/SummaryController.cpp" line="86"/>
+        <location filename="../src/SummaryController.cpp" line="151"/>
         <source>m in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="87"/>
-        <location filename="../src/SummaryController.cpp" line="152"/>
+        <location filename="../src/SummaryController.cpp" line="88"/>
+        <location filename="../src/SummaryController.cpp" line="153"/>
         <source>ft in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="89"/>
+        <location filename="../src/SummaryController.cpp" line="90"/>
         <source> min
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="136"/>
-        <location filename="../src/SummaryController.cpp" line="138"/>
+        <location filename="../src/SummaryController.cpp" line="137"/>
+        <location filename="../src/SummaryController.cpp" line="139"/>
         <source>SET </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="136"/>
+        <location filename="../src/SummaryController.cpp" line="137"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="138"/>
+        <location filename="../src/SummaryController.cpp" line="139"/>
         <source>lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="150"/>
-        <location filename="../src/SummaryController.cpp" line="152"/>
+        <location filename="../src/SummaryController.cpp" line="151"/>
+        <location filename="../src/SummaryController.cpp" line="153"/>
         <source>min</source>
         <translation type="unfinished"></translation>
     </message>

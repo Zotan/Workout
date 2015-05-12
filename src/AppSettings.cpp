@@ -64,6 +64,32 @@ void AppSettings::saveFileSelected(const QStringList &files) {
     Database::get()->saveDB(files.first());
 }
 
+void AppSettings::exportDB() {
+    using namespace bb::cascades::pickers;
+
+    FilePicker* filePicker = new FilePicker();
+    filePicker->setType(FileType::Other);
+    filePicker->setTitle("Select location");
+    filePicker->setMode(FilePickerMode::Saver);
+    filePicker->open();
+
+    // Connect the fileSelected() signal with the slot.
+    QObject::connect(filePicker,
+        SIGNAL(fileSelected(const QStringList&)),
+        this,
+        SLOT(exportFileSelected(const QStringList&)));
+
+    // Connect the canceled() signal with the slot.
+    QObject::connect(filePicker,
+        SIGNAL(canceled()),
+        this,
+        SLOT(canceled()));
+}
+
+void AppSettings::exportFileSelected (const QStringList& files) {
+    Database::get()->exportCSV(files.first());
+}
+
 
 void AppSettings::loadDB() {
 
