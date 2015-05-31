@@ -130,6 +130,10 @@ void RoutineController::deleteRoutine(int id) {
     }
 }
 
+void RoutineController::deleteRoutinesNoAsk(int id) {
+    Database::get()->deleteRoutine(id);
+}
+
 void RoutineController::onPromptFinishedDeleteRoutine(bb::system::SystemUiResult::Type type) {
 
     if(type == bb::system::SystemUiResult::ConfirmButtonSelection) {
@@ -252,6 +256,9 @@ void RoutineController::removeExerciseFromRoutine(int routine_id, int routine_ex
     loadRoutine(routine_id);
 }
 
+void RoutineController::removeExerciseFromRoutineNoAsk(int routine_id, int routine_exercise_id) {
+    Database::get()->removeExerciseFromRoutine(routine_exercise_id);
+}
 
 
 

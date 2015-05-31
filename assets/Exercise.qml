@@ -1,5 +1,6 @@
 import bb.cascades 1.3
 import Utility.ExerciseController 1.0
+import bb.system 1.2
 
 NavigationPane {
     id: nav
@@ -110,6 +111,45 @@ NavigationPane {
                     
                     }
                     
+                    multiSelectAction: MultiSelectActionItem {}
+                    
+                    multiSelectHandler {
+                        // These actions will be shown during multiple selection, while this 
+                        // multiSelectHandler is active
+                        actions: [
+                            DeleteActionItem {
+                                property variant selectionList
+                                property variant selectedItem
+                                id: deleteActionItem
+                                onTriggered: {
+                                    deleteActionItem.selectionList = exercicesList.selectionList()
+                                    deleteActionItem.selectedItem = theModel.data(selectionList);
+                                    multiSelectDeleteDialog.show()
+                                }
+                                attachedObjects: [
+                                    SystemDialog {
+                                        id: multiSelectDeleteDialog
+                                        title: qsTr("Delete exercises") + Retranslate.onLocaleOrLanguageChanged
+                                        body: qsTr("Are you sure you want to delete these exercises?") + Retranslate.onLocaleOrLanguageChanged
+                                        onFinished: {
+                                            if (result == 3) {
+                                            } else {
+                                                
+                                                for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                                    console.log(i)
+                                                    exerciseController.deleteExerciseNoAsk(theModel.data(deleteActionItem.selectionList[i]).id);
+                                                }
+                                                exerciseController.getExerciseList();
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                        
+                        status: qsTr("Delete")
+                    }
+                    
                     listItemComponents: [
                         ListItemComponent {
                             type: "item"
@@ -178,7 +218,7 @@ NavigationPane {
                         
                         if(chosenItem.category == 1) {
                             if(!exercisePage.tpageCardio) {
-                                exercisePage.tpageCardio = practice.createObject(0);
+                                exercisePage.tpageCardio = practice.createObject();
                             }
                             
                             exercisePage.tpageCardio.category = 1;
@@ -188,7 +228,7 @@ NavigationPane {
                             nav.push(exercisePage.tpageCardio);
                         } else {
                             if(!exercisePage.tpageStrength) {
-                                exercisePage.tpageStrength = practice.createObject(0);
+                                exercisePage.tpageStrength = practice.createObject();
                             }
                             
                             exercisePage.tpageStrength.category = 2;

@@ -1,5 +1,6 @@
 1
-78
+84
+Balance.qml
 BugReport.qml
 bugReportIcons/BlablaRequest.png
 bugReportIcons/BlablaRequest_white.png
@@ -28,6 +29,8 @@ images/color/Excellent.gif
 images/icon_about.png
 images/icon_add.png
 images/icon_add_white.png
+images/icon_balance.png
+images/icon_balance.svg
 images/icon_close.png
 images/icon_credit.png
 images/icon_daily.png
@@ -54,6 +57,8 @@ images/icon_rounded_refresh.png
 images/icon_rounded_refresh_black.png
 images/icon_rounded_refresh_white.png
 images/icon_save.png
+images/icon_stop_watch.png
+images/icon_stop_watch.svg
 images/icon_up_black.png
 images/icon_up_rounded_black.png
 images/icon_up_rounded_black.svg
@@ -66,6 +71,7 @@ js/Chart.js
 ListIssues.qml
 main.qml
 Payment.qml
+PlotProgress.qml
 Policy.qml
 populate_exercises.sql
 Practice.qml

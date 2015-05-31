@@ -18,12 +18,16 @@ class AppSettings : public QObject {
 
     Q_PROPERTY( int theme     READ getTheme     WRITE setTheme       NOTIFY themeChanged)
     Q_PROPERTY( int unit      READ getUnit      WRITE setUnit        NOTIFY unitChanged)
+    Q_PROPERTY( int ledNotif  READ getLedNotif  WRITE setLedNotif    NOTIFY ledNotifChanged)
+    Q_PROPERTY( int soundNotif  READ getSoundNotif  WRITE setSoundNotif    NOTIFY soundNotifChanged)
 
 
 private:
 
     int                          m_Theme;
     int                          m_Unit;
+    int                          m_LedNotif;
+    int                          m_SoundNotif;
 
 
 public:
@@ -39,6 +43,12 @@ public Q_SLOTS:
 
     inline int  getUnit   () const                         { return m_Unit; }
     inline void setUnit   (int c)                          { if(c != m_Unit) {m_Unit = c; emit  unitChanged(); }}
+
+    inline int  getLedNotif   () const                     { return m_LedNotif; }
+    inline void setLedNotif   (int c)                      { if(c != m_LedNotif) {m_LedNotif = c; emit  ledNotifChanged(); }}
+
+    inline int  getSoundNotif   () const                   { return m_SoundNotif; }
+    inline void setSoundNotif   (int c)                    { if(c != m_SoundNotif) {m_SoundNotif = c; emit  soundNotifChanged(); }}
 
 
     void save             ();
@@ -61,6 +71,8 @@ Q_SIGNALS:
 
     void themeChanged();
     void unitChanged();
+    void ledNotifChanged();
+    void soundNotifChanged();
 
 
 };

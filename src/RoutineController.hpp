@@ -46,12 +46,14 @@ public Q_SLOTS:
     void onPromptFinishedAddRoutine (bb::system::SystemUiResult::Type);
 
     void deleteRoutine              (int id);
+    void deleteRoutinesNoAsk        (int id);
     void onPromptFinishedDeleteRoutine(bb::system::SystemUiResult::Type);
     void renameRoutine             (int id, const QString &label);
     void onPromptFinishedRenameRoutine(bb::system::SystemUiResult::Type);
 
     void addExerciseToRoutine       (int routine_id, int exercise_id);
     void removeExerciseFromRoutine  (int routine_id, int routine_exercise_id);
+    void removeExerciseFromRoutineNoAsk(int routine_id, int routine_exercise_id);
 
     void saveOrder                  ();
 

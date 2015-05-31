@@ -25,7 +25,7 @@ PracticeController::PracticeController(QObject *parent) : QObject(parent), m_Lis
     m_TimeStopWatchSec = settings.value("StopWatch", 60).toInt();
     m_StopWatch = QString("%1").arg(static_cast<int>(floor(m_TimeStopWatchSec/60)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(floor(m_TimeStopWatchSec % 60)), 2, 10, QChar('0'));
 
-
+    notif = NULL;
     m_Led = new bb::device::Led();
     m_Led->setColor(bb::device::LedColor::Magenta);
 }
@@ -288,6 +288,8 @@ void PracticeController::plotCardio(int exercise_id, const QDateTime &begin, con
 
     QList<Cardio*> cardios = Database::get()->getHistoryCardio(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
+    if(cardios.empty()) return;
+
     QString datas = "var data = { "
                         "labels: [";
 
@@ -353,6 +355,8 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
     if(m_HistoryWeb == NULL) return;
 
     QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
+
+    if(sets.empty()) return;
 
     QString datas = "var data = { "
                         "labels: [";
@@ -531,6 +535,14 @@ void PracticeController::deletePracticeEntry(int id, int category, int exercise_
     }
 }
 
+void PracticeController::deletePracticeEntryNoAsk(int id, int category) {
+    if(category == 1) {
+        Database::get()->deletePracticeCardioEntry(id);
+    } else {
+        Database::get()->deletePracticeStrengthEntry(id);
+    }
+}
+
 void PracticeController::onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result) {
 
     if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
@@ -607,7 +619,17 @@ void PracticeController::stopWatchTick() {
         QSettings settings("Amonchakai", "Workout");
         delta = settings.value("StopWatch", 60).toInt();
 
-        m_Led->flash(2);
+        if(settings.value("ledNotif", 1) == 1)
+            m_Led->flash(2);
+
+        if(settings.value("soundNotif", 0) == 1) {
+            if(notif == NULL) {
+                notif = new bb::platform::Notification();
+            }
+            notif->notify();
+            notif->clearEffectsForAll();
+        }
+
         m_StopWatchRunning = false;
     }
 
@@ -620,6 +642,30 @@ void PracticeController::stopWatchTick() {
     m_StopWatchMutex.unlock();
 }
 
+
+void PracticeController::setSecStopWatch(const QDateTime &time) {
+    m_StopWatchMutex.lockForWrite();
+    m_TimeStopWatchSec = time.time().hour()*3600+time.time().minute()*60+time.time().second();
+
+    if(!m_StopWatchRunning) {
+        QSettings settings("Amonchakai", "Workout");
+        settings.setValue("StopWatch", m_TimeStopWatchSec);
+    }
+
+    if(m_StopWatchRunning) {
+        qint64 delta = max((m_TargetTimeStopWatch - QDateTime::currentMSecsSinceEpoch()) / 1000, 0);
+        m_StopWatch = QString("%1").arg(static_cast<int>(floor(delta/60)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(floor(delta % 60)), 2, 10, QChar('0'));
+    } else {
+        m_StopWatch = QString("%1").arg(static_cast<int>(floor(m_TimeStopWatchSec/60)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(floor(m_TimeStopWatchSec % 60)), 2, 10, QChar('0'));
+    }
+    emit stopWatchChanged();
+
+    m_StopWatchMutex.unlock();
+}
+
+QString PracticeController::getSecStopWatch() {
+    return QString("%1").arg(static_cast<int>(floor(m_TimeStopWatchSec/3600)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(floor((m_TimeStopWatchSec - floor(m_TimeStopWatchSec/3600)*3600)/60)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(m_TimeStopWatchSec%60), 2, 10, QChar('0'));
+}
 
 
 

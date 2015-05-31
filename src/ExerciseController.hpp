@@ -41,6 +41,7 @@ public Q_SLOTS:
 
     void newExercise                 (const QString &label, int type);
     void deleteExercise              (int id);
+    void deleteExerciseNoAsk         (int id);
     void onPromptFinishedDeleteExercise(bb::system::SystemUiResult::Type);
     void renameExercise             (int id, const QString &label);
     void onPromptFinishedRenameExercise(bb::system::SystemUiResult::Type);

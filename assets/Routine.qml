@@ -1,5 +1,6 @@
 import bb.cascades 1.3
 import Utility.RoutineController 1.0
+import bb.system 1.2
 
 NavigationPane {
     id: nav
@@ -92,6 +93,45 @@ NavigationPane {
                 
                 }
                 
+                multiSelectAction: MultiSelectActionItem {}
+                
+                multiSelectHandler {
+                    // These actions will be shown during multiple selection, while this 
+                    // multiSelectHandler is active
+                    actions: [
+                        DeleteActionItem {
+                            property variant selectionList
+                            property variant selectedItem
+                            id: deleteActionItem
+                            onTriggered: {
+                                deleteActionItem.selectionList = listRoutines.selectionList()
+                                deleteActionItem.selectedItem = theModel.data(selectionList);
+                                multiSelectDeleteDialog.show()
+                            }
+                            attachedObjects: [
+                                SystemDialog {
+                                    id: multiSelectDeleteDialog
+                                    title: qsTr("Delete routines") + Retranslate.onLocaleOrLanguageChanged
+                                    body: qsTr("Are you sure you want to delete these routines?") + Retranslate.onLocaleOrLanguageChanged
+                                    onFinished: {
+                                        if (result == 3) {
+                                        } else {
+                                            
+                                            for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                                console.log(i)
+                                                routineController.deleteRoutinesNoAsk(theModel.data(deleteActionItem.selectionList[i]).id);
+                                            }
+                                            routineController.updateRoutineList();
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                    
+                    status: qsTr("Delete")
+                }
+                
                 listItemComponents: [
                     ListItemComponent {
                         type: "item"
@@ -160,7 +200,7 @@ NavigationPane {
                 onTriggered: {
                     var chosenItem = dataModel.data(indexPath);
                     if(!pageRoutineDetail) {
-                        pageRoutineDetail = routineDetail.createObject(0);
+                        pageRoutineDetail = routineDetail.createObject();
                     }
                     pageRoutineDetail.routine = chosenItem.id;
                     pageRoutineDetail.title = chosenItem.title;

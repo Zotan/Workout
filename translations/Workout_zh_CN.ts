@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="zh_CN">
 <context>
     <name>AppSettings</name>
     <message>
@@ -635,8 +635,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/Practice.qml" line="682"/>
+        <source>Delete records</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="683"/>
+        <source>Are you sure you want to delete these records?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/Practice.qml" line="726"/>
         <source> </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="726"/>
+        <source> in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -663,36 +678,6 @@
     <message>
         <location filename="../assets/Practice.qml" line="787"/>
         <source>ft</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="1090"/>
-        <source>Timer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="1117"/>
-        <source>Choose timer duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="1140"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="726"/>
-        <source> in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="682"/>
-        <source>Delete records</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Practice.qml" line="683"/>
-        <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -780,6 +765,21 @@
     <message>
         <location filename="../assets/Practice.qml" line="1069"/>
         <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="1090"/>
+        <source>Timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="1117"/>
+        <source>Choose timer duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="1140"/>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

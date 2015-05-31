@@ -1,5 +1,5 @@
 import bb.cascades 1.3
-
+import bb.system 1.2
 
 Page {
     property int routine
@@ -122,6 +122,50 @@ Page {
             
             layout: StackListLayout {
                 id: theLayout
+            }
+            
+            multiSelectAction: MultiSelectActionItem {}
+            
+            multiSelectHandler {
+                // These actions will be shown during multiple selection, while this 
+                // multiSelectHandler is active
+                actions: [
+                    DeleteActionItem {
+                        property variant selectionList
+                        property variant selectedItem
+                        id: deleteActionItem
+                        onTriggered: {
+                            deleteActionItem.selectionList = routineDetailList.selectionList()
+                            deleteActionItem.selectedItem = theModel.data(selectionList);
+                            multiSelectDeleteDialog.show()
+                        }
+                        attachedObjects: [
+                            SystemDialog {
+                                id: multiSelectDeleteDialog
+                                title: qsTr("Delete exercises") + Retranslate.onLocaleOrLanguageChanged
+                                body: qsTr("Are you sure you want to delete these exercises?") + Retranslate.onLocaleOrLanguageChanged
+                                onFinished: {
+                                    if (result == 3) {
+                                    } else {
+                                        
+                                        for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                            var idReg = RegExp("([0-9]+)")
+                                            var encoded_text = theModel.data(deleteActionItem.selectionList[i]);
+                                            var ret = encoded_text.match(idReg);
+                                            
+                                            //console.log(parseInt(encoded_text.substring(0,ret[1].length)))
+                                            routineController.removeExerciseFromRoutineNoAsk(routine, parseInt(encoded_text.substring(0,ret[1].length)));
+                                            
+                                        }
+                                        routineController.loadRoutine(routine);
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+                
+                status: qsTr("Delete")
             }
             
             rearrangeHandler {

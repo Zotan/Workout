@@ -158,6 +158,25 @@ void Database::initDatabase() {
         }
     }
 
+
+    {
+        const QString createSQL = "CREATE TABLE IF NOT EXISTS BodyWeights ( "
+                                      "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                      "                time NUMERIC, "
+                                      "                weight REAL, "
+                                      "                notes VARCHAR "
+                                      ");";
+
+        QSqlQuery query(m_Database);
+        if (query.exec(createSQL)) {
+            qDebug() << "Table created.";
+        } else {
+            // If 'exec' fails, error information can be accessed via the lastError function
+            // the last error is reset every time exec is called.
+            const QSqlError error = query.lastError();
+            qDebug() << "Create table error:" << error.text();
+        }
+    }
 }
 
 
@@ -816,6 +835,69 @@ QDateTime Database::getLastExerciseDate() {
 }
 
 
+
+QList< BodyWeight* > Database::getBodyWeights(qint64 begin, qint64 end) {
+    QList< BodyWeight* > result;
+
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT * FROM BodyWeights WHERE time > :bg_time AND time < :ed_time ORDER BY time DESC ");
+    query.bindValue(":bg_time", begin == 0 ? QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch() : begin);
+    query.bindValue(":ed_time", end == 0 ? QDateTime::currentDateTime().toMSecsSinceEpoch() : end);
+    query.exec();
+
+    while (query.next()) {
+        int id = query.value(0).toInt();
+        qint64 time = static_cast<qint64>(query.value(1).toLongLong());
+        float weight = query.value(2).toFloat();
+        QString notes = query.value(3).toString();
+
+        BodyWeight *ex = new BodyWeight();
+        ex->setId(id);
+        ex->setNote(notes);
+        ex->setTime(QDateTime::fromMSecsSinceEpoch(time).date().toString(Qt::DefaultLocaleShortDate));
+        ex->setWeight(weight);
+
+        result.push_back(ex);
+    }
+
+
+    return result;
+}
+
+void Database::addBodyWeight(qint64 time, float weight, const QString& notes) {
+    QSqlQuery query(m_Database);
+    query.prepare("INSERT INTO BodyWeights (time, weight, notes) VALUES(:time, :weight, :notes)");
+    query.bindValue(":time", time);
+    query.bindValue(":weight", weight);
+    query.bindValue(":notes", notes);
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "item created.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "insert record error:" << error.text();
+    }
+}
+
+void Database::deleteBodyWeight(int id) {
+    QSqlQuery query(m_Database);
+    query.prepare("DELETE FROM BodyWeights WHERE id = :id");
+    query.bindValue(":id", id);
+
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (query.exec()) {
+        qDebug() << "item deleted.";
+    } else {
+        // If 'exec' fails, error information can be accessed via the lastError function
+        // the last error is reset every time exec is called.
+        const QSqlError error = query.lastError();
+        qDebug() << "delete record error:" << error.text();
+    }
+}
+
 // ------------------------------------------------------------------------------------------------------
 // IO Database
 
@@ -1037,6 +1119,45 @@ void Database::saveDB(const QString &path) {
         }
     }
 
+    {
+        QString directory = QDir::homePath() + QLatin1String("/Backup");
+        QFile file(directory + "/BodyWeights.sql");
+
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+
+            const QString createSQL = "CREATE TABLE IF NOT EXISTS BodyWeights ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                time NUMERIC, "
+                                          "                weight REAL, "
+                                          "                notes VARCHAR "
+                                          ");";
+
+            stream << createSQL << "\n";
+
+            QSqlQuery query(m_Database);
+            query.prepare("SELECT * FROM BodyWeights");
+            if (!query.exec()) {
+                const QSqlError error = query.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query.next()) {
+
+                QString notes = query.value(3).toString() ;
+                notes.replace("\'", "\'\'");
+
+                stream << "INSERT INTO BodyWeights (id, time, weight, notes) VALUES ( "
+                        + query.value(0).toString()
+                        + ", " + query.value(1).toString()
+                        + ", " + query.value(2).toString()
+                        + ", \'" + notes + "\'); \n";
+            }
+
+
+            file.close();
+        }
+    }
     Zip uz;
     Zip::ErrorCode ec = uz.createArchive(path + ".zip");
     if (ec != Zip::Ok)
@@ -1048,6 +1169,7 @@ void Database::saveDB(const QString &path) {
     uz.addFile(directory + "/Cardio.sql");
     uz.addFile(directory + "/Routines.sql");
     uz.addFile(directory + "/DetailRoutines.sql");
+    uz.addFile(directory + "/BodyWeights.sql");
 
     ec = uz.closeArchive();
 }
@@ -1131,6 +1253,14 @@ void Database::loadDB(const QString &path) {
         exec_scripts = exec_scripts && executeScript(directory + "/DetailRoutines.sql");
     }
 
+    if(exec_scripts) {
+        QSqlQuery query(m_Database);
+        query.prepare("DELETE FROM BodyWeights WHERE id > 0;");
+        exec_scripts = query.exec();
+
+        exec_scripts = exec_scripts && executeScript(directory + "/BodyWeights.sql");
+    }
+
     if(!exec_scripts) {
         bb::system::SystemToast *toast = new bb::system::SystemToast();
 
@@ -1212,6 +1342,13 @@ void Database::exportCSV(const QString &path) {
                                           "                calories INTEGER, "
                                           "                notes VARCHAR "
                                           ");";
+
+                      const QString createSQL = "CREATE TABLE IF NOT EXISTS BodyWeights ( "
+                                          "                id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                          "                time NUMERIC, "
+                                          "                weight REAL, "
+                                          "                notes VARCHAR "
+                                          ");";
          */
 
         while (query.next()) {
@@ -1225,22 +1362,42 @@ void Database::exportCSV(const QString &path) {
         }
 
 
-        QSqlQuery query2(m_Database);
-        query2.prepare("SELECT * FROM Exercises, Cardio WHERE Cardio.exercise_id = Exercises.id;");
-        if (!query2.exec()) {
-            const QSqlError error = query2.lastError();
-            qDebug() << "query error:" << error.text();
+
+
+        {
+            QSqlQuery query2(m_Database);
+            query2.prepare("SELECT * FROM Exercises, Cardio WHERE Cardio.exercise_id = Exercises.id;");
+            if (!query2.exec()) {
+                const QSqlError error = query2.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query2.next()) {
+                stream << query2.value(1).toString() << ", "
+                       << (query2.value(2).toInt() == 1 ? "Cardio" : "Strength") << ", "
+                       << query2.value(5).toString() << ", "
+                       << QDateTime::fromMSecsSinceEpoch(query2.value(6).toLongLong()).toString() << ", "
+                       << query2.value(7).toString() << ", "
+                       << query2.value(8).toString() << ", "
+                       << query2.value(9).toString() << ", "
+                       << query2.value(10).toString() << "\n";
+            }
         }
 
-        while (query2.next()) {
-            stream << query2.value(1).toString() << ", "
-                   << (query2.value(2).toInt() == 1 ? "Cardio" : "Strength") << ", "
-                   << query2.value(5).toString() << ", "
-                   << QDateTime::fromMSecsSinceEpoch(query2.value(6).toLongLong()).toString() << ", "
-                   << query2.value(7).toString() << ", "
-                   << query2.value(8).toString() << ", "
-                   << query2.value(9).toString() << ", "
-                   << query2.value(10).toString() << "\n";
+
+        {
+            QSqlQuery query2(m_Database);
+            query2.prepare("SELECT * FROM BodyWeights;");
+            if (!query2.exec()) {
+                const QSqlError error = query2.lastError();
+                qDebug() << "query error:" << error.text();
+            }
+
+            while (query2.next()) {
+                stream << QDateTime::fromMSecsSinceEpoch(query2.value(1).toLongLong()).toString() << ", "
+                       << query2.value(2).toString() << ", "
+                       << query2.value(3).toString() << "\n";
+            }
         }
 
 

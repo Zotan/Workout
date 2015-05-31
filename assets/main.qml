@@ -96,6 +96,18 @@ TabbedPane {
         }
     } 
     
+    Tab { 
+        // Localized text with the dynamic translation and locale updates support
+        id: tabWeight
+        title: qsTr("Weight") + Retranslate.onLocaleOrLanguageChanged
+        ActionBar.placement: ActionBarPlacement.OnBar
+        imageSource: "asset:///images/icon_balance.png"
+        delegateActivationPolicy: TabDelegateActivationPolicy.Default
+        
+        delegate: Delegate {
+            source: "Balance.qml"
+        }
+    } 
     
     attachedObjects: [
         Sheet {

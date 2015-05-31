@@ -216,6 +216,53 @@ public:
 };
 
 
+
+class BodyWeight : public QObject {
+    Q_OBJECT
+
+    Q_PROPERTY( int id              READ getId          WRITE setId          NOTIFY idChanged)
+    Q_PROPERTY( QString time        READ getTime        WRITE setTime        NOTIFY timeChanged)
+    Q_PROPERTY( float   weight      READ getWeight      WRITE setWeight      NOTIFY weightChanged)
+    Q_PROPERTY( QString note        READ getNote        WRITE setNote        NOTIFY noteChanged)
+
+
+    // ----------------------------------------------------------------------------------------------
+
+
+private:
+    int     m_Id;
+    QString m_Time;
+    float   m_Weight;
+    QString m_Note;
+
+
+    // ----------------------------------------------------------------------------------------------
+
+public:
+    BodyWeight(QObject *parent = 0) : QObject(parent), m_Weight(0) {}
+    virtual ~BodyWeight() {}
+
+    inline int            getId() const                     { return m_Id; }
+    inline void           setId(int c)                      { m_Id = c; }
+
+    inline const QString& getTime() const                   { return m_Time; }
+    inline void           setTime(const QString &c)         { m_Time = c; }
+
+    inline float          getWeight() const                 { return m_Weight; }
+    inline void           setWeight(float c)                { m_Weight = c; }
+
+    inline const QString &getNote() const                   { return m_Note; }
+    inline void           setNote(const QString &s)         { m_Note = s; }
+
+    // ----------------------------------------------------------------------------------------------
+    Q_SIGNALS:
+        void idChanged();
+        void timeChanged();
+        void weightChanged();
+        void noteChanged();
+};
+
+
 class Routine : public QObject {
     Q_OBJECT
 

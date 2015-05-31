@@ -75,9 +75,14 @@ Page {
             onViewableAreaChanged: {
                 if(viewableArea.x % DisplayInfo.width != 0) {
                     scrollView.scrollToPoint(Math.floor(viewableArea.x/DisplayInfo.width+0.5)*DisplayInfo.width, scrollView.viewableArea.y);
-                    actionSelector.selectedIndex = Math.floor(viewableArea.x/DisplayInfo.width+0.5);
+                    
+                } else {
+                    actionSelector.selectedIndex = Math.floor(viewableArea.x/DisplayInfo.width);
                 }
+                
+                
             }
+            
             
             Container {
                 layout: StackLayout {
@@ -656,6 +661,48 @@ Page {
                         
                         }
                         
+                        multiSelectAction: MultiSelectActionItem {}
+                        
+                        multiSelectHandler {
+                            // These actions will be shown during multiple selection, while this 
+                            // multiSelectHandler is active
+                            actions: [
+                                DeleteActionItem {
+                                    property variant selectionList
+                                    property variant selectedItem
+                                    id: deleteActionItem
+                                    onTriggered: {
+                                        deleteActionItem.selectionList = historyList.selectionList()
+                                        deleteActionItem.selectedItem = histModel.data(selectionList);
+                                        multiSelectDeleteDialog.show()
+                                    }
+                                    attachedObjects: [
+                                        SystemDialog {
+                                            id: multiSelectDeleteDialog
+                                            title: qsTr("Delete records") + Retranslate.onLocaleOrLanguageChanged
+                                            body: qsTr("Are you sure you want to delete these records?") + Retranslate.onLocaleOrLanguageChanged
+                                            onFinished: {
+                                                if (result == 3) {
+                                                } else {
+                                                    
+                                                    for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                                        practiceController.deletePracticeEntryNoAsk(histModel.data(deleteActionItem.selectionList[i]).id, category);
+                                                    }
+                                                    
+                                                    if(category == 1)
+                                                        practiceController.loadHistory(exercise_id);
+                                                    else 
+                                                        practiceController.loadStrengthHistory(exercise_id);
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                            
+                            status: qsTr("Delete")
+                        }
+                        
                         listItemComponents: [
                             ListItemComponent {
                                 type: "header"
@@ -771,6 +818,7 @@ Page {
                         DateTimePicker {
                             id: startDate
                             title: qsTr("Start")
+                            value: practiceController.initDate();
                             
                             onValueChanged: {
                                 if(category == 1)
@@ -879,8 +927,26 @@ Page {
                         
                         url: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? "local:///assets/render_graph_black.html" : "local:///assets/render_graph.html"
                         
-                        horizontalAlignment: HorizontalAlignment.Fill
+                        preferredWidth: DisplayInfo.width
                         verticalAlignment: VerticalAlignment.Fill
+                        
+                        /*
+                        onLoadingChanged: {
+                            if (loadRequest.status == WebLoadStatus.Succeeded) {
+                                switch(category) {
+                                    
+                                    case 1:
+                                        practiceController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
+                                        break;
+                                    
+                                    case 2:
+                                        practiceController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
+                                        break;
+                                    
+                                }
+                            }
+                        }
+                        */
                     }
                 }
             }
@@ -1019,6 +1085,79 @@ Page {
                     routineController.prev();
                 }
             }
+        },
+        ActionItem {
+          title: qsTr("Timer")
+          ActionBar.placement: ActionBarPlacement.InOverflow
+          imageSource:   "asset:///images/icon_stop_watch.png"
+          onTriggered: {
+              timerpicker.value = timerpicker.dateFromTime(practiceController.getSecStopWatch());
+              setTimer.open();
+          }
+          
+          attachedObjects: [
+              Dialog {
+                  id: setTimer
+                                    
+                  content:  Container {
+                      
+                      background: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.create("#282828") : Color.White
+                      horizontalAlignment: HorizontalAlignment.Center
+                      verticalAlignment: VerticalAlignment.Center
+                      
+                      preferredWidth: ui.du(60)
+                      
+                      layout: StackLayout {
+                          orientation: LayoutOrientation.TopToBottom
+                      }
+                      
+                      Divider { }
+                      
+                      Label {
+                          text: qsTr("Choose timer duration")
+                          textStyle.fontSize: FontSize.Large
+                          horizontalAlignment: HorizontalAlignment.Left
+                      }
+                      
+                      Divider { }
+                      
+                      DateTimePicker {
+                          id: timerpicker
+                          title: "Timer"
+                          mode: DateTimePickerMode.Timer
+                          value: timerpicker.dateFromTime(practiceController.getSecStopWatch())
+                      }
+                      
+                      Divider { }
+                      
+                      Container {
+                          layout: StackLayout {
+                              orientation: LayoutOrientation.LeftToRight
+                          }
+                          horizontalAlignment: HorizontalAlignment.Fill
+                          
+                          Button {
+                              text: qsTr("Cancel")
+                              horizontalAlignment: HorizontalAlignment.Fill
+                              
+                              onClicked: {
+                                  setTimer.close();
+                              }
+                          }
+                          
+                          Button {
+                              text: qsTr("Save")
+                              horizontalAlignment: HorizontalAlignment.Fill
+                              
+                              onClicked: {
+                                  setTimer.close();
+                                  practiceController.setSecStopWatch(timerpicker.value)
+                              }
+                          }
+                      }
+                  }
+              }
+          ]
         }
     ]
     
@@ -1084,6 +1223,19 @@ Page {
             practiceController.loadHistory(exercise_id);
         else 
             practiceController.loadStrengthHistory(exercise_id);
+            
+         /*
+        // load the graph!
+        switch(category) {
+            case 1:
+                practiceController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
+                break;
+            
+            case 2:
+                practiceController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
+                break;        
+        }
+        */
     }
     
     attachedObjects: [

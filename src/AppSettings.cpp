@@ -18,6 +18,8 @@ AppSettings::AppSettings(QObject *parent) : QObject(parent), m_Theme(0), m_Unit(
 
     m_Theme = settings.value("theme", 1).toInt();
     m_Unit  = settings.value("unit", 2).toInt();
+    m_LedNotif  = settings.value("ledNotif", 1).toInt();
+    m_SoundNotif  = settings.value("soundNotif", 0).toInt();
 
 }
 
@@ -26,6 +28,8 @@ void AppSettings::save() {
     QSettings settings("Amonchakai", "Workout");
     settings.setValue("theme", m_Theme);
     settings.setValue("unit", m_Unit);
+    settings.setValue("ledNotif", m_LedNotif);
+    settings.setValue("soundNotif", m_SoundNotif);
 
 }
 

@@ -14,6 +14,7 @@
 #include <QDateTime>
 #include <QReadWriteLock>
 #include <bb/device/Led>
+#include <bb/platform/Notification>
 #include <bb/system/SystemUiResult>
 
 class Set;
@@ -47,7 +48,7 @@ private:
     bb::cascades::ListView          *m_HistoryListView;
     bb::cascades::WebView           *m_HistoryWeb;
     bb::device::Led                 *m_Led;
-
+    bb::platform::Notification      *notif;
 
     float                            m_Weight;
     int                              m_Repetition;
@@ -116,6 +117,8 @@ public Q_SLOTS:
     void saveSet                     (const QString &note);
     void updateDateTime              ();
 
+    QDateTime initDate               () const                          { return QDateTime::currentDateTime().addYears(-1); }
+
     void pushToDB                    (int exerciseId);
     void pushCardioToDB              (int exerciseId, const QString &notes);
 
@@ -130,6 +133,7 @@ public Q_SLOTS:
     QString getDateFromTime          (qint64 time);
 
     void deletePracticeEntry         (int id, int category, int exercise_id);
+    void deletePracticeEntryNoAsk    (int id, int category);
     void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type);
     void updatePractice              (int category);
 
@@ -137,6 +141,8 @@ public Q_SLOTS:
     void startStopWatch              ();
     void resetStopWatch              ();
     void addSecStopWatch             (int sec);
+    void setSecStopWatch             (const QDateTime &time);
+    QString getSecStopWatch          ();
     void stopWatchTick               ();
 
 Q_SIGNALS:

@@ -15,6 +15,7 @@ class Set;
 class Cardio;
 class Routine;
 class RoutineExercise;
+class BodyWeight;
 
 class Database {
 
@@ -38,6 +39,9 @@ public:
     void addExercise                (const QString &label, int category);
     void deleteExercise             (int id);
     void renameExercise             (int id, const QString &label);
+
+    void addBodyWeight              (qint64 time, float weight, const QString& notes);
+    void deleteBodyWeight           (int id);
 
     void saveSet                    (int exercise_id, const Set *set);
     void deletePracticeStrengthEntry(int id);
@@ -67,6 +71,7 @@ public:
 
     QList<QPair<QString, QList<Set*> > >    getHistoryStrength(qint64 begin = 0, qint64 end = 0);
     QList<QPair<QString, QList<Cardio*> > > getHistoryCardio  (qint64 begin = 0, qint64 end = 0);
+    QList< BodyWeight* >                    getBodyWeights    (qint64 begin = 0, qint64 end = 0);
 
 
 

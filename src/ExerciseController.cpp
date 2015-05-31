@@ -182,6 +182,11 @@ void ExerciseController::deleteExercise(int id) {
     }
 }
 
+void ExerciseController::deleteExerciseNoAsk(int id) {
+    Database::get()->deleteExercise(id);
+
+}
+
 void ExerciseController::onPromptFinishedDeleteExercise(bb::system::SystemUiResult::Type type) {
 
     if(type == bb::system::SystemUiResult::ConfirmButtonSelection) {
