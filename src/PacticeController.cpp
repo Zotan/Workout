@@ -288,8 +288,6 @@ void PracticeController::plotCardio(int exercise_id, const QDateTime &begin, con
 
     QList<Cardio*> cardios = Database::get()->getHistoryCardio(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
-    if(cardios.empty()) return;
-
     QString datas = "var data = { "
                         "labels: [";
 
@@ -356,7 +354,6 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
 
     QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
-    if(sets.empty()) return;
 
     QString datas = "var data = { "
                         "labels: [";
@@ -378,6 +375,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
             added = false;
         }
     }
+    datas.replace(", ,", ", ");
     datas[datas.length()-2] = ' '; // remove the last comma...
 
 
@@ -627,7 +625,7 @@ void PracticeController::stopWatchTick() {
                 notif = new bb::platform::Notification();
             }
             notif->notify();
-            notif->clearEffectsForAll();
+            QTimer::singleShot(1000, notif, SLOT(clearEffectsForAll()));
         }
 
         m_StopWatchRunning = false;

@@ -192,7 +192,12 @@ Page {
     
     
     onCreationCompleted: {
-        balanceController.setHistoryWebView(historyWeb);
+        if(typeof balanceController === 'undefined'){
+            practiceController.setHistoryWebView(historyWeb);
+        } else {
+            balanceController.setHistoryWebView(historyWeb);
+        }
+        
     }
     
     attachedObjects: [

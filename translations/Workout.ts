@@ -374,17 +374,17 @@
 <context>
     <name>ExercisePicker</name>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="21"/>
+        <location filename="../assets/ExercisePicker.qml" line="22"/>
         <source>Choose an exercise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="46"/>
+        <location filename="../assets/ExercisePicker.qml" line="47"/>
         <source>No exercises available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="59"/>
+        <location filename="../assets/ExercisePicker.qml" line="60"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -786,12 +786,12 @@
 <context>
     <name>PracticeController</name>
     <message>
-        <location filename="../src/PacticeController.cpp" line="523"/>
+        <location filename="../src/PacticeController.cpp" line="521"/>
         <source>Delete practice record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PacticeController.cpp" line="524"/>
+        <location filename="../src/PacticeController.cpp" line="522"/>
         <source>Are you sure you want to delete this record?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -998,22 +998,32 @@ You can add some using the &quot;add&quot; button.</source>
 <context>
     <name>Summary</name>
     <message>
-        <location filename="../assets/Summary.qml" line="37"/>
+        <location filename="../assets/Summary.qml" line="46"/>
         <source>YOUR LAST WORKOUT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="59"/>
+        <location filename="../assets/Summary.qml" line="68"/>
         <source>STATS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="79"/>
+        <location filename="../assets/Summary.qml" line="87"/>
+        <source>PROGRESS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Summary.qml" line="119"/>
+        <source>Plot progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Summary.qml" line="132"/>
         <source>DETAILS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="102"/>
+        <location filename="../assets/Summary.qml" line="155"/>
         <source>No previous exercises available.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1070,13 +1080,13 @@ You can add some using the &quot;add&quot; button.</source>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="86"/>
-        <location filename="../src/SummaryController.cpp" line="151"/>
+        <location filename="../src/SummaryController.cpp" line="177"/>
         <source>m in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="88"/>
-        <location filename="../src/SummaryController.cpp" line="153"/>
+        <location filename="../src/SummaryController.cpp" line="179"/>
         <source>ft in </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1087,24 +1097,29 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="137"/>
-        <location filename="../src/SummaryController.cpp" line="139"/>
+        <location filename="../src/SummaryController.cpp" line="116"/>
+        <source>Duration: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="163"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
         <source>SET </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="137"/>
+        <location filename="../src/SummaryController.cpp" line="163"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="139"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
         <source>lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="151"/>
-        <location filename="../src/SummaryController.cpp" line="153"/>
+        <location filename="../src/SummaryController.cpp" line="177"/>
+        <location filename="../src/SummaryController.cpp" line="179"/>
         <source>min</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,5 +1,5 @@
 1
-84
+85
 Balance.qml
 BugReport.qml
 bugReportIcons/BlablaRequest.png
@@ -39,6 +39,7 @@ images/icon_down_rounded_black.png
 images/icon_down_rounded_white.png
 images/icon_exercise.png
 images/icon_filter.png
+images/icon_graph.png
 images/icon_home.png
 images/icon_next.png
 images/icon_next.svg

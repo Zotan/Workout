@@ -89,6 +89,32 @@ void SummaryController::getInfos() {
 
     m_Stats += QString::number(duration/60) + tr(" min\n");
 
+    qint64 minTime = 0;
+    qint64 maxTime = 0;
+
+    for(int i = 0 ; i < exercises_strength.length() ; ++i) {
+        for(int k = 0 ; k < exercises_strength.at(i).second.length() ; ++k) {
+            if(exercises_strength.at(i).second.at(k)->getTime() > maxTime)
+                maxTime = exercises_strength.at(i).second.at(k)->getTime();
+
+            if(exercises_strength.at(i).second.at(k)->getTime() < minTime || minTime == 0)
+                minTime = exercises_strength.at(i).second.at(k)->getTime();
+        }
+    }
+
+    for(int i = 0 ; i < exercises_cardio.length() ; ++i) {
+        for(int k = 0 ; k < exercises_cardio.at(i).second.length() ; ++k) {
+            if(exercises_cardio.at(i).second.at(k)->getTime() > maxTime)
+                maxTime = exercises_cardio.at(i).second.at(k)->getTime();
+
+            if(exercises_cardio.at(i).second.at(k)->getTime() < minTime || minTime == 0)
+                minTime = exercises_cardio.at(i).second.at(k)->getTime();
+        }
+    }
+
+    qint64 diffTime = (maxTime - minTime) / 1000;
+    m_Stats += tr("Duration: ") + (QString("%1").arg(static_cast<int>(floor(diffTime/3600)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(floor((diffTime - floor(diffTime/3600)*3600)/60)), 2, 10, QChar('0')) + ":" + QString("%1").arg(static_cast<int>(diffTime%60), 2, 10, QChar('0')));
+
 
     emit statsChanged();
 

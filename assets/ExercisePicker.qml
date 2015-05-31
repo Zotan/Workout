@@ -5,6 +5,7 @@ Page {
     id: exercisePage
     property variant tpageCardio
     property variant tpageStrength
+    property bool doNotCloseOnSelected
     
     signal exercisePicked(int id, string name);
     
@@ -129,8 +130,13 @@ Page {
                 onTriggered: {
                     var chosenItem = dataModel.data(indexPath);
                     
-                    exercisePickedId = chosenItem.id;
-                    nav.pop();
+                    if(!doNotCloseOnSelected) {
+                        exercisePickedId = chosenItem.id;
+                        nav.pop();
+                    } else {
+                        exercisePickedCategory = chosenItem.category;
+                        exercisePickedId = chosenItem.id;
+                    }
                 }
             }
         
@@ -140,6 +146,7 @@ Page {
     onCreationCompleted: {
         exerciseController.setListView(exercicesList);
         exerciseController.getExerciseList();
+        doNotCloseOnSelected = false;
     }
     
     attachedObjects: [
