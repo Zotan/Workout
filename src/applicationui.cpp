@@ -21,6 +21,7 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 #include <bb/device/DisplayInfo>
+#include <bb/cascades/Image>
 
 #include "ExerciseController.hpp"
 #include "PracticeController.hpp"
@@ -30,6 +31,7 @@
 #include "BalanceController.hpp"
 
 #include "BugReportController.hpp"
+#include "Graph.hpp"
 
 using namespace bb::cascades;
 
@@ -59,6 +61,9 @@ ApplicationUI::ApplicationUI() :
     qmlRegisterType<AppSettings>("Utility.AppSettings", 1, 0, "AppSettings");
 
     qmlRegisterType<BugReportController>("Lib.BugReport", 1, 0, "BugReport");
+
+    qmlRegisterType<Graph>("Utility.Graph", 1, 0, "Graph");
+    qRegisterMetaType<bb::cascades::Image>("Image");
 
 
     // Create scene document from main.qml asset, the parent is set

@@ -10,14 +10,16 @@
 
 #include <QtCore/QObject>
 #include <bb/cascades/ListView>
-#include <bb/cascades/WebView>
 #include <QDateTime>
 #include <QReadWriteLock>
 #include <bb/device/Led>
 #include <bb/platform/Notification>
 #include <bb/system/SystemUiResult>
 
+#include "Graph.hpp"
+
 class Set;
+
 
 class PracticeController : public QObject {
     Q_OBJECT;
@@ -46,7 +48,7 @@ private:
 
     bb::cascades::ListView          *m_ListView;
     bb::cascades::ListView          *m_HistoryListView;
-    bb::cascades::WebView           *m_HistoryWeb;
+    Graph                           *m_GraphController;
     bb::device::Led                 *m_Led;
     bb::platform::Notification      *notif;
 
@@ -112,7 +114,7 @@ public Q_SLOTS:
 
     inline void setListView          (QObject *list)                  { m_ListView = dynamic_cast<bb::cascades::ListView*>(list); };
     inline void setHistoryListView   (QObject *list)                  { m_HistoryListView = dynamic_cast<bb::cascades::ListView*>(list); };
-    inline void setHistoryWebView    (QObject *web)                   { m_HistoryWeb = dynamic_cast<bb::cascades::WebView*>(web); };
+    inline void setGraph             (QObject *gr)                    { m_GraphController = dynamic_cast<Graph*>(gr); };
 
     void saveSet                     (const QString &note);
     void updateDateTime              ();

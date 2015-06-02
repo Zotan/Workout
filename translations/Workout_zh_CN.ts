@@ -22,58 +22,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="42"/>
+        <location filename="../assets/Balance.qml" line="44"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="60"/>
-        <location filename="../assets/Balance.qml" line="281"/>
+        <location filename="../assets/Balance.qml" line="62"/>
+        <location filename="../assets/Balance.qml" line="282"/>
         <source>Body weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="89"/>
+        <location filename="../assets/Balance.qml" line="91"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="93"/>
+        <location filename="../assets/Balance.qml" line="95"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="103"/>
+        <location filename="../assets/Balance.qml" line="105"/>
         <source>Plot progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="116"/>
+        <location filename="../assets/Balance.qml" line="118"/>
         <source>Previous records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="141"/>
+        <location filename="../assets/Balance.qml" line="143"/>
         <source>No previous body weight records.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="192"/>
+        <location filename="../assets/Balance.qml" line="193"/>
         <source>Delete records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="193"/>
+        <location filename="../assets/Balance.qml" line="194"/>
         <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="209"/>
+        <location filename="../assets/Balance.qml" line="210"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="284"/>
+        <location filename="../assets/Balance.qml" line="285"/>
         <source>Delete entry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,12 +81,12 @@
 <context>
     <name>BalanceController</name>
     <message>
-        <location filename="../src/BalanceController.cpp" line="117"/>
+        <location filename="../src/BalanceController.cpp" line="90"/>
         <source>Delete record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BalanceController.cpp" line="118"/>
+        <location filename="../src/BalanceController.cpp" line="91"/>
         <source>Are you sure you want to delete this record? </source>
         <translation type="unfinished"></translation>
     </message>
@@ -447,83 +447,83 @@
 <context>
     <name>PlotProgress</name>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="15"/>
+        <location filename="../assets/PlotProgress.qml" line="16"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="40"/>
+        <location filename="../assets/PlotProgress.qml" line="41"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="62"/>
+        <location filename="../assets/PlotProgress.qml" line="63"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="87"/>
-        <location filename="../assets/PlotProgress.qml" line="117"/>
+        <location filename="../assets/PlotProgress.qml" line="88"/>
+        <location filename="../assets/PlotProgress.qml" line="118"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="91"/>
+        <location filename="../assets/PlotProgress.qml" line="92"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="95"/>
+        <location filename="../assets/PlotProgress.qml" line="96"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="100"/>
+        <location filename="../assets/PlotProgress.qml" line="101"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="104"/>
+        <location filename="../assets/PlotProgress.qml" line="105"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="121"/>
+        <location filename="../assets/PlotProgress.qml" line="122"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="126"/>
+        <location filename="../assets/PlotProgress.qml" line="127"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="130"/>
+        <location filename="../assets/PlotProgress.qml" line="131"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="134"/>
+        <location filename="../assets/PlotProgress.qml" line="135"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="138"/>
+        <location filename="../assets/PlotProgress.qml" line="139"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="142"/>
+        <location filename="../assets/PlotProgress.qml" line="143"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="146"/>
+        <location filename="../assets/PlotProgress.qml" line="147"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="150"/>
+        <location filename="../assets/PlotProgress.qml" line="151"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
@@ -544,241 +544,241 @@
 <context>
     <name>Practice</name>
     <message>
-        <location filename="../assets/Practice.qml" line="50"/>
+        <location filename="../assets/Practice.qml" line="51"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="55"/>
+        <location filename="../assets/Practice.qml" line="56"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="60"/>
+        <location filename="../assets/Practice.qml" line="61"/>
         <source>Graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="156"/>
+        <location filename="../assets/Practice.qml" line="157"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="258"/>
-        <location filename="../assets/Practice.qml" line="857"/>
+        <location filename="../assets/Practice.qml" line="259"/>
+        <location filename="../assets/Practice.qml" line="858"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="287"/>
-        <location filename="../assets/Practice.qml" line="862"/>
+        <location filename="../assets/Practice.qml" line="288"/>
+        <location filename="../assets/Practice.qml" line="863"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="316"/>
-        <location filename="../assets/Practice.qml" line="866"/>
+        <location filename="../assets/Practice.qml" line="317"/>
+        <location filename="../assets/Practice.qml" line="867"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="345"/>
+        <location filename="../assets/Practice.qml" line="346"/>
         <source>Set: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="439"/>
+        <location filename="../assets/Practice.qml" line="440"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="439"/>
+        <location filename="../assets/Practice.qml" line="440"/>
         <source>lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="467"/>
+        <location filename="../assets/Practice.qml" line="468"/>
         <source>You have to perform at least one repetition!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="540"/>
+        <location filename="../assets/Practice.qml" line="541"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="558"/>
+        <location filename="../assets/Practice.qml" line="559"/>
         <source>Completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="588"/>
-        <location filename="../assets/Practice.qml" line="734"/>
+        <location filename="../assets/Practice.qml" line="589"/>
+        <location filename="../assets/Practice.qml" line="735"/>
         <source>SET: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="606"/>
-        <location filename="../assets/Practice.qml" line="791"/>
+        <location filename="../assets/Practice.qml" line="607"/>
+        <location filename="../assets/Practice.qml" line="792"/>
         <source> Kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="606"/>
-        <location filename="../assets/Practice.qml" line="791"/>
+        <location filename="../assets/Practice.qml" line="607"/>
+        <location filename="../assets/Practice.qml" line="792"/>
         <source> lbs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="632"/>
+        <location filename="../assets/Practice.qml" line="633"/>
         <source>No history available. You need to do some excercise!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="682"/>
+        <location filename="../assets/Practice.qml" line="683"/>
         <source>Delete records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="683"/>
+        <location filename="../assets/Practice.qml" line="684"/>
         <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="726"/>
+        <location filename="../assets/Practice.qml" line="727"/>
         <source> </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="726"/>
+        <location filename="../assets/Practice.qml" line="727"/>
         <source> in </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="749"/>
+        <location filename="../assets/Practice.qml" line="750"/>
         <source>Practice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="752"/>
+        <location filename="../assets/Practice.qml" line="753"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="703"/>
-        <location filename="../assets/Practice.qml" line="760"/>
+        <location filename="../assets/Practice.qml" line="704"/>
+        <location filename="../assets/Practice.qml" line="761"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="787"/>
+        <location filename="../assets/Practice.qml" line="788"/>
         <source>m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="787"/>
+        <location filename="../assets/Practice.qml" line="788"/>
         <source>ft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="820"/>
+        <location filename="../assets/Practice.qml" line="821"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="834"/>
+        <location filename="../assets/Practice.qml" line="835"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="849"/>
-        <location filename="../assets/Practice.qml" line="879"/>
+        <location filename="../assets/Practice.qml" line="850"/>
+        <location filename="../assets/Practice.qml" line="880"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="853"/>
+        <location filename="../assets/Practice.qml" line="854"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="883"/>
+        <location filename="../assets/Practice.qml" line="884"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="888"/>
+        <location filename="../assets/Practice.qml" line="889"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="892"/>
+        <location filename="../assets/Practice.qml" line="893"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="896"/>
+        <location filename="../assets/Practice.qml" line="897"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="900"/>
+        <location filename="../assets/Practice.qml" line="901"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="904"/>
+        <location filename="../assets/Practice.qml" line="905"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="908"/>
+        <location filename="../assets/Practice.qml" line="909"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="912"/>
+        <location filename="../assets/Practice.qml" line="913"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1030"/>
+        <location filename="../assets/Practice.qml" line="1019"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1030"/>
-        <location filename="../assets/Practice.qml" line="1149"/>
+        <location filename="../assets/Practice.qml" line="1019"/>
+        <location filename="../assets/Practice.qml" line="1138"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1062"/>
+        <location filename="../assets/Practice.qml" line="1051"/>
         <source>You have to enter a duration!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1069"/>
+        <location filename="../assets/Practice.qml" line="1058"/>
         <source>Prev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1069"/>
+        <location filename="../assets/Practice.qml" line="1058"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1090"/>
+        <location filename="../assets/Practice.qml" line="1079"/>
         <source>Timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1117"/>
+        <location filename="../assets/Practice.qml" line="1106"/>
         <source>Choose timer duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1140"/>
+        <location filename="../assets/Practice.qml" line="1129"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -786,12 +786,12 @@
 <context>
     <name>PracticeController</name>
     <message>
-        <location filename="../src/PacticeController.cpp" line="521"/>
+        <location filename="../src/PacticeController.cpp" line="461"/>
         <source>Delete practice record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PacticeController.cpp" line="522"/>
+        <location filename="../src/PacticeController.cpp" line="462"/>
         <source>Are you sure you want to delete this record?</source>
         <translation type="unfinished"></translation>
     </message>

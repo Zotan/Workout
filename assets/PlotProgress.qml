@@ -1,5 +1,6 @@
 import bb.cascades 1.3
 import Utility.PracticeController 1.0
+import Utility.Graph 1.0
 
 Page {
     titleBar: TitleBar {
@@ -157,45 +158,53 @@ Page {
             }
         }
         
-        WebView {
-            id: historyWeb                        
-            settings.textAutosizingEnabled: false
-            settings.zoomToFitEnabled: false
-            settings.background: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.create("#282828") : Color.White
+        Container {
+            id: graphContainer
+            layout: AbsoluteLayout { }
+            preferredHeight: 720
+            preferredWidth: 720
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
             
-            url: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? "local:///assets/render_graph_black.html" : "local:///assets/render_graph.html"
-            
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-            
-            onLoadingChanged: {
-                if (loadRequest.status == WebLoadStatus.Succeeded) {
-                    switch(category) {
-                        
-                        case 1:
-                            practiceController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
-                            break;
-                        
-                        case 2:
-                            practiceController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
-                            break;
-                        
-                        case 3:
-                            balanceController.plotBodyWeights(startDate.value, endDate.value);
-                            break;
-                    }
-                }
+            ImageView {
+                id: image
+                image: graphController.image
+                
+                preferredHeight: 720
+                preferredWidth: 720
+                scalingMethod: ScalingMethod.AspectFit
             }
         }
         
     }
     
+    onExercise_idChanged: {
+        switch(category) {
+            
+            case 1:
+                practiceController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
+                break;
+            
+            case 2:
+                practiceController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
+                break;
+            
+            case 3:
+                balanceController.plotBodyWeights(startDate.value, endDate.value);
+                break;
+        }
+
+    }
     
     onCreationCompleted: {
+        graphController.setContainer(graphContainer);
+        //graphController.draw();
+        
         if(typeof balanceController === 'undefined'){
-            practiceController.setHistoryWebView(historyWeb);
+            practiceController.setGraph(graphController);
         } else {
-            balanceController.setHistoryWebView(historyWeb);
+            balanceController.setGraph(graphController);
+            balanceController.plotBodyWeights(startDate.value, endDate.value);
         }
         
     }
@@ -203,6 +212,11 @@ Page {
     attachedObjects: [
         PracticeController {
             id: practiceController
+        },
+        Graph {
+            id: graphController
+            width: 720
+            height: 720
         }
     ]
 }

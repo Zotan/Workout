@@ -2,6 +2,7 @@ import bb.cascades 1.3
 import bb.system 1.0
 import Utility.PracticeController 1.0
 import Utility.AppSettings 1.0
+import Utility.Graph 1.0
 
 Page {
     id: practicePage
@@ -919,34 +920,22 @@ Page {
                         }
                     }
                     
-                    WebView {
-                        id: historyWeb                        
-                        settings.textAutosizingEnabled: false
-                        settings.zoomToFitEnabled: false
-                        settings.background: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.create("#282828") : Color.White
+                    Container {
+                        id: graphContainer
+                        layout: AbsoluteLayout { }
+                        preferredHeight: 720
+                        preferredWidth: 720
+                        horizontalAlignment: HorizontalAlignment.Center
+                        verticalAlignment: VerticalAlignment.Center
                         
-                        url: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? "local:///assets/render_graph_black.html" : "local:///assets/render_graph.html"
-                        
-                        preferredWidth: DisplayInfo.width
-                        verticalAlignment: VerticalAlignment.Fill
-                        
-                        /*
-                        onLoadingChanged: {
-                            if (loadRequest.status == WebLoadStatus.Succeeded) {
-                                switch(category) {
-                                    
-                                    case 1:
-                                        practiceController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
-                                        break;
-                                    
-                                    case 2:
-                                        practiceController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
-                                        break;
-                                    
-                                }
-                            }
+                        ImageView {
+                            id: image
+                            image: graphController.image
+                            
+                            preferredHeight: 720
+                            preferredWidth: 720
+                            scalingMethod: ScalingMethod.AspectFit
                         }
-                        */
                     }
                 }
             }
@@ -1186,8 +1175,9 @@ Page {
     
     onCreationCompleted: {
         practiceController.setListView(accomplishedExerciseList);
-        practiceController.setHistoryListView(historyList);    
-        practiceController.setHistoryWebView(historyWeb); 
+        practiceController.setHistoryListView(historyList);   
+        graphController.setContainer(graphContainer); 
+        practiceController.setGraph(graphController);
         playlistMode = false;   
         refresh_history = false;
     }
@@ -1245,6 +1235,11 @@ Page {
         AppSettings {
             id: appSettings
         },
+        Graph {
+            id: graphController
+            width: 720
+            height: 720
+        }, 
         ComponentDefinition {
             id: editPractice
             source: "EditPractice.qml"

@@ -31,6 +31,8 @@ NavigationPane {
         
         
         ScrollView {
+            focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
+            id: scrollView
             
             Container {
                 layout: StackLayout {
@@ -145,7 +147,6 @@ NavigationPane {
                     }
                     
                     ListView {
-                        focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
                         
                         id: history
                         preferredHeight: ui.du(70)
@@ -309,6 +310,7 @@ NavigationPane {
         onCreationCompleted: {
             balanceController.setListView(history);
             balanceController.getWeightsList();
+            scrollView.requestFocus();
         }
         
         
@@ -317,7 +319,7 @@ NavigationPane {
                 id: balanceController
                 
                 onCompleted: {
-                    history.requestFocus();
+                    scrollView.requestFocus();
                 }
             },
             AppSettings {

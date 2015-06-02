@@ -9,9 +9,10 @@
 #define BALANCECONTROLLER_HPP_
 
 #include <bb/cascades/ListView>
-#include <bb/cascades/WebView>
 #include <QDateTime>
 #include <bb/system/SystemUiResult>
+
+#include "Graph.hpp"
 
 
 class BalanceController : public QObject {
@@ -21,7 +22,7 @@ class BalanceController : public QObject {
 private:
 
     bb::cascades::ListView          *m_ListView;
-    bb::cascades::WebView           *m_HistoryWeb;
+    Graph                           *m_GraphController;
 
     int                              m_tmp_id;
 
@@ -36,7 +37,7 @@ public:
 public Q_SLOTS:
 
     inline void setListView          (QObject *list)                  { m_ListView = dynamic_cast<bb::cascades::ListView*>(list); };
-    inline void setHistoryWebView    (QObject *web)                   { m_HistoryWeb = dynamic_cast<bb::cascades::WebView*>(web); };
+    inline void setGraph             (QObject *gr)                    { m_GraphController = dynamic_cast<Graph*>(gr); };
 
     void getWeightsList              ();
     void saveWeight                  (float value, const QString& notes);

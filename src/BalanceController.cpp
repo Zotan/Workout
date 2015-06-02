@@ -62,50 +62,23 @@ void BalanceController::saveWeight(float value, const QString& notes) {
 
 void BalanceController::plotBodyWeights(const QDateTime &begin, const QDateTime &end) {
 
-    if(m_HistoryWeb == NULL) return;
+    if(m_GraphController == NULL) return;
 
     QList< BodyWeight* > bodyweights = Database::get()->getBodyWeights(begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
-    QString datas = "var data = { "
-                        "labels: [";
+    QList<QString> labels;
+    QList<float>   datas;
 
     for(int i = bodyweights.length()-1 ; i >= 0 ; --i) {
-        datas += "\"" + bodyweights.at(i)->getTime() + "\"";
-
-        if(i > 0)
-            datas += ", ";
+        labels.push_back(bodyweights.at(i)->getTime());
     }
-
-    datas += "], "
-            "datasets: ["
-                "{"
-                    "label: \"My First dataset\","
-                    "fillColor: \"rgba(220,220,220,0.2)\","
-                    "strokeColor: \"rgba(220,220,220,1)\","
-                    "pointColor: \"rgba(220,220,220,1)\","
-                    "pointStrokeColor: \"#fff\","
-                    "pointHighlightFill: \"#fff\","
-                    "pointHighlightStroke: \"rgba(220,220,220,1)\","
-                    "data: [" ;
 
 
     for(int i = bodyweights.length()-1 ; i >= 0 ; --i) {
-        datas += QString::number(bodyweights.at(i)->getWeight());
-
-        if(i > 0)
-            datas += ", ";
+        datas.push_back(bodyweights.at(i)->getWeight());
     }
 
-    datas += "]}]";
-
-    datas += "};";
-    datas += "new Chart(ctx).Line(data, {"
-                "bezierCurve: false"
-            "});";
-
-
-    qDebug() << datas;
-    m_HistoryWeb->evaluateJavaScript(datas);
+    m_GraphController->plot(labels, datas);
 }
 
 void BalanceController::deleteRecord(int id) {

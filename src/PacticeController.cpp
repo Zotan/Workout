@@ -16,8 +16,10 @@
 
 #include "DataObject.hpp"
 #include "Database.hpp"
+#include "Graph.hpp"
 
-PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_HistoryWeb(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
+
+PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_GraphController(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
 
     updateDateTime();
 
@@ -284,113 +286,60 @@ QString PracticeController::getDateFromTime(qint64 time) {
 
 void PracticeController::plotCardio(int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria) {
 
-    if(m_HistoryWeb == NULL) return;
+    if(m_GraphController == NULL) return;
 
     QList<Cardio*> cardios = Database::get()->getHistoryCardio(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
-    QString datas = "var data = { "
-                        "labels: [";
+    QList<QString> labels;
+    QList<float>   datas;
 
     for(int i = cardios.length()-1 ; i >= 0 ; --i) {
-        datas += "\"" + QDateTime::fromMSecsSinceEpoch(cardios.at(i)->getTime()).toString(Qt::SystemLocaleShortDate) + "\"";
-
-        if(i > 0)
-            datas += ", ";
+        labels.push_back(QDateTime::fromMSecsSinceEpoch(cardios.at(i)->getTime()).toString(Qt::SystemLocaleShortDate));
     }
-
-    datas += "], "
-            "datasets: ["
-                "{"
-                    "label: \"My First dataset\","
-                    "fillColor: \"rgba(220,220,220,0.2)\","
-                    "strokeColor: \"rgba(220,220,220,1)\","
-                    "pointColor: \"rgba(220,220,220,1)\","
-                    "pointStrokeColor: \"#fff\","
-                    "pointHighlightFill: \"#fff\","
-                    "pointHighlightStroke: \"rgba(220,220,220,1)\","
-                    "data: [" ;
-
 
     for(int i = cardios.length()-1 ; i >= 0 ; --i) {
 
         switch(criteria) {
             case 0:
-                datas += QString::number(static_cast<float>(cardios.at(i)->getDuration())/60);
+                datas.push_back((static_cast<float>(cardios.at(i)->getDuration())/60));
                 break;
 
             case 1:
-                datas += QString::number(static_cast<int>(cardios.at(i)->getDistance()));
+                datas.push_back((static_cast<int>(cardios.at(i)->getDistance())));
                 break;
 
             case 2:
-                datas += QString::number(static_cast<int>(cardios.at(i)->getHeartRate()));
+                datas.push_back((static_cast<int>(cardios.at(i)->getHeartRate())));
                 break;
 
             case 3:
-                datas += QString::number(static_cast<int>(cardios.at(i)->getCalories()));
+                datas.push_back((static_cast<int>(cardios.at(i)->getCalories())));
                 break;
         }
-
-        if(i > 0)
-            datas += ", ";
     }
 
-    datas += "]}]";
-
-    datas += "};";
-    datas += "new Chart(ctx).Line(data, {"
-                "bezierCurve: false"
-            "});";
-
-
-    m_HistoryWeb->evaluateJavaScript(datas);
-
+    m_GraphController->plot(labels, datas);
 }
 
 
 void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria) {
 
-    if(m_HistoryWeb == NULL) return;
+    if(m_GraphController == NULL) return;
 
     QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
+    QList<QString> labels;
+    QList<float>   datas;
 
-    QString datas = "var data = { "
-                        "labels: [";
-
-    bool added = false;
     if(sets.length() > 0) {
-        datas += "\"" + QDateTime::fromMSecsSinceEpoch(sets.last()->getTime()).toString(Qt::SystemLocaleShortDate) + "\", ";
-        added = true;
+        labels.push_back(QDateTime::fromMSecsSinceEpoch(sets.last()->getTime()).toString(Qt::SystemLocaleShortDate));
     }
 
     for(int i = sets.length()-2 ; i >= 0 ; --i) {
         if((sets.at(i)->getTime() - sets.at(i+1)->getTime()) > 1000*60*60*4) {
-            datas += "\"" + QDateTime::fromMSecsSinceEpoch(sets.at(i)->getTime()).toString(Qt::SystemLocaleShortDate) + "\"";
-            added = true;
-        }
-
-        if(added) {
-            datas += ", ";
-            added = false;
+            labels.push_back(QDateTime::fromMSecsSinceEpoch(sets.at(i)->getTime()).toString(Qt::SystemLocaleShortDate));
         }
     }
-    datas.replace(", ,", ", ");
-    datas[datas.length()-2] = ' '; // remove the last comma...
-
-
-    datas += "], "
-            "datasets: ["
-                "{"
-                    "label: \"My First dataset\","
-                    "fillColor: \"rgba(220,220,220,0.2)\","
-                    "strokeColor: \"rgba(220,220,220,1)\","
-                    "pointColor: \"rgba(220,220,220,1)\","
-                    "pointStrokeColor: \"#fff\","
-                    "pointHighlightFill: \"#fff\","
-                    "pointHighlightStroke: \"rgba(220,220,220,1)\","
-                    "data: [" ;
-
 
 
     QList<double> feature;
@@ -409,7 +358,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
                     for(int n = 0 ; n < feature.size() ; ++n) {
                         mx = mx >  feature.at(n) ? mx : feature.at(n);
                     }
-                    datas += "\"" + QString::number(mx) + "\", ";
+                    datas.push_back(mx);
                     break;
                 }
 
@@ -418,7 +367,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
                     for(int n = 0 ; n < feature.size() ; ++n) {
                         mn = mn <  feature.at(n) ? mn : feature.at(n);
                     }
-                    datas += "\"" + QString::number(mn) + "\", ";
+                    datas.push_back(mn);
                     break;
                 }
 
@@ -427,7 +376,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
                     for(int n = 0 ; n < feature.size() ; ++n) {
                         avg += feature.at(n);
                     }
-                    datas += "\"" + QString::number(avg / feature.size()) + "\", ";
+                    datas.push_back(avg / feature.size());
                     break;
                 }
 
@@ -436,7 +385,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
                     for(int n = 0 ; n < feature.size() ; ++n) {
                         avg += feature.at(n);
                     }
-                    datas += "\"" + QString::number(avg) + "\", ";
+                    datas.push_back(avg);
                     break;
                 }
             }
@@ -454,13 +403,14 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
                 feature.push_back(sets.at(i)->getRepetition());
         }
     }
+
     switch(criteria % 4) {
         case 0: {
             double mx = 0;
             for(int n = 0 ; n < feature.size() ; ++n) {
                 mx = mx >  feature.at(n) ? mx : feature.at(n);
             }
-            datas += "\"" + QString::number(mx) + "\" ";
+            datas.push_back(mx);
             break;
         }
 
@@ -469,7 +419,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
             for(int n = 0 ; n < feature.size() ; ++n) {
                 mn = mn <  feature.at(n) ? mn : feature.at(n);
             }
-            datas += "\"" + QString::number(mn) + "\" ";
+            datas.push_back(mn);
             break;
         }
 
@@ -478,7 +428,7 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
             for(int n = 0 ; n < feature.size() ; ++n) {
                 avg += feature.at(n);
             }
-            datas += "\"" + QString::number(avg / feature.size()) + "\" ";
+            datas.push_back(avg / feature.size());
             break;
         }
 
@@ -487,22 +437,12 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
             for(int n = 0 ; n < feature.size() ; ++n) {
                 avg += feature.at(n);
             }
-            datas += "\"" + QString::number(avg) + "\" ";
+            datas.push_back(avg);
             break;
         }
     }
 
-    datas += "]}]";
-
-    datas += "};";
-    datas += "new Chart(ctx).Line(data, {"
-                "bezierCurve: false"
-            "});";
-
-    qDebug() << datas;
-
-    m_HistoryWeb->evaluateJavaScript(datas);
-
+    m_GraphController->plot(labels, datas);
 }
 
 
