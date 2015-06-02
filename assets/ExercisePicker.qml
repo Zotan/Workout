@@ -134,6 +134,7 @@ Page {
                         exercisePickedId = chosenItem.id;
                         nav.pop();
                     } else {
+                        exerciseLabel = chosenItem.title;
                         exercisePickedCategory = chosenItem.category;
                         exercisePickedId = chosenItem.id;
                     }

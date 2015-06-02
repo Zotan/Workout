@@ -28,7 +28,8 @@
     </message>
     <message>
         <location filename="../assets/Balance.qml" line="62"/>
-        <location filename="../assets/Balance.qml" line="282"/>
+        <location filename="../assets/Balance.qml" line="112"/>
+        <location filename="../assets/Balance.qml" line="283"/>
         <source>Body weight</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,32 +49,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="118"/>
+        <location filename="../assets/Balance.qml" line="119"/>
         <source>Previous records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="143"/>
+        <location filename="../assets/Balance.qml" line="144"/>
         <source>No previous body weight records.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="193"/>
+        <location filename="../assets/Balance.qml" line="194"/>
         <source>Delete records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="194"/>
+        <location filename="../assets/Balance.qml" line="195"/>
         <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="210"/>
+        <location filename="../assets/Balance.qml" line="211"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="285"/>
+        <location filename="../assets/Balance.qml" line="286"/>
         <source>Delete entry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -447,83 +448,78 @@
 <context>
     <name>PlotProgress</name>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="16"/>
-        <source>Progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/PlotProgress.qml" line="41"/>
+        <location filename="../assets/PlotProgress.qml" line="46"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="63"/>
+        <location filename="../assets/PlotProgress.qml" line="68"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="88"/>
-        <location filename="../assets/PlotProgress.qml" line="118"/>
+        <location filename="../assets/PlotProgress.qml" line="93"/>
+        <location filename="../assets/PlotProgress.qml" line="123"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="92"/>
+        <location filename="../assets/PlotProgress.qml" line="97"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="96"/>
+        <location filename="../assets/PlotProgress.qml" line="101"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="101"/>
+        <location filename="../assets/PlotProgress.qml" line="106"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="105"/>
+        <location filename="../assets/PlotProgress.qml" line="110"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="122"/>
+        <location filename="../assets/PlotProgress.qml" line="127"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="127"/>
+        <location filename="../assets/PlotProgress.qml" line="132"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="131"/>
+        <location filename="../assets/PlotProgress.qml" line="136"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="135"/>
+        <location filename="../assets/PlotProgress.qml" line="140"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="139"/>
+        <location filename="../assets/PlotProgress.qml" line="144"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="143"/>
+        <location filename="../assets/PlotProgress.qml" line="148"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="147"/>
+        <location filename="../assets/PlotProgress.qml" line="152"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="151"/>
+        <location filename="../assets/PlotProgress.qml" line="156"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
@@ -998,32 +994,32 @@ You can add some using the &quot;add&quot; button.</source>
 <context>
     <name>Summary</name>
     <message>
-        <location filename="../assets/Summary.qml" line="46"/>
+        <location filename="../assets/Summary.qml" line="47"/>
         <source>YOUR LAST WORKOUT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="68"/>
+        <location filename="../assets/Summary.qml" line="69"/>
         <source>STATS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="87"/>
+        <location filename="../assets/Summary.qml" line="88"/>
         <source>PROGRESS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="119"/>
+        <location filename="../assets/Summary.qml" line="120"/>
         <source>Plot progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="132"/>
+        <location filename="../assets/Summary.qml" line="133"/>
         <source>DETAILS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="155"/>
+        <location filename="../assets/Summary.qml" line="156"/>
         <source>No previous exercises available.</source>
         <translation type="unfinished"></translation>
     </message>

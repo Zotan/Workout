@@ -8,6 +8,7 @@ NavigationPane {
     property variant plotPage
     property int exercisePickedCategory
     property int exercisePickedId
+    property string exerciseLabel
     
     Page {
         
@@ -257,8 +258,10 @@ NavigationPane {
         if(!plotPage)
             plotPage = plotProgress.createObject();
 
+        plotPage.caption = exerciseLabel;
         plotPage.category = exercisePickedCategory;        
         plotPage.exercise_id = exercisePickedId;
+        
 
         nav.push(plotPage);
         

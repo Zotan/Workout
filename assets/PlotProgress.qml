@@ -13,7 +13,7 @@ Page {
                 
                 Label {
                     id: folder
-                    text: qsTr("Progress")
+                    text: caption
                     textStyle {
                         color: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.White : Color.Black
                     }
@@ -24,8 +24,13 @@ Page {
         }
     }
     
+    property string caption
     property int category
     property int exercise_id
+    
+    onCaptionChanged: {
+        folder.text = caption;
+    }
     
     Container {
         layout: StackLayout {

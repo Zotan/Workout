@@ -109,6 +109,7 @@ NavigationPane {
                         if(!plotPage)
                             plotPage = plotProgress.createObject();
                         plotPage.category = 3;
+                        plotPage.caption = qsTr("Body weight")
                         nav.push(plotPage);
                     }
                 }
