@@ -923,8 +923,8 @@ Page {
                     Container {
                         id: graphContainer
                         layout: AbsoluteLayout { }
-                        preferredHeight: 720
-                        preferredWidth: 720
+                        preferredHeight: DisplayInfo.height/2
+                        preferredWidth: DisplayInfo.width-20
                         horizontalAlignment: HorizontalAlignment.Center
                         verticalAlignment: VerticalAlignment.Center
                         
@@ -932,8 +932,8 @@ Page {
                             id: image
                             image: graphController.image
                             
-                            preferredHeight: 720
-                            preferredWidth: 720
+                            preferredHeight: DisplayInfo.height/2
+                            preferredWidth: DisplayInfo.width-20
                             scalingMethod: ScalingMethod.AspectFit
                         }
                     }
@@ -1237,8 +1237,8 @@ Page {
         },
         Graph {
             id: graphController
-            width: 720
-            height: 720
+            height: DisplayInfo.height/2
+            width: DisplayInfo.width-20
         }, 
         ComponentDefinition {
             id: editPractice

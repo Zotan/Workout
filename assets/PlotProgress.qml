@@ -158,21 +158,24 @@ Page {
             }
         }
         
-        Container {
-            id: graphContainer
-            layout: AbsoluteLayout { }
-            preferredHeight: 720
-            preferredWidth: 720
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Center
+        ScrollView {
             
-            ImageView {
-                id: image
-                image: graphController.image
+            Container {
+                id: graphContainer
+                layout: AbsoluteLayout { }
+                preferredHeight: DisplayInfo.height/2
+                preferredWidth: DisplayInfo.width-20
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
                 
-                preferredHeight: 720
-                preferredWidth: 720
-                scalingMethod: ScalingMethod.AspectFit
+                ImageView {
+                    id: image
+                    image: graphController.image
+                    
+                    preferredHeight: DisplayInfo.height/2
+                    preferredWidth: DisplayInfo.width-20
+                    scalingMethod: ScalingMethod.AspectFit
+                }
             }
         }
         
@@ -215,8 +218,8 @@ Page {
         },
         Graph {
             id: graphController
-            width: 720
-            height: 720
+            width: DisplayInfo.width-20
+            height: DisplayInfo.height/2
         }
     ]
 }

@@ -40,7 +40,7 @@ void Graph::draw() {
 }
 
 #define XUNIT_PX(x) (5+m_MarginW/2 + ((x) - minX)*scalingX)
-#define YUNIT_PX(y) (-5+m_Height - m_MarginH/2 - ((y) - minY)*scalingY)
+#define YUNIT_PX(y) (yOffset+m_Height - m_MarginH/2 - ((y) - minY)*scalingY)
 
 
 void Graph::clear() {
@@ -69,7 +69,11 @@ void Graph::drawAxis() {
 
 void Graph::plot(const QList<float> &x, const QList<float> &y, const QList<QString> &labels) {
     m_MarginH = 130;
-    m_MarginW = 140;
+    if(!y.isEmpty() && y.at(0) > 1000)
+        m_MarginW = 260;
+    else
+        m_MarginW = 170;
+
     m_YTickCount = 5;
     if(labels.isEmpty())
         m_XTickCount = 5;
@@ -86,6 +90,7 @@ void Graph::plot(const QList<float> &x, const QList<float> &y, const QList<QStri
     float maxX = std::numeric_limits<float>::min();
     float minY = std::numeric_limits<float>::max();
     float maxY = std::numeric_limits<float>::min();
+
 
 
     for(int i = 0 ; i < x.size() ; ++i) {
@@ -106,10 +111,18 @@ void Graph::plot(const QList<float> &x, const QList<float> &y, const QList<QStri
         }
     }
 
+    if(maxX - minX < 0.00001) return;
+
+
     float scalingX = (m_Width-m_MarginW-10) / (maxX-minX);
     float scalingY = (m_Height-m_MarginH-10) / (maxY-minY);
     float aspectRatio = static_cast<float>(m_Width)/static_cast<float>(m_Height);
 
+    float yOffset = -5;
+    if(maxY-minY < 0.00001) {
+        scalingY = 2;
+        yOffset = -m_Height/2;
+    }
 
     // plot ticks & text
     // Apparently it is not possible to use the function drawText() from QPainter --> result in systematic crash...
