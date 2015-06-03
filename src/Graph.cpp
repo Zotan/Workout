@@ -13,6 +13,12 @@
 #include <bb/ImageData>
 #include <limits>
 
+#include <bb/cascades/Application>
+#include <bb/cascades/ThemeSupport>
+#include <bb/cascades/ColorTheme>
+#include <bb/cascades/Theme>
+
+
 Graph::Graph(QObject *parent) : QObject(parent), m_Container(NULL), m_Height(0), m_Width(0) {
     m_MarginW = 40;
     m_MarginH = 40;
@@ -45,7 +51,12 @@ void Graph::draw() {
 
 void Graph::clear() {
     m_Image = QImage(QSize(m_Width, m_Height), QImage::Format_RGB32);
-    m_Image.fill(Qt::white);
+
+    if(bb::cascades::Application::instance()->themeSupport()->theme()->colorTheme()->style() == bb::cascades::VisualStyle::Dark) {
+        m_Image.fill(QColor("#2d2d2d"));
+    } else {
+        m_Image.fill(Qt::white);
+    }
 
     if(m_Container != NULL) {
         for(int i = 0 ; i < m_Labels.size() ; ++i) {
@@ -60,6 +71,9 @@ void Graph::clear() {
 
 void Graph::drawBoundingBox() {
     QPainter painter(&m_Image);
+    if(bb::cascades::Application::instance()->themeSupport()->theme()->colorTheme()->style() == bb::cascades::VisualStyle::Dark) {
+        painter.setPen(Qt::white);
+    }
     painter.drawRect(QRect(m_MarginW/2, m_MarginH/2, m_Width-m_MarginW, m_Height-m_MarginH));
 }
 
