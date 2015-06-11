@@ -425,7 +425,7 @@
     </message>
     <message>
         <location filename="../assets/Payment.qml" line="13"/>
-        <location filename="../assets/Payment.qml" line="87"/>
+        <location filename="../assets/Payment.qml" line="80"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,8 +440,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Payment.qml" line="82"/>
-        <source>Excellent</source>
+        <location filename="../assets/Payment.qml" line="74"/>
+        <source>Thank you for your support!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

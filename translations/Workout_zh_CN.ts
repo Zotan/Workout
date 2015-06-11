@@ -22,58 +22,59 @@
         <translation>体重</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="42"/>
+        <location filename="../assets/Balance.qml" line="44"/>
         <source>New</source>
         <translation>新建</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="60"/>
-        <location filename="../assets/Balance.qml" line="281"/>
+        <location filename="../assets/Balance.qml" line="62"/>
+        <location filename="../assets/Balance.qml" line="112"/>
+        <location filename="../assets/Balance.qml" line="283"/>
         <source>Body weight</source>
         <translation>体重</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="89"/>
+        <location filename="../assets/Balance.qml" line="91"/>
         <source>Notes</source>
         <translation>备注</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="93"/>
+        <location filename="../assets/Balance.qml" line="95"/>
         <source>Progress</source>
         <translation>进度</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="103"/>
+        <location filename="../assets/Balance.qml" line="105"/>
         <source>Plot progress</source>
         <translation>图形进度</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="116"/>
+        <location filename="../assets/Balance.qml" line="119"/>
         <source>Previous records</source>
         <translation>过去记录</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="141"/>
+        <location filename="../assets/Balance.qml" line="144"/>
         <source>No previous body weight records.</source>
         <translation>无过去的体重记录。</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="192"/>
+        <location filename="../assets/Balance.qml" line="194"/>
         <source>Delete records</source>
         <translation>删除记录</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="193"/>
+        <location filename="../assets/Balance.qml" line="195"/>
         <source>Are you sure you want to delete these records?</source>
         <translation>您确定要删除这些记录吗？</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="209"/>
+        <location filename="../assets/Balance.qml" line="211"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../assets/Balance.qml" line="284"/>
+        <location filename="../assets/Balance.qml" line="286"/>
         <source>Delete entry</source>
         <translation>删除条目</translation>
     </message>
@@ -81,12 +82,12 @@
 <context>
     <name>BalanceController</name>
     <message>
-        <location filename="../src/BalanceController.cpp" line="117"/>
+        <location filename="../src/BalanceController.cpp" line="90"/>
         <source>Delete record</source>
         <translation>删除记录</translation>
     </message>
     <message>
-        <location filename="../src/BalanceController.cpp" line="118"/>
+        <location filename="../src/BalanceController.cpp" line="91"/>
         <source>Are you sure you want to delete this record? </source>
         <translation>您确定要删除该记录吗？</translation>
     </message>
@@ -374,17 +375,17 @@
 <context>
     <name>ExercisePicker</name>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="21"/>
+        <location filename="../assets/ExercisePicker.qml" line="22"/>
         <source>Choose an exercise</source>
         <translation>选择锻炼</translation>
     </message>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="46"/>
+        <location filename="../assets/ExercisePicker.qml" line="47"/>
         <source>No exercises available.</source>
         <translation>无可用锻炼。</translation>
     </message>
     <message>
-        <location filename="../assets/ExercisePicker.qml" line="59"/>
+        <location filename="../assets/ExercisePicker.qml" line="60"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -424,7 +425,7 @@
     </message>
     <message>
         <location filename="../assets/Payment.qml" line="13"/>
-        <location filename="../assets/Payment.qml" line="87"/>
+        <location filename="../assets/Payment.qml" line="80"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -439,91 +440,94 @@
         <translation>捐赠 ~1$</translation>
     </message>
     <message>
-        <location filename="../assets/Payment.qml" line="82"/>
+        <location filename="../assets/Payment.qml" line="74"/>
+        <source>Thank you for your support!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Excellent</source>
-        <translation>优秀</translation>
+        <translation type="obsolete">优秀</translation>
     </message>
 </context>
 <context>
     <name>PlotProgress</name>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="15"/>
         <source>Progress</source>
-        <translation>进度</translation>
+        <translation type="obsolete">进度</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="40"/>
+        <location filename="../assets/PlotProgress.qml" line="46"/>
         <source>Start</source>
         <translation>开始</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="62"/>
+        <location filename="../assets/PlotProgress.qml" line="68"/>
         <source>End</source>
         <translation>结束</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="87"/>
-        <location filename="../assets/PlotProgress.qml" line="117"/>
+        <location filename="../assets/PlotProgress.qml" line="93"/>
+        <location filename="../assets/PlotProgress.qml" line="123"/>
         <source>Criteria</source>
         <translation>标准</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="91"/>
+        <location filename="../assets/PlotProgress.qml" line="97"/>
         <source>Time</source>
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="95"/>
+        <location filename="../assets/PlotProgress.qml" line="101"/>
         <source>Distance</source>
         <translation>距离</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="100"/>
+        <location filename="../assets/PlotProgress.qml" line="106"/>
         <source>Heart rate</source>
         <translation>心率</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="104"/>
+        <location filename="../assets/PlotProgress.qml" line="110"/>
         <source>Calories</source>
         <translation>卡路里</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="121"/>
+        <location filename="../assets/PlotProgress.qml" line="127"/>
         <source>Max weight</source>
         <translation>最大重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="126"/>
+        <location filename="../assets/PlotProgress.qml" line="132"/>
         <source>Min weight</source>
         <translation>最小重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="130"/>
+        <location filename="../assets/PlotProgress.qml" line="136"/>
         <source>Avg. weight</source>
         <translation>平均重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="134"/>
+        <location filename="../assets/PlotProgress.qml" line="140"/>
         <source>Total weight</source>
         <translation>总重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="138"/>
+        <location filename="../assets/PlotProgress.qml" line="144"/>
         <source>Max reps</source>
         <translation>最大次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="142"/>
+        <location filename="../assets/PlotProgress.qml" line="148"/>
         <source>Min reps</source>
         <translation>最小次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="146"/>
+        <location filename="../assets/PlotProgress.qml" line="152"/>
         <source>Avg. reps</source>
         <translation>平均次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="150"/>
+        <location filename="../assets/PlotProgress.qml" line="156"/>
         <source>Total reps</source>
         <translation>总次数</translation>
     </message>
@@ -544,241 +548,241 @@
 <context>
     <name>Practice</name>
     <message>
-        <location filename="../assets/Practice.qml" line="50"/>
+        <location filename="../assets/Practice.qml" line="51"/>
         <source>New</source>
         <translation>新建</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="55"/>
+        <location filename="../assets/Practice.qml" line="56"/>
         <source>History</source>
         <translation>历史纪录</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="60"/>
+        <location filename="../assets/Practice.qml" line="61"/>
         <source>Graph</source>
         <translation>图表</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="156"/>
+        <location filename="../assets/Practice.qml" line="157"/>
         <source>Duration</source>
         <translation>持续时间</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="258"/>
-        <location filename="../assets/Practice.qml" line="857"/>
+        <location filename="../assets/Practice.qml" line="259"/>
+        <location filename="../assets/Practice.qml" line="858"/>
         <source>Distance</source>
         <translation>距离</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="287"/>
-        <location filename="../assets/Practice.qml" line="862"/>
+        <location filename="../assets/Practice.qml" line="288"/>
+        <location filename="../assets/Practice.qml" line="863"/>
         <source>Heart rate</source>
         <translation>心率</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="316"/>
-        <location filename="../assets/Practice.qml" line="866"/>
+        <location filename="../assets/Practice.qml" line="317"/>
+        <location filename="../assets/Practice.qml" line="867"/>
         <source>Calories</source>
         <translation>卡路里</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="345"/>
+        <location filename="../assets/Practice.qml" line="346"/>
         <source>Set: </source>
         <translation>设置： </translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="439"/>
+        <location filename="../assets/Practice.qml" line="440"/>
         <source>Kg</source>
         <translation>千克</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="439"/>
+        <location filename="../assets/Practice.qml" line="440"/>
         <source>lbs</source>
         <translation>磅</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="467"/>
+        <location filename="../assets/Practice.qml" line="468"/>
         <source>You have to perform at least one repetition!</source>
         <translation>您必须执行至少一次重复！</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="540"/>
+        <location filename="../assets/Practice.qml" line="541"/>
         <source>Notes</source>
         <translation>备注</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="558"/>
+        <location filename="../assets/Practice.qml" line="559"/>
         <source>Completed</source>
         <translation>已完成</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="588"/>
-        <location filename="../assets/Practice.qml" line="734"/>
+        <location filename="../assets/Practice.qml" line="589"/>
+        <location filename="../assets/Practice.qml" line="735"/>
         <source>SET: </source>
         <translation>设置： </translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="606"/>
-        <location filename="../assets/Practice.qml" line="791"/>
+        <location filename="../assets/Practice.qml" line="607"/>
+        <location filename="../assets/Practice.qml" line="792"/>
         <source> Kg</source>
         <translation> 千克</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="606"/>
-        <location filename="../assets/Practice.qml" line="791"/>
+        <location filename="../assets/Practice.qml" line="607"/>
+        <location filename="../assets/Practice.qml" line="792"/>
         <source> lbs</source>
         <translation> 磅</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="632"/>
+        <location filename="../assets/Practice.qml" line="633"/>
         <source>No history available. You need to do some excercise!</source>
         <translation>无可用历史纪录。您需要进行一些锻炼！</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="682"/>
+        <location filename="../assets/Practice.qml" line="683"/>
         <source>Delete records</source>
         <translation>删除记录</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="683"/>
+        <location filename="../assets/Practice.qml" line="684"/>
         <source>Are you sure you want to delete these records?</source>
         <translation>您确定要删除这些记录吗？</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="726"/>
+        <location filename="../assets/Practice.qml" line="727"/>
         <source> </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="726"/>
+        <location filename="../assets/Practice.qml" line="727"/>
         <source> in </source>
         <translation> 在 </translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="749"/>
+        <location filename="../assets/Practice.qml" line="750"/>
         <source>Practice</source>
         <translation>练习</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="752"/>
+        <location filename="../assets/Practice.qml" line="753"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="703"/>
-        <location filename="../assets/Practice.qml" line="760"/>
+        <location filename="../assets/Practice.qml" line="704"/>
+        <location filename="../assets/Practice.qml" line="761"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="787"/>
+        <location filename="../assets/Practice.qml" line="788"/>
         <source>m</source>
         <translation>米</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="787"/>
+        <location filename="../assets/Practice.qml" line="788"/>
         <source>ft</source>
         <translation>英尺</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="820"/>
+        <location filename="../assets/Practice.qml" line="821"/>
         <source>Start</source>
         <translation>开始</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="834"/>
+        <location filename="../assets/Practice.qml" line="835"/>
         <source>End</source>
         <translation>结束</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="849"/>
-        <location filename="../assets/Practice.qml" line="879"/>
+        <location filename="../assets/Practice.qml" line="850"/>
+        <location filename="../assets/Practice.qml" line="880"/>
         <source>Criteria</source>
         <translation>标准</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="853"/>
+        <location filename="../assets/Practice.qml" line="854"/>
         <source>Time</source>
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="883"/>
+        <location filename="../assets/Practice.qml" line="884"/>
         <source>Max weight</source>
         <translation>最大重量</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="888"/>
+        <location filename="../assets/Practice.qml" line="889"/>
         <source>Min weight</source>
         <translation>最小重量</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="892"/>
+        <location filename="../assets/Practice.qml" line="893"/>
         <source>Avg. weight</source>
         <translation>平均重量</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="896"/>
+        <location filename="../assets/Practice.qml" line="897"/>
         <source>Total weight</source>
         <translation>总重量</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="900"/>
+        <location filename="../assets/Practice.qml" line="901"/>
         <source>Max reps</source>
         <translation>最大次数</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="904"/>
+        <location filename="../assets/Practice.qml" line="905"/>
         <source>Min reps</source>
         <translation>最小次数</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="908"/>
+        <location filename="../assets/Practice.qml" line="909"/>
         <source>Avg. reps</source>
         <translation>平均次数</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="912"/>
+        <location filename="../assets/Practice.qml" line="913"/>
         <source>Total reps</source>
         <translation>总次数</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1030"/>
+        <location filename="../assets/Practice.qml" line="1019"/>
         <source>Next</source>
         <translation>下一个</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1030"/>
-        <location filename="../assets/Practice.qml" line="1149"/>
+        <location filename="../assets/Practice.qml" line="1019"/>
+        <location filename="../assets/Practice.qml" line="1138"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1062"/>
+        <location filename="../assets/Practice.qml" line="1051"/>
         <source>You have to enter a duration!</source>
         <translation>您必须输入持续时间！</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1069"/>
+        <location filename="../assets/Practice.qml" line="1058"/>
         <source>Prev</source>
         <translation>上一个</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1069"/>
+        <location filename="../assets/Practice.qml" line="1058"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1090"/>
+        <location filename="../assets/Practice.qml" line="1079"/>
         <source>Timer</source>
         <translation>计时器</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1117"/>
+        <location filename="../assets/Practice.qml" line="1106"/>
         <source>Choose timer duration</source>
         <translation>选择计时器持续时间</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="1140"/>
+        <location filename="../assets/Practice.qml" line="1129"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -786,12 +790,12 @@
 <context>
     <name>PracticeController</name>
     <message>
-        <location filename="../src/PacticeController.cpp" line="523"/>
+        <location filename="../src/PacticeController.cpp" line="461"/>
         <source>Delete practice record</source>
         <translation>删除练习记录</translation>
     </message>
     <message>
-        <location filename="../src/PacticeController.cpp" line="524"/>
+        <location filename="../src/PacticeController.cpp" line="462"/>
         <source>Are you sure you want to delete this record?</source>
         <translation>您确定要删除该记录吗？</translation>
     </message>
@@ -999,22 +1003,32 @@ You can add some using the &quot;add&quot; button.</source>
 <context>
     <name>Summary</name>
     <message>
-        <location filename="../assets/Summary.qml" line="37"/>
+        <location filename="../assets/Summary.qml" line="47"/>
         <source>YOUR LAST WORKOUT</source>
         <translation>您的最近锻炼</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="59"/>
+        <location filename="../assets/Summary.qml" line="69"/>
         <source>STATS</source>
         <translation>统计</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="79"/>
+        <location filename="../assets/Summary.qml" line="88"/>
+        <source>PROGRESS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Summary.qml" line="120"/>
+        <source>Plot progress</source>
+        <translation type="unfinished">图形进度</translation>
+    </message>
+    <message>
+        <location filename="../assets/Summary.qml" line="133"/>
         <source>DETAILS</source>
         <translation>详情</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="102"/>
+        <location filename="../assets/Summary.qml" line="156"/>
         <source>No previous exercises available.</source>
         <translation>无可用锻炼。</translation>
     </message>
@@ -1073,13 +1087,13 @@ You can add some using the &quot;add&quot; button.</source>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="86"/>
-        <location filename="../src/SummaryController.cpp" line="151"/>
+        <location filename="../src/SummaryController.cpp" line="177"/>
         <source>m in </source>
         <translation>米 在 </translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="88"/>
-        <location filename="../src/SummaryController.cpp" line="153"/>
+        <location filename="../src/SummaryController.cpp" line="179"/>
         <source>ft in </source>
         <translation>英尺 在 </translation>
     </message>
@@ -1090,24 +1104,29 @@ You can add some using the &quot;add&quot; button.</source>
         <translation>分钟</translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="137"/>
-        <location filename="../src/SummaryController.cpp" line="139"/>
+        <location filename="../src/SummaryController.cpp" line="116"/>
+        <source>Duration: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="163"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
         <source>SET </source>
         <translation>设置 </translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="137"/>
+        <location filename="../src/SummaryController.cpp" line="163"/>
         <source>Kg</source>
         <translation>千克</translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="139"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
         <source>lbs</source>
         <translation>磅</translation>
     </message>
     <message>
-        <location filename="../src/SummaryController.cpp" line="151"/>
-        <location filename="../src/SummaryController.cpp" line="153"/>
+        <location filename="../src/SummaryController.cpp" line="177"/>
+        <location filename="../src/SummaryController.cpp" line="179"/>
         <source>min</source>
         <translation>分钟</translation>
     </message>
