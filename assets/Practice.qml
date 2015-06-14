@@ -395,7 +395,7 @@ Page {
                         }
                         
                         Label {
-                            text: "REPS @"
+                            text: qsTr("REPS @")
                             textStyle.textAlign: TextAlign.Center
                             verticalAlignment: VerticalAlignment.Center
                             horizontalAlignment: HorizontalAlignment.Center
@@ -586,7 +586,7 @@ Page {
                                     }
                                     
                                     Label {
-                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
+                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + qsTr(" REPS @ ") + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }
@@ -732,7 +732,7 @@ Page {
                                     
                                     Label {
                                         visible: mainContainerHistListView.ListItem.view.getCategory() == 2
-                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + " REPS @ " + ListItemData.weight + mainContainerHistListView.ListItem.view.getUnitStr();
+                                        text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + qsTr(" REPS @ ") + ListItemData.weight + mainContainerHistListView.ListItem.view.getUnitStr();
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Left
                                     }

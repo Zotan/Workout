@@ -78,6 +78,16 @@
         <source>Delete entry</source>
         <translation>删除条目</translation>
     </message>
+    <message>
+        <location filename="../assets/Balance.qml" line="299"/>
+        <source>Kg</source>
+        <translation type="unfinished">千克</translation>
+    </message>
+    <message>
+        <location filename="../assets/Balance.qml" line="299"/>
+        <source>lbs</source>
+        <translation type="unfinished">磅</translation>
+    </message>
 </context>
 <context>
     <name>BalanceController</name>
@@ -591,6 +601,11 @@
         <translation>设置： </translation>
     </message>
     <message>
+        <location filename="../assets/Practice.qml" line="398"/>
+        <source>REPS @</source>
+        <translation type="unfinished">次@</translation>
+    </message>
+    <message>
         <location filename="../assets/Practice.qml" line="440"/>
         <source>Kg</source>
         <translation>千克</translation>
@@ -620,6 +635,12 @@
         <location filename="../assets/Practice.qml" line="735"/>
         <source>SET: </source>
         <translation>设置： </translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="589"/>
+        <location filename="../assets/Practice.qml" line="735"/>
+        <source> REPS @ </source>
+        <translation type="unfinished">次@</translation>
     </message>
     <message>
         <location filename="../assets/Practice.qml" line="607"/>
@@ -1015,7 +1036,7 @@ You can add some using the &quot;add&quot; button.</source>
     <message>
         <location filename="../assets/Summary.qml" line="88"/>
         <source>PROGRESS</source>
-        <translation type="unfinished"></translation>
+        <translation>进度</translation>
     </message>
     <message>
         <location filename="../assets/Summary.qml" line="120"/>
@@ -1053,37 +1074,43 @@ You can add some using the &quot;add&quot; button.</source>
         <location filename="../src/SummaryController.cpp" line="39"/>
         <source> days ago on
 </source>
-        <translation> 天前于</translation>
+        <translation> 天前于
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="55"/>
         <source> exercises completed
 </source>
-        <translation> 锻炼已完成</translation>
+        <translation> 锻炼已完成
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="60"/>
         <source> sets completed
 </source>
-        <translation> 设置已完成 </translation>
+        <translation> 设置已完成 
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="69"/>
         <source> reps completed
 </source>
-        <translation> 次数已完成</translation>
+        <translation> 次数已完成
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="72"/>
         <source> Kg total lifted
 </source>
-        <translation> 举起总千克</translation>
+        <translation> 举起总千克
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="74"/>
         <source> lbs total lifted
 </source>
-        <translation> 举起总磅</translation>
+        <translation> 举起总磅
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="86"/>
@@ -1101,7 +1128,8 @@ You can add some using the &quot;add&quot; button.</source>
         <location filename="../src/SummaryController.cpp" line="90"/>
         <source> min
 </source>
-        <translation>分钟</translation>
+        <translation>分钟
+</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="116"/>
@@ -1118,6 +1146,12 @@ You can add some using the &quot;add&quot; button.</source>
         <location filename="../src/SummaryController.cpp" line="163"/>
         <source>Kg</source>
         <translation>千克</translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="163"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
+        <source> REPS @ </source>
+        <translation type="unfinished">次@</translation>
     </message>
     <message>
         <location filename="../src/SummaryController.cpp" line="165"/>

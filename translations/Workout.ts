@@ -78,6 +78,16 @@
         <source>Delete entry</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/Balance.qml" line="299"/>
+        <source>Kg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Balance.qml" line="299"/>
+        <source>lbs</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BalanceController</name>
@@ -583,6 +593,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../assets/Practice.qml" line="398"/>
+        <source>REPS @</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/Practice.qml" line="440"/>
         <source>Kg</source>
         <translation type="unfinished"></translation>
@@ -611,6 +626,12 @@
         <location filename="../assets/Practice.qml" line="589"/>
         <location filename="../assets/Practice.qml" line="735"/>
         <source>SET: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Practice.qml" line="589"/>
+        <location filename="../assets/Practice.qml" line="735"/>
+        <source> REPS @ </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1106,6 +1127,12 @@ You can add some using the &quot;add&quot; button.</source>
     <message>
         <location filename="../src/SummaryController.cpp" line="163"/>
         <source>Kg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SummaryController.cpp" line="163"/>
+        <location filename="../src/SummaryController.cpp" line="165"/>
+        <source> REPS @ </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

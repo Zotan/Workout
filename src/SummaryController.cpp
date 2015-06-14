@@ -160,9 +160,9 @@ void SummaryController::getInfos() {
             d->setTitle(exercises_strength.at(i).first);
             const Set *set = exercises_strength.at(i).second.at(k);
             if(metric)
-                d->setText(tr("SET ") + QString::number(set->getRepId()) + ": " + QString::number(set->getRepetition()) + " REPS @ " + QString::number(set->getWeight()) + tr("Kg") );
+                d->setText(tr("SET ") + QString::number(set->getRepId()) + ": " + QString::number(set->getRepetition()) + tr(" REPS @ ") + QString::number(set->getWeight()) + tr("Kg") );
             else
-                d->setText(tr("SET ") + QString::number(set->getRepId()) + ": " + QString::number(set->getRepetition()) + " REPS @ " + QString::number(set->getWeight()) + tr("lbs") );
+                d->setText(tr("SET ") + QString::number(set->getRepId()) + ": " + QString::number(set->getRepetition()) + tr(" REPS @ ") + QString::number(set->getWeight()) + tr("lbs") );
 
             datas.push_back(d);
         }

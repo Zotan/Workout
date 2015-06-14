@@ -296,7 +296,7 @@ NavigationPane {
                         ]
                         
                         function getUnit() {
-                            return appSettings.unit == 2 ? "Kg" : "lbs";
+                            return appSettings.unit == 2 ? qsTr("Kg") : qsTr("lbs");
                         }
                         
                         function deleteEntry(id) {
