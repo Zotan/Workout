@@ -139,6 +139,8 @@ public Q_SLOTS:
     void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type);
     void updatePractice              (int category);
 
+    void resetStrengthView           ();
+
 
     void startStopWatch              ();
     void resetStopWatch              ();

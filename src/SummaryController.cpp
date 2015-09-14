@@ -48,8 +48,8 @@ void SummaryController::getInfos() {
     // general statistics about the last exercise
 
 
-    QList<QPair<QString, QList<Set*> > >    exercises_strength = Database::get()->getHistoryStrength(lastWorkout.addDays(-1).toMSecsSinceEpoch());
-    QList<QPair<QString, QList<Cardio*> > > exercises_cardio   = Database::get()->getHistoryCardio  (lastWorkout.addDays(-1).toMSecsSinceEpoch());
+    QList<QPair<QString, QList<Set*> > >    exercises_strength = Database::get()->getHistoryStrength(lastWorkout.addSecs(-60*60*4).toMSecsSinceEpoch());
+    QList<QPair<QString, QList<Cardio*> > > exercises_cardio   = Database::get()->getHistoryCardio  (lastWorkout.addSecs(-60*60*4).toMSecsSinceEpoch());
 
 
     m_Stats = QString::number(exercises_strength.length() + exercises_cardio.length()) + tr(" exercises completed\n");

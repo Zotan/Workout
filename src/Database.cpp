@@ -664,7 +664,7 @@ QList<QPair<QString, QList<Set*> > > Database::getHistoryStrength(qint64 begin, 
     QList<QPair<QString, QList<Set*> > > exercises;
 
     QSqlQuery query(m_Database);
-    query.prepare("SELECT * FROM Sets, Exercises WHERE Sets.exercise_id = Exercises.id AND Exercises.Category = 2 AND Sets.time > :bg_time AND Sets.time < :ed_time ORDER BY Sets.time DESC ");
+    query.prepare("SELECT * FROM Sets, Exercises WHERE Sets.exercise_id = Exercises.id AND Exercises.Category = 2 AND Sets.time > :bg_time AND Sets.time < :ed_time ORDER BY Exercises.Title DESC ");
     query.bindValue(":bg_time", begin == 0 ? QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch() : begin);
     query.bindValue(":ed_time", end == 0 ? QDateTime::currentDateTime().toMSecsSinceEpoch() : end);
     // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
@@ -686,6 +686,7 @@ QList<QPair<QString, QList<Set*> > > Database::getHistoryStrength(qint64 begin, 
         if(exercises.isEmpty())
             exercises.push_back(QPair<QString, QList<Set*> >(label, QList<Set*>()));
         else {
+            qDebug() << exercises.last().first << label;
             if(exercises.last().first != label)
                 exercises.push_back(QPair<QString, QList<Set*> >(label, QList<Set*>()));
         }

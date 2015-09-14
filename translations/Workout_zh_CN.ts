@@ -811,12 +811,12 @@
 <context>
     <name>PracticeController</name>
     <message>
-        <location filename="../src/PacticeController.cpp" line="461"/>
+        <location filename="../src/PacticeController.cpp" line="484"/>
         <source>Delete practice record</source>
         <translation>删除练习记录</translation>
     </message>
     <message>
-        <location filename="../src/PacticeController.cpp" line="462"/>
+        <location filename="../src/PacticeController.cpp" line="485"/>
         <source>Are you sure you want to delete this record?</source>
         <translation>您确定要删除该记录吗？</translation>
     </message>

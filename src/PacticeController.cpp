@@ -145,6 +145,29 @@ void PracticeController::loadPractice(int exercise_id, int category) {
     }
 }
 
+void PracticeController::resetStrengthView() {
+    setWeight(0);
+    setRepetition(0);
+    setSets(0);
+
+
+    // ----------------------------------------------------------------------------------------------
+    // get the dataModel of the listview if not already available
+     using namespace bb::cascades;
+
+
+     if(m_ListView == NULL) {
+         qWarning() << "did not received the listview. quit.";
+         return;
+     }
+
+     GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_ListView->dataModel());
+     if(dataModel != NULL)
+         dataModel->clear();
+     m_Sets.clear();
+
+}
+
 void PracticeController::updatePractice(int category) {
     if(category == 1) {
         Cardio c;

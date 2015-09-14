@@ -1206,6 +1206,11 @@ Page {
             } else {
                 practiceController.restoreSession(exercise_id);
             }
+        } else {
+            practiceController.resetStrengthView();
+            practiceController.repetition = 0;
+            practiceController.weight = 0;
+            practiceController.sets = 1;
         }
         scrollView.requestFocus();
         
