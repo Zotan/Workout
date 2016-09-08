@@ -4,6 +4,9 @@ import Utility.PracticeController 1.0
 Page {
     property int category
     property int id
+    property int saved
+    property int repetition
+    property double weight
     
     titleBar: TitleBar {
         title: qsTr("Edit")
@@ -29,9 +32,8 @@ Page {
                     practiceController.repetition = parseInt(inputStrength1.text, 10);
                     practiceController.weight = parseFloat(inputStrength2.text);
                     
-                    practiceController.updatePractice(category);
-                    
-                    refresh_history = true;
+                    console.log("Update practice from QML")
+                    practiceController.updatePractice(id, saved, category);
                     
                     nav.pop();                
                 }
@@ -250,7 +252,7 @@ Page {
                 TextField {
                     id: inputStrength1
                     visible: category == 2
-                    text: practiceController.repetition
+                    text: repetition
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -279,7 +281,7 @@ Page {
                 TextField {
                     id: inputStrength2
                     visible: category == 2
-                    text: practiceController.weight
+                    text: weight
                     textStyle.fontSize: FontSize.Small
                     textStyle.textAlign: TextAlign.Center
                     preferredWidth: ui.du(42)
@@ -322,15 +324,11 @@ Page {
         
     }
     
-    
-    onIdChanged: {
-        practiceController.loadPractice(id, category);
+    onRepetitionChanged: {
+        inputStrength1.text = repetition;
     }
     
-    attachedObjects: [
-        PracticeController {
-            id: practiceController
-        }
-    ]
-
+    onWeightChanged: {
+        inputStrength2.text = weight;
+    }
 }

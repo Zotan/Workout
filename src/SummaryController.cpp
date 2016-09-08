@@ -11,17 +11,64 @@
 
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/GroupDataModel>
+#include <bb/cascades/ScrollAnimation>
+#include <bb/device/DisplayInfo>
 
-SummaryController::SummaryController(QObject *parent) : QObject(parent), m_ListView(NULL) {
+
+SummaryController::SummaryController(QObject *parent) : QObject(parent), m_ListView(NULL), m_ListDatePicker(NULL) {
 
 }
 
+void SummaryController::loadDatePicker() {
+    if(m_ListDatePicker == NULL) {
+        qDebug() << "Did not received: ListDatePicker";
+        return;
+    }
+    using namespace bb::cascades;
 
-void SummaryController::getInfos() {
+
+    QDateTime today = QDateTime::currentDateTime();
+    QDate day = today.date();
+
+    // ----------------------------------------------------------------------------------------------
+    // push data to the view
+
+
+    QVariantMap map = QVariantMap();
+
+    for(int i = -30 ; i < 30 ; ++i) {
+        QDate lDay = day.addDays(i);
+
+        map["number"] = (lDay.day());
+        map["id"] = (i);
+        if(i == 0) {
+            map["weekday"] = (tr("TODAY"));
+            map["marker"] = (true);
+        } else {
+            map["weekday"] = (QDate::shortDayName(lDay.dayOfWeek(), QDate::StandaloneFormat));
+            map["marker"] = Database::get()->hasHistory(QDateTime(lDay).toMSecsSinceEpoch(), QDateTime(lDay, QTime(23,59,59)).toMSecsSinceEpoch());
+        }
+
+        listModel << map;
+    }
+
+    bb::device::DisplayInfo display;
+
+    m_ListDatePicker->setDataModel(&listModel);
+    QVariantList pathIndex;
+    pathIndex << 30 - (display.pixelSize().width() > 1000 ? 6 : 4) ;
+    m_ListDatePicker->scrollToItem(pathIndex, bb::cascades::ScrollAnimation::None);
+    QVariantList pathIndex2;
+    pathIndex2 << 30  ;
+    m_ListDatePicker->select(pathIndex2, true);
+
+}
+
+void SummaryController::getInfos(int id) {
 
     // --------------------------------------------------------------------
     // date last exercise
-
+    /*
     QDateTime lastWorkout = Database::get()->getLastExerciseDate();
     QDateTime today = QDateTime::currentDateTime();
 
@@ -41,15 +88,18 @@ void SummaryController::getInfos() {
     }
 
     emit dateChanged();
+    */
 
     QSettings settings("Amonchakai", "Workout");
 
     // --------------------------------------------------------------------
     // general statistics about the last exercise
+    QDateTime lastWorkout = QDateTime::currentDateTime();
 
+    QDate date = lastWorkout.date().addDays(id);
 
-    QList<QPair<QString, QList<Set*> > >    exercises_strength = Database::get()->getHistoryStrength(lastWorkout.addSecs(-60*60*4).toMSecsSinceEpoch());
-    QList<QPair<QString, QList<Cardio*> > > exercises_cardio   = Database::get()->getHistoryCardio  (lastWorkout.addSecs(-60*60*4).toMSecsSinceEpoch());
+    QList<QPair<QString, QList<Set*> > >    exercises_strength = Database::get()->getHistoryStrength(QDateTime(date).toMSecsSinceEpoch(), QDateTime(date, QTime(23,59,59)).toMSecsSinceEpoch());
+    QList<QPair<QString, QList<Cardio*> > > exercises_cardio   = Database::get()->getHistoryCardio  (QDateTime(date).toMSecsSinceEpoch(), QDateTime(date, QTime(23,59,59)).toMSecsSinceEpoch());
 
 
     m_Stats = QString::number(exercises_strength.length() + exercises_cardio.length()) + tr(" exercises completed\n");

@@ -9,6 +9,54 @@
 #define DATAOBJECT_HPP_
 
 
+struct DateItem : QObject {
+    Q_OBJECT
+
+    Q_PROPERTY( QString weekday     READ getWeekday     WRITE setWeekday      NOTIFY weekdayChanged)
+    Q_PROPERTY( int number          READ getNumber      WRITE setNumber       NOTIFY numberChanged)
+    Q_PROPERTY( int id              READ getId          WRITE setId           NOTIFY idChanged)
+    Q_PROPERTY( bool marker         READ getMarker      WRITE setMarker       NOTIFY markerChanged)
+
+    // ----------------------------------------------------------------------------------------------
+
+
+private:
+    QString m_Weekday;
+    int     m_Number;
+    bool    m_Marker;
+    int     m_ID;
+
+
+    // ----------------------------------------------------------------------------------------------
+
+public:
+    DateItem(QObject *parent = 0) : QObject(parent), m_Number(0), m_Marker(false) {}
+    virtual ~DateItem() {}
+
+
+
+    inline const QString &getWeekday() const                { return m_Weekday; }
+    inline void           setWeekday(const QString &s)      { m_Weekday = s; }
+
+    inline int            getNumber() const                 { return m_Number; }
+    inline void           setNumber(int c)                  { m_Number = c; }
+
+    inline int            getId() const                     { return m_ID; }
+    inline void           setId(int c)                      { m_ID = c; }
+
+    inline int            getMarker() const                 { return m_Marker; }
+    inline void           setMarker(bool c)                 { m_Marker = c; }
+
+
+    // ----------------------------------------------------------------------------------------------
+    Q_SIGNALS:
+        void weekdayChanged();
+        void numberChanged();
+        void markerChanged();
+        void idChanged();
+
+};
+
 
 class Exercise : public QObject {
     Q_OBJECT
@@ -127,6 +175,8 @@ class Set : public QObject {
     Q_PROPERTY( QString note        READ getNote        WRITE setNote           NOTIFY noteChanged)
     Q_PROPERTY( int repetition      READ getRepetition  WRITE setRepetition     NOTIFY repetitionChanged)
     Q_PROPERTY( float weight        READ getWeight      WRITE setWeight         NOTIFY weightChanged)
+    Q_PROPERTY( bool done           READ isDone         WRITE setDone           NOTIFY doneChanged)
+    Q_PROPERTY( bool saved          READ isSaved        WRITE setSaved          NOTIFY savedChanged)
 
     // ----------------------------------------------------------------------------------------------
 
@@ -138,32 +188,40 @@ private:
     QString m_Note;
     int m_Repetition;
     float m_Weight;
+    bool m_Done;
+    bool m_Saved;
 
 
     // ----------------------------------------------------------------------------------------------
 
 public:
-    Set(QObject *parent = 0) : QObject(parent), m_Id(0), m_RepId(0), m_Time(0), m_Repetition(0), m_Weight(0) {}
+    Set(QObject *parent = 0) : QObject(parent), m_Id(0), m_RepId(0), m_Time(0), m_Repetition(0), m_Weight(0), m_Done(false), m_Saved(false) {}
     virtual ~Set() {}
 
 
     inline int            getId() const                     { return m_Id; }
-    inline void           setId(int c)                      { m_Id = c; }
+    inline void           setId(int c)                      {if(m_Id != c) { m_Id = c; emit idChanged(); } }
 
     inline int            getRepId() const                  { return m_RepId; }
-    inline void           setRepId(int c)                   { m_RepId = c; }
+    inline void           setRepId(int c)                   { if(m_RepId != c) { m_RepId = c; emit repIdChanged(); } }
 
     inline qint64         getTime() const                   { return m_Time; }
-    inline void           setTime(qint64 c)                 { m_Time = c; }
+    inline void           setTime(qint64 c)                 { if(m_Time != c) { m_Time = c; emit timeChanged(); } }
 
     inline const QString &getNote() const                   { return m_Note; }
-    inline void           setNote(const QString &s)         { m_Note = s; }
+    inline void           setNote(const QString &s)         { if(m_Note != s) { m_Note = s; emit noteChanged(); } }
 
     inline int            getRepetition() const             { return m_Repetition; }
-    inline void           setRepetition(int c)              { m_Repetition = c; }
+    inline void           setRepetition(int c)              { if(m_Repetition != c) { m_Repetition = c; emit repetitionChanged(); } }
 
     inline float          getWeight() const                 { return m_Weight; }
-    inline void           setWeight(float c)                { m_Weight = c; }
+    inline void           setWeight(float c)                { if(m_Weight != c) { m_Weight = c; emit weightChanged(); } }
+
+    inline bool           isDone() const                    { return m_Done; }
+    inline void           setDone(bool c)                   { if(m_Done != c) { m_Done = c; emit doneChanged(); } }
+
+    inline bool           isSaved() const                   { return m_Saved; }
+    inline void           setSaved(bool c)                  { if(m_Saved != c) { m_Saved = c; emit savedChanged(); } }
 
 
 
@@ -175,6 +233,8 @@ public:
         void noteChanged();
         void repetitionChanged();
         void weightChanged();
+        void doneChanged();
+        void savedChanged();
 
 };
 

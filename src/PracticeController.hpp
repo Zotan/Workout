@@ -73,9 +73,10 @@ private:
     QReadWriteLock                   m_StopWatchMutex;
 
     QList<Set*>                     m_Sets;
+    QList<Set*>                     m_LastSets;
 
 
-    int                              m_CacheId, m_CacheCategory, m_CacheExerciseId;
+    int                              m_CacheId, m_CacheCategory, m_CacheExerciseId, m_CacheIsSaved;
 
 
 public:
@@ -110,6 +111,9 @@ public:
     inline const QString &getNotes() const                      { return m_Notes; }
     inline void           setNotes(const QString &c)            { if(m_Notes != c) {m_Notes = c; emit notesChanged();} }
 
+    void                  removeItemFromListView(int position);
+    void                  updateItemFromListViewAfterDelete(int position);
+
 public Q_SLOTS:
 
     inline void setListView          (QObject *list)                  { m_ListView = dynamic_cast<bb::cascades::ListView*>(list); };
@@ -128,16 +132,17 @@ public Q_SLOTS:
     void loadHistory                 (int exercise_id);
     void loadStrengthHistory         (int exercise_id);
     void restoreSession              (int exercise_id);
+    void loadPrevious                (int exercise_id);
 
     void plotCardio                  (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
     void plotStrength                (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
 
     QString getDateFromTime          (qint64 time);
 
-    void deletePracticeEntry         (int id, int category, int exercise_id);
-    void deletePracticeEntryNoAsk    (int id, int category);
+    void deletePracticeEntry         (int id, int isSaved, int category, int exercise_id);
     void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type);
-    void updatePractice              (int category);
+    void deletePractice              (int id, int isSaved, int category);
+    void updatePractice              (int id, int isSaved, int category);
 
     void resetStrengthView           ();
 

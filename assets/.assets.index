@@ -1,5 +1,5 @@
 1
-85
+91
 Balance.qml
 BugReport.qml
 bugReportIcons/BlablaRequest.png
@@ -26,6 +26,11 @@ images/calendar.png
 images/clock.png
 images/clock_white.png
 images/color/Excellent.gif
+images/color/flat.amd
+images/color/flat.png
+images/color/gradient.png
+images/ic_expand.png
+images/ic_notes.png
 images/icon_about.png
 images/icon_add.png
 images/icon_add_white.png
@@ -40,6 +45,7 @@ images/icon_down_rounded_white.png
 images/icon_exercise.png
 images/icon_filter.png
 images/icon_graph.png
+images/icon_graph_white.png
 images/icon_home.png
 images/icon_next.png
 images/icon_next.svg

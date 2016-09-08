@@ -19,7 +19,7 @@
 #include "Graph.hpp"
 
 
-PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_GraphController(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
+PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_GraphController(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0), m_CacheIsSaved(0) {
 
     updateDateTime();
 
@@ -35,11 +35,14 @@ PracticeController::PracticeController(QObject *parent) : QObject(parent), m_Lis
 void PracticeController::saveSet(const QString &note) {
     Set *set = new Set();
 
-    set->setRepId(m_SetsNumber);
+    set->setRepId((m_SetsNumber+1));
     set->setNote(note);
     set->setRepetition(m_Repetition);
     set->setWeight(m_Weight);
     set->setTime(QDateTime::currentMSecsSinceEpoch());
+    set->setDone(true);
+    set->setSaved(false);
+    set->setId(m_Sets.size());
 
     m_Sets.push_back(set);
 
@@ -51,7 +54,7 @@ void PracticeController::saveSet(const QString &note) {
 
 
      if(m_ListView == NULL) {
-         qWarning() << "did not received the listview. quit.";
+         qWarning() << "(saveSet) did not received the listview. quit.";
          return;
      }
 
@@ -66,7 +69,28 @@ void PracticeController::saveSet(const QString &note) {
          m_ListView->setDataModel(dataModel);
      }
 
-     dataModel->insert(set);
+
+     if((m_SetsNumber-1) < m_LastSets.size()) {
+         Set *eSet = m_LastSets[m_SetsNumber-1];
+
+         eSet->setDone(true);
+         eSet->setSaved(false);
+         eSet->setNote(note);
+         eSet->setRepId(m_SetsNumber);
+         eSet->setRepetition(m_Repetition);
+         eSet->setWeight(m_Weight);
+         eSet->setTime(set->getTime());
+         eSet->setId(m_Sets.length()-1);
+
+     } else {
+         dataModel->insert(set);
+     }
+
+     if(m_SetsNumber < m_LastSets.size()) {
+         setRepetition(m_LastSets[m_SetsNumber]->getRepetition());
+         setWeight(m_LastSets[m_SetsNumber]->getWeight());
+     }
+
 
      startStopWatch();
 }
@@ -87,7 +111,8 @@ void PracticeController::updateDateTime() {
 void PracticeController::pushToDB(int exerciseId) {
 
     for(int i = 0 ; i < m_Sets.size() ; ++i) {
-        Database::get()->saveSet(exerciseId, m_Sets.at(i));
+        if(!m_Sets.at(i)->isSaved())
+            Database::get()->saveSet(exerciseId, m_Sets.at(i));
     }
 
 
@@ -97,7 +122,7 @@ void PracticeController::pushToDB(int exerciseId) {
 
 
      if(m_ListView == NULL) {
-         qWarning() << "did not received the listview. quit.";
+         qWarning() << "(pushToDB) did not received the listview. quit.";
          return;
      }
 
@@ -105,6 +130,7 @@ void PracticeController::pushToDB(int exerciseId) {
      if(dataModel != NULL)
          dataModel->clear();
      m_Sets.clear();
+     m_LastSets.clear();
 
 }
 
@@ -150,14 +176,13 @@ void PracticeController::resetStrengthView() {
     setRepetition(0);
     setSets(0);
 
-
     // ----------------------------------------------------------------------------------------------
     // get the dataModel of the listview if not already available
      using namespace bb::cascades;
 
 
      if(m_ListView == NULL) {
-         qWarning() << "did not received the listview. quit.";
+         qWarning() << "(resetStrengthView) did not received the listview. quit.";
          return;
      }
 
@@ -168,11 +193,11 @@ void PracticeController::resetStrengthView() {
 
 }
 
-void PracticeController::updatePractice(int category) {
+void PracticeController::updatePractice(int id, int isSaved, int category) {
     if(category == 1) {
         Cardio c;
 
-        c.setId(m_CacheExerciseId);
+        c.setId(id);
         c.setDistance(this->m_Distance);
         c.setDuration(this->m_Duration);
         c.setHeartRate(this->m_HeartRate);
@@ -183,14 +208,30 @@ void PracticeController::updatePractice(int category) {
 
     } else {
 
-        Set s;
+        if(isSaved == 1) {
 
-        s.setRepetition(this->m_Repetition);
-        s.setWeight(this->m_Weight);
-        s.setNote(this->m_Notes);
-        s.setId(m_CacheExerciseId);
+            for(int i = 0 ; i < m_Sets.size() ; ++i) {
 
-        Database::get()->updatePractice(&s);
+                if(m_Sets.at(i)->isSaved() && m_Sets.at(i)->getId() == id) {
+
+                    m_Sets.at(i)->setRepetition(this->m_Repetition);
+                    m_Sets.at(i)->setWeight(this->m_Weight);
+                    m_Sets.at(i)->setNote(this->m_Notes);
+
+                    Database::get()->updatePractice(m_Sets.at(i));
+
+                    return;
+                }
+            }
+
+        } else {
+
+            if(id < m_Sets.size()) {
+                m_Sets.at(id)->setRepetition(this->m_Repetition);
+                m_Sets.at(id)->setWeight(this->m_Weight);
+                m_Sets.at(id)->setNote(this->m_Notes);
+            }
+        }
     }
 }
 
@@ -202,7 +243,7 @@ void PracticeController::loadStrengthHistory(int exercise_id) {
 
 
      if(m_HistoryListView == NULL) {
-         qWarning() << "did not received the listview. quit.";
+         qWarning() << "(loadStrengthHistory) did not received the listview. quit.";
          return;
      }
 
@@ -236,7 +277,7 @@ void PracticeController::restoreSession(int exercise_id) {
 
 
     if(m_ListView == NULL) {
-        qWarning() << "did not received the listview. quit.";
+        qWarning() << "(restoreSession) did not received the listview. quit.";
         return;
     }
 
@@ -251,16 +292,61 @@ void PracticeController::restoreSession(int exercise_id) {
     QList<QObject*> ex;
     for(int i = sets.length()-1 ; i >= 0 ; --i) {
         ex.push_back(sets.at(i));
+        m_Sets.push_back(sets.at(i));
+    }
+
+
+    dataModel->insertList(ex);
+    if(!sets.isEmpty()) {
+        setWeight(sets.first()->getWeight());
+        setRepetition(sets.first()->getRepetition());
+    } else {
+        setWeight(0);
+        setRepetition(0);
+    }
+
+    setSets(sets.size());
+
+}
+
+void PracticeController::loadPrevious(int exercise_id) {
+    // ----------------------------------------------------------------------------------------------
+    // get the dataModel of the listview if not already available
+    using namespace bb::cascades;
+
+
+    if(m_ListView == NULL) {
+        qWarning() << "(loadPrevious) did not received the listview. quit.";
+        return;
+    }
+
+    GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_ListView->dataModel());
+    if (!dataModel) {
+        return;
+    }
+
+    int numberSetDone = m_Sets.size();
+
+    QList<Set*> sets = Database::get()->getLastHistoryStrength(exercise_id);
+    QList<QObject*> ex;
+
+
+    for(int i = m_LastSets.size() ; i < sets.size() ; ++i) {
+        m_LastSets.push_back(sets.at(i));
+    }
+
+    for(int i = 0 ; i < sets.size() - dataModel->size() ; ++i) {
+        ex.push_back(sets.at(dataModel->size() + i));
     }
 
     dataModel->insertList(ex);
-    if(!sets.isEmpty())
-        setWeight(sets.first()->getWeight());
-    else
-        setWeight(0);
+    if(!sets.isEmpty()) {
+        int idx = std::min(numberSetDone, sets.size()-1);
+        setWeight(sets[idx]->getWeight());
+        setRepetition(sets[idx]->getRepetition());
+    }
 
-    setSets(sets.size()+1);
-
+    setSets(numberSetDone);
 }
 
 void PracticeController::loadHistory(int exercise_id) {
@@ -272,7 +358,7 @@ void PracticeController::loadHistory(int exercise_id) {
 
 
      if(m_HistoryListView == NULL) {
-         qWarning() << "did not received the listview. quit.";
+         qWarning() << "(loadHistory) did not received the listview. quit.";
          return;
      }
 
@@ -471,10 +557,11 @@ void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, c
 
 
 
-void PracticeController::deletePracticeEntry(int id, int category, int exercise_id) {
+void PracticeController::deletePracticeEntry(int id, int isSaved, int category, int exercise_id) {
     m_CacheId = id;
     m_CacheCategory = category;
     m_CacheExerciseId = exercise_id;
+    m_CacheIsSaved = isSaved;
 
     using namespace bb::cascades;
     using namespace bb::system;
@@ -496,26 +583,88 @@ void PracticeController::deletePracticeEntry(int id, int category, int exercise_
     }
 }
 
-void PracticeController::deletePracticeEntryNoAsk(int id, int category) {
-    if(category == 1) {
-        Database::get()->deletePracticeCardioEntry(id);
-    } else {
-        Database::get()->deletePracticeStrengthEntry(id);
-    }
-}
 
 void PracticeController::onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result) {
 
     if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
+        deletePractice(m_CacheId, m_CacheIsSaved, m_CacheCategory);
+    }
+}
 
-        if(m_CacheCategory == 1) {
-            Database::get()->deletePracticeCardioEntry(m_CacheId);
-            loadHistory(m_CacheExerciseId);
+void PracticeController::deletePractice(int id, int isSaved, int category) {
+    if(isSaved) {
+        if(category == 1) {
+            Database::get()->deletePracticeCardioEntry(id);
         } else {
-            Database::get()->deletePracticeStrengthEntry(m_CacheId);
-            loadStrengthHistory(m_CacheExerciseId);
-        }
+            Database::get()->deletePracticeStrengthEntry(id);
 
+            for(int i = 0 ; i < m_Sets.size() ; ++i) {
+                if(m_Sets.at(i)->getId() == id) {
+                    removeItemFromListView(i);
+                    updateItemFromListViewAfterDelete(i);
+                    return;
+                }
+            }
+        }
+    } else {
+        removeItemFromListView(id);
+    }
+}
+
+void PracticeController::removeItemFromListView(int position) {
+
+    // remove from view
+    if(m_ListView == NULL) {
+         qWarning() << "(removeItemFromListView) did not received the listview. quit.";
+         return;
+     }
+
+    using namespace bb::cascades;
+    GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_ListView->dataModel());
+
+    if(dataModel == NULL) {
+        qWarning() << "(removeItemFromListView) No pre-defined datamodel. quit.";
+        return;
+    }
+
+    if(position >=  m_Sets.size()) {
+        qWarning() << "Deleting item which does not exists. quit.";
+        return;
+    }
+
+    // remove it from the array of indication set
+    if(position < m_LastSets.size()) {
+        m_LastSets.removeAt(position);
+
+        for(int i = position ; i < m_LastSets.size() ; ++i) {
+            m_LastSets[i]->setRepId(i+1);
+            m_LastSets[i]->setId(i);
+        }
+    }
+
+    // remove the item from the array & update the ids
+    m_Sets.removeAt(position);
+    for(int i = position ; i < m_Sets.size() ; ++i) {
+        m_Sets[i]->setRepId(i+1);
+        if(!m_Sets[i]->isSaved())
+            m_Sets[i]->setId(i);
+    }
+
+
+
+     QVariantList path;
+     path << dataModel->size() - 1 - position;
+     dataModel->removeAt(path);
+
+     setSets(m_Sets.size());
+
+}
+
+void PracticeController::updateItemFromListViewAfterDelete(int position) {
+    for(int i = position ; i < m_Sets.size() ; ++i) {
+        if(m_Sets.at(i)->isSaved()) {
+            Database::get()->updatePractice(m_Sets.at(i));
+        }
     }
 }
 

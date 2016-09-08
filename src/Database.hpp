@@ -64,6 +64,7 @@ public:
     Set*           getSet           (int exerciseId);
     QList<Cardio*> getHistoryCardio (int exerciseId, qint64 begin = 0, qint64 end = 0);
     QList<Set*>    getHistoryStrength(int exerciseId, qint64 begin = 0, qint64 end = 0);
+    QList<Set*>    getLastHistoryStrength(int exerciseId);
     QDateTime      getLastExerciseDate();
 
     void           updatePractice   (Cardio *c);
@@ -72,6 +73,8 @@ public:
     QList<QPair<QString, QList<Set*> > >    getHistoryStrength(qint64 begin = 0, qint64 end = 0);
     QList<QPair<QString, QList<Cardio*> > > getHistoryCardio  (qint64 begin = 0, qint64 end = 0);
     QList< BodyWeight* >                    getBodyWeights    (qint64 begin = 0, qint64 end = 0);
+
+    bool                                    hasHistory(qint64 begin = 0, qint64 end = 0);
 
 
 

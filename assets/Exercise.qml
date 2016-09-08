@@ -10,236 +10,256 @@ NavigationPane {
         property variant tpageCardio
         property variant tpageStrength
         
-        titleBar: TitleBar {
-            kind: TitleBarKind.FreeForm
-            kindProperties: FreeFormTitleBarKindProperties {
-                Container {
-                    layout: DockLayout { }
-                    leftPadding: 10
-                    rightPadding: 10
-                    
-                    Label {
-                        id: folder
-                        text: qsTr("List of exercises")
-                        textStyle {
-                            color: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.White : Color.Black
-                        }
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Center
-                    }
-                    
-                    ImageButton {
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Right
-                        defaultImageSource: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? "asset:///images/icon_add_white.png" : "asset:///images/icon_add.png" 
-                        preferredHeight: ui.du(7)
-                        preferredWidth: ui.du(7)
-                        onClicked: {
-                            newExercise.open();
-                        }
-                        
-                    }
-      
-                }
-            }
-        }
+        property variant selectionColor: Color.create("#1ca9be")
+        property variant darkColor: Color.create("#282828")
+        
         
         Container {
-            verticalAlignment: VerticalAlignment.Fill
-            horizontalAlignment: HorizontalAlignment.Fill
-            layout: DockLayout { }
+            layout: StackLayout {
+                orientation: LayoutOrientation.TopToBottom
+            }            
             
-            Container {  
-                id: dataEmptyLabel
-                visible: theModel.empty //model.isEmpty() will not work  
-                horizontalAlignment: HorizontalAlignment.Center  
-                verticalAlignment: VerticalAlignment.Center
+            Container {
+                background: back.imagePaint
+                layout: DockLayout { }
+                leftPadding: 10
+                rightPadding: 10
                 
-                layout: DockLayout {}
+                horizontalAlignment: HorizontalAlignment.Fill
+                preferredHeight: ui.du(12)
                 
                 Label {
-                    text: connectingActivity.running ?  qsTr("Loading, please wait.") : qsTr("No exercises available.")
+                    id: folder
+                    text: qsTr("List of exercises")
+                    textStyle {
+                        color: Color.White
+                        fontSize: FontSize.Large 
+                    }
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
                 }
+                
+                
+                ImageButton {
+                    verticalAlignment: VerticalAlignment.Center
+                    horizontalAlignment: HorizontalAlignment.Right
+                    defaultImageSource: "asset:///images/icon_add_white.png" 
+                    preferredHeight: ui.du(7)
+                    preferredWidth: ui.du(7)
+                    onClicked: {
+                        newExercise.open();
+                    }
+                
+                }
+                
+                attachedObjects: [
+                    ImagePaintDefinition {
+                        id: back
+                        imageSource: "asset:///images/color/gradient.png"
+                        repeatPattern: RepeatPattern.X
+                    }
+                ]
             }
             
+            
+
             Container {
-                layout: StackLayout {
-                    orientation: LayoutOrientation.TopToBottom
-                }
-                ActivityIndicator {
-                    id: connectingActivity
-                    preferredHeight: 60
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Top
-                }
+                verticalAlignment: VerticalAlignment.Fill
+                horizontalAlignment: HorizontalAlignment.Fill
+                layout: DockLayout { }
                 
-                TextField {
-                    id: search
-                    hintText: qsTr("Search")
+                Container {  
+                    id: dataEmptyLabel
+                    visible: theModel.empty //model.isEmpty() will not work  
+                    horizontalAlignment: HorizontalAlignment.Center  
+                    verticalAlignment: VerticalAlignment.Center
                     
-                    onTextChanging: {
-                        if(search.text.length > 2 || search.text.length == 0)
-                            exerciseController.filter(search.text);
+                    layout: DockLayout {}
+                    
+                    Label {
+                        text: connectingActivity.running ?  qsTr("Loading, please wait.") : qsTr("No exercises available.")
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Center
                     }
                 }
                 
-                ListView {
-                    id: exercicesList
-                    focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
+                Container {
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.TopToBottom
+                    }
+                    ActivityIndicator {
+                        id: connectingActivity
+                        preferredHeight: 60
+                        horizontalAlignment: HorizontalAlignment.Center
+                        verticalAlignment: VerticalAlignment.Top
+                    }
                     
-                    dataModel: GroupDataModel {
-                        id: theModel
-                        sortingKeys: ["id"]
-                        grouping: ItemGrouping.None
+                    TextField {
+                        id: search
+                        hintText: qsTr("Search")
                         
-                        property bool empty: true
-                        
-                        
-                        onItemAdded: {
-                            empty = isEmpty();
+                        onTextChanging: {
+                            if(search.text.length > 2 || search.text.length == 0)
+                                exerciseController.filter(search.text);
                         }
-                        onItemRemoved: {
-                            empty = isEmpty();
-                        }  
-                        onItemUpdated: empty = isEmpty()  
-                        
-                        // You might see an 'unknown signal' error  
-                        // in the QML-editor, guess it's a SDK bug.  
-                        onItemsChanged: empty = isEmpty()
-                    
                     }
                     
-                    multiSelectAction: MultiSelectActionItem {}
-                    
-                    multiSelectHandler {
-                        // These actions will be shown during multiple selection, while this 
-                        // multiSelectHandler is active
-                        actions: [
-                            DeleteActionItem {
-                                property variant selectionList
-                                property variant selectedItem
-                                id: deleteActionItem
-                                onTriggered: {
-                                    deleteActionItem.selectionList = exercicesList.selectionList()
-                                    deleteActionItem.selectedItem = theModel.data(selectionList);
-                                    multiSelectDeleteDialog.show()
-                                }
-                                attachedObjects: [
-                                    SystemDialog {
-                                        id: multiSelectDeleteDialog
-                                        title: qsTr("Delete exercises") + Retranslate.onLocaleOrLanguageChanged
-                                        body: qsTr("Are you sure you want to delete these exercises?") + Retranslate.onLocaleOrLanguageChanged
-                                        onFinished: {
-                                            if (result == 3) {
-                                            } else {
-                                                
-                                                for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
-                                                    console.log(i)
-                                                    exerciseController.deleteExerciseNoAsk(theModel.data(deleteActionItem.selectionList[i]).id);
+                    ListView {
+                        id: exercicesList
+                        focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
+                        
+                        dataModel: GroupDataModel {
+                            id: theModel
+                            sortingKeys: ["id"]
+                            grouping: ItemGrouping.None
+                            
+                            property bool empty: true
+                            
+                            
+                            onItemAdded: {
+                                empty = isEmpty();
+                            }
+                            onItemRemoved: {
+                                empty = isEmpty();
+                            }  
+                            onItemUpdated: empty = isEmpty()  
+                            
+                            // You might see an 'unknown signal' error  
+                            // in the QML-editor, guess it's a SDK bug.  
+                            onItemsChanged: empty = isEmpty()
+                        
+                        }
+                        
+                        multiSelectAction: MultiSelectActionItem {}
+                        
+                        multiSelectHandler {
+                            // These actions will be shown during multiple selection, while this 
+                            // multiSelectHandler is active
+                            actions: [
+                                DeleteActionItem {
+                                    property variant selectionList
+                                    property variant selectedItem
+                                    id: deleteActionItem
+                                    onTriggered: {
+                                        deleteActionItem.selectionList = exercicesList.selectionList()
+                                        deleteActionItem.selectedItem = theModel.data(selectionList);
+                                        multiSelectDeleteDialog.show()
+                                    }
+                                    attachedObjects: [
+                                        SystemDialog {
+                                            id: multiSelectDeleteDialog
+                                            title: qsTr("Delete exercises") + Retranslate.onLocaleOrLanguageChanged
+                                            body: qsTr("Are you sure you want to delete these exercises?") + Retranslate.onLocaleOrLanguageChanged
+                                            onFinished: {
+                                                if (result == 3) {
+                                                } else {
+                                                    
+                                                    for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                                        console.log(i)
+                                                        exerciseController.deleteExerciseNoAsk(theModel.data(deleteActionItem.selectionList[i]).id);
+                                                    }
+                                                    exerciseController.getExerciseList();
                                                 }
-                                                exerciseController.getExerciseList();
                                             }
                                         }
+                                    ]
+                                }
+                            ]
+                            
+                            status: qsTr("Delete")
+                        }
+                        
+                        listItemComponents: [
+                            ListItemComponent {
+                                type: "item"
+                                
+                                
+                                Container {
+                                    preferredHeight: ui.du(12)
+                                    id: listItemContainer
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    verticalAlignment: VerticalAlignment.Center
+                                    layout: DockLayout {
                                     }
-                                ]
+                                    
+                                    Container {
+                                        verticalAlignment: VerticalAlignment.Center
+                                        layout: StackLayout {
+                                            orientation: LayoutOrientation.LeftToRight
+                                        }
+                                        Container {
+                                            preferredWidth: ui.du(0.1)
+                                        }
+                                        Label {
+                                            text: ListItemData.title
+                                            verticalAlignment: VerticalAlignment.Center
+                                        }
+                                    }
+                                    
+                                    
+                                    Divider { }
+                                    
+                                    contextActions: [
+                                        ActionSet {
+                                            title: qsTr("Exercise")
+                                            
+                                            ActionItem {
+                                                title: qsTr("Rename exercise")
+                                                imageSource: "asset:///images/icon_write_context.png"
+                                                onTriggered: {
+                                                    listItemContainer.ListItem.view.renameExercise(ListItemData.id, ListItemData.title);
+                                                }
+                                            }
+                                            
+                                            DeleteActionItem {
+                                                title: qsTr("Delete exercise")
+                                                onTriggered: {
+                                                    listItemContainer.ListItem.view.deleteExercise(ListItemData.id);
+                                                }
+                                            }
+                                        }
+                                    ]
+                                    
+                                }
                             }
                         ]
                         
-                        status: qsTr("Delete")
-                    }
-                    
-                    listItemComponents: [
-                        ListItemComponent {
-                            type: "item"
-                            
-                            
-                            Container {
-                                preferredHeight: ui.du(12)
-                                id: listItemContainer
-                                horizontalAlignment: HorizontalAlignment.Fill
-                                verticalAlignment: VerticalAlignment.Center
-                                layout: DockLayout {
-                                }
-                                
-                                Container {
-                                    verticalAlignment: VerticalAlignment.Center
-                                    layout: StackLayout {
-                                        orientation: LayoutOrientation.LeftToRight
-                                    }
-                                    Container {
-                                        preferredWidth: ui.du(0.1)
-                                    }
-                                    Label {
-                                        text: ListItemData.title
-                                        verticalAlignment: VerticalAlignment.Center
-                                    }
-                                }
-                                
-                                
-                                Divider { }
-                                
-                                contextActions: [
-                                    ActionSet {
-                                        title: qsTr("Exercise")
-                                        
-                                        ActionItem {
-                                            title: qsTr("Rename exercise")
-                                            imageSource: "asset:///images/icon_write_context.png"
-                                            onTriggered: {
-                                                listItemContainer.ListItem.view.renameExercise(ListItemData.id, ListItemData.title);
-                                            }
-                                        }
-                                        
-                                        DeleteActionItem {
-                                            title: qsTr("Delete exercise")
-                                            onTriggered: {
-                                                listItemContainer.ListItem.view.deleteExercise(ListItemData.id);
-                                            }
-                                        }
-                                    }
-                                ]
-                                
-                            }
+                        function renameExercise(id, label) {
+                            exerciseController.renameExercise(id, label);                        
                         }
-                    ]
-                    
-                    function renameExercise(id, label) {
-                        exerciseController.renameExercise(id, label);                        
-                    }
-                    
-                    function deleteExercise(id) {
-                        exerciseController.deleteExercise(id);
-                    }
-                                    
-                    onTriggered: {
-                        var chosenItem = dataModel.data(indexPath);
                         
-                        if(chosenItem.category == 1) {
-                            if(!exercisePage.tpageCardio) {
-                                exercisePage.tpageCardio = practice.createObject();
+                        function deleteExercise(id) {
+                            exerciseController.deleteExercise(id);
+                        }
+                                        
+                        onTriggered: {
+                            var chosenItem = dataModel.data(indexPath);
+                            
+                            if(chosenItem.category == 1) {
+                                if(!exercisePage.tpageCardio) {
+                                    exercisePage.tpageCardio = practice.createObject();
+                                }
+                                
+                                exercisePage.tpageCardio.category = 1;
+                                exercisePage.tpageCardio.title = chosenItem.title;
+                                exercisePage.tpageCardio.exercise_id = chosenItem.id;
+                                
+                                nav.push(exercisePage.tpageCardio);
+                            } else {
+                                if(!exercisePage.tpageStrength) {
+                                    exercisePage.tpageStrength = practice.createObject();
+                                }
+                                
+                                exercisePage.tpageStrength.category = 2;
+                                exercisePage.tpageStrength.title = chosenItem.title;
+                                exercisePage.tpageStrength.exercise_id = chosenItem.id;
+                                
+                                nav.push(exercisePage.tpageStrength);
                             }
-                            
-                            exercisePage.tpageCardio.category = 1;
-                            exercisePage.tpageCardio.title = chosenItem.title;
-                            exercisePage.tpageCardio.exercise_id = chosenItem.id;
-                            
-                            nav.push(exercisePage.tpageCardio);
-                        } else {
-                            if(!exercisePage.tpageStrength) {
-                                exercisePage.tpageStrength = practice.createObject();
-                            }
-                            
-                            exercisePage.tpageStrength.category = 2;
-                            exercisePage.tpageStrength.title = chosenItem.title;
-                            exercisePage.tpageStrength.exercise_id = chosenItem.id;
-                            
-                            nav.push(exercisePage.tpageStrength);
                         }
                     }
+                
                 }
-            
             }
         }
         
@@ -276,9 +296,21 @@ NavigationPane {
                     label.text = "";
                 }
                 
+                attachedObjects: [
+                    ImagePaintDefinition {
+                        id: back2
+                        imageSource: "asset:///images/color/flat.amd"
+                        repeatPattern: RepeatPattern.X
+                    }
+                ]
+                
                 content:  Container {
+                    leftPadding: ui.du(2)
+                    rightPadding: ui.du(2)
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(2)
                     
-                    background: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.create("#282828") : Color.White
+                    background: back2.imagePaint
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center
                     
@@ -288,15 +320,13 @@ NavigationPane {
                         orientation: LayoutOrientation.TopToBottom
                     }
                     
-                    Divider { }
-                    
                     Label {
                         text: qsTr("Create a new exercise")
                         textStyle.fontSize: FontSize.Large
                         horizontalAlignment: HorizontalAlignment.Left
+                        textStyle.color: Color.White
                     }
                     
-                    Divider { }
                     
                     TextField {
                         id: label

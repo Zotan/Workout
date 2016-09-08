@@ -585,6 +585,7 @@ Set* Database::getSet(int exerciseId) {
         ex->setWeight(weight);
         ex->setNote(notes);
         ex->setTime(time);
+        ex->setSaved(true);
     }
 
     return ex;
@@ -653,8 +654,48 @@ QList<Set*> Database::getHistoryStrength(int exerciseId, qint64 begin, qint64 en
         ex->setWeight(weight);
         ex->setNote(notes);
         ex->setTime(time);
+        ex->setDone(true);
+        ex->setSaved(true);
 
         exercises.push_back(ex);
+    }
+
+    return exercises;
+}
+
+QList<Set*> Database::getLastHistoryStrength(int exerciseId) {
+    QList<Set*> exercises;
+
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT * FROM Sets WHERE exercise_id = :exercise_id AND time > :bg_time AND time < :ed_time ORDER BY time DESC ");
+    query.bindValue(":exercise_id", exerciseId);
+    query.bindValue(":bg_time", QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch());
+    query.bindValue(":ed_time", QDateTime::currentDateTime().addSecs(-4*60*60).toMSecsSinceEpoch());
+    query.exec();
+
+    // exercise_id, repetition_id, time, note, repetition, weight
+    while (query.next()) {
+        int repetition_id = query.value(2).toInt();
+        qint64 time = static_cast<qint64>(query.value(3).toLongLong());
+        QString notes = query.value(4).toString();
+        int repetition = query.value(5).toInt();
+        float weight = query.value(6).toInt();
+
+        if(exercises.size() > 0) {
+            if((exercises.front()->getTime()-time) > (1000*60*60*4)) {
+                return exercises;
+            }
+        }
+
+        Set *ex = new Set();
+        ex->setId(query.value(0).toInt());
+        ex->setRepId(repetition_id);
+        ex->setRepetition(repetition);
+        ex->setWeight(weight);
+        ex->setNote(notes);
+        ex->setTime(time);
+
+        exercises.push_front(ex);
     }
 
     return exercises;
@@ -699,6 +740,7 @@ QList<QPair<QString, QList<Set*> > > Database::getHistoryStrength(qint64 begin, 
         ex->setWeight(weight);
         ex->setNote(notes);
         ex->setTime(time);
+        ex->setSaved(true);
 
         exercises.last().second.push_back(ex);
     }
@@ -754,6 +796,39 @@ QList<QPair<QString, QList<Cardio*> > > Database::getHistoryCardio  (qint64 begi
     return exercises;
 }
 
+bool Database::hasHistory(qint64 begin, qint64 end) {
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT count(*) FROM Sets WHERE Sets.time > :bg_time AND Sets.time < :ed_time");
+    query.bindValue(":bg_time", begin == 0 ? QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch() : begin);
+    query.bindValue(":ed_time", end == 0 ? QDateTime::currentDateTime().toMSecsSinceEpoch() : end);
+    // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.
+    if (!query.exec()) {
+        const QSqlError error = query.lastError();
+        qDebug() << "query error:" << error.text();
+    }
+
+
+    // exercise_id, repetition_id, time, note, repetition, weight
+    while (query.next()) {
+        return query.value(0).toInt() > 0;
+    }
+
+
+    query.prepare("SELECT count(*) FROM Cardio WHERE time > :bg_time AND time < :ed_time ");
+    query.bindValue(":bg_time", begin == 0 ? QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch() : begin);
+    query.bindValue(":ed_time", end == 0 ? QDateTime::currentDateTime().toMSecsSinceEpoch() : end);
+    if (!query.exec()) {
+        const QSqlError error = query.lastError();
+        qDebug() << "query error:" << error.text();
+    }
+
+    while (query.next()) {
+        return query.value(0).toInt() > 0;
+    }
+
+    return false;
+}
+
 void Database::updatePractice(Cardio *c) {
     if(c == NULL) return;
 
@@ -781,11 +856,12 @@ void Database::updatePractice(Set *set) {
     if(set == NULL) return;
 
     QSqlQuery query(m_Database);
-    query.prepare("UPDATE Sets SET note = :note, repetition = :repetition, weight = :weight WHERE id = :id");
+    query.prepare("UPDATE Sets SET note = :note, repetition_id = :repetition_id, repetition = :repetition, weight = :weight WHERE id = :id");
     query.bindValue(":note", set->getNote());
     query.bindValue(":repetition", set->getRepetition());
     query.bindValue(":weight", set->getWeight());
     query.bindValue(":id", set->getId());
+    query.bindValue(":repetition_id", set->getRepId());
 
 
     // Note that no SQL Statement is passed to 'exec' as it is a prepared statement.

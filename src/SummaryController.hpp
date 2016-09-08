@@ -10,7 +10,7 @@
 
 
 #include <bb/cascades/ListView>
-
+#include <bb/cascades/QListDataModel>
 
 
 class SummaryController : public QObject {
@@ -26,6 +26,8 @@ private:
     QString                          m_Stats;
 
     bb::cascades::ListView          *m_ListView;
+    bb::cascades::ListView          *m_ListDatePicker;
+    bb::cascades::QVariantListDataModel listModel;
 
 
 
@@ -44,8 +46,11 @@ public Q_SLOTS:
 
 
     inline void setListView         (QObject *list)                 { m_ListView = dynamic_cast<bb::cascades::ListView*>(list);};
+    inline void setListDatePicker   (QObject *list)                 { m_ListDatePicker = dynamic_cast<bb::cascades::ListView*>(list); loadDatePicker();};
 
-    void getInfos                   ();
+
+    void loadDatePicker             ();
+    void getInfos                   (int id = 0);
 
 
 

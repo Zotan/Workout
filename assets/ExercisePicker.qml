@@ -9,138 +9,152 @@ Page {
     
     signal exercisePicked(int id, string name);
     
-    titleBar: TitleBar {
-        kind: TitleBarKind.FreeForm
-        kindProperties: FreeFormTitleBarKindProperties {
-            Container {
-                layout: DockLayout { }
-                leftPadding: 10
-                rightPadding: 10
-                
-                Label {
-                    id: folder
-                    text: qsTr("Choose an exercise")
-                    textStyle {
-                        color: Application.themeSupport.theme.colorTheme.style == VisualStyle.Dark ? Color.White : Color.Black
-                    }
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Center
-                }                            
-            }
-        }
-    }
-    
     Container {
-        verticalAlignment: VerticalAlignment.Fill
-        horizontalAlignment: HorizontalAlignment.Fill
-        layout: DockLayout { }
+        layout: StackLayout {
+            orientation: LayoutOrientation.TopToBottom
+        }            
         
-        Container {  
-            id: dataEmptyLabel
-            visible: theModel.empty //model.isEmpty() will not work  
-            horizontalAlignment: HorizontalAlignment.Center  
-            verticalAlignment: VerticalAlignment.Center
+        Container {
+            background: back.imagePaint
+            layout: DockLayout { }
+            leftPadding: 10
+            rightPadding: 10
             
-            layout: DockLayout {}
+            horizontalAlignment: HorizontalAlignment.Fill
+            preferredHeight: ui.du(12)
             
             Label {
-                text: qsTr("No exercises available.")
+                id: folder
+                text: qsTr("Choose an exercise")
+                textStyle {
+                    color: Color.White
+                    fontSize: FontSize.Large 
+                }
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
             }
+            
+            attachedObjects: [
+                ImagePaintDefinition {
+                    id: back
+                    imageSource: "asset:///images/color/gradient.png"
+                    repeatPattern: RepeatPattern.X
+                }
+            ]
         }
         
         Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
+            verticalAlignment: VerticalAlignment.Fill
+            horizontalAlignment: HorizontalAlignment.Fill
+            layout: DockLayout { }
             
-            TextField {
-                id: search
-                hintText: qsTr("Search")
+            Container {  
+                id: dataEmptyLabel
+                visible: theModel.empty //model.isEmpty() will not work  
+                horizontalAlignment: HorizontalAlignment.Center  
+                verticalAlignment: VerticalAlignment.Center
                 
-                onTextChanging: {
-                    if(search.text.length > 2 || search.text.length == 0)
-                        exerciseController.filter(search.text);
+                layout: DockLayout {}
+                
+                Label {
+                    text: qsTr("No exercises available.")
+                    verticalAlignment: VerticalAlignment.Center
+                    horizontalAlignment: HorizontalAlignment.Center
                 }
             }
             
-            ListView {
-                id: exercicesList
-                focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
+            Container {
+                layout: StackLayout {
+                    orientation: LayoutOrientation.TopToBottom
+                }
                 
-                dataModel: GroupDataModel {
-                    id: theModel
-                    sortingKeys: ["id"]
-                    grouping: ItemGrouping.None
+                TextField {
+                    id: search
+                    hintText: qsTr("Search")
                     
-                    property bool empty: true
-                    
-                    
-                    onItemAdded: {
-                        empty = isEmpty();
+                    onTextChanging: {
+                        if(search.text.length > 2 || search.text.length == 0)
+                            exerciseController.filter(search.text);
                     }
-                    onItemRemoved: {
-                        empty = isEmpty();
-                    }  
-                    onItemUpdated: empty = isEmpty()  
-                    
-                    // You might see an 'unknown signal' error  
-                    // in the QML-editor, guess it's a SDK bug.  
-                    onItemsChanged: empty = isEmpty()
-                
                 }
                 
-                                
-                listItemComponents: [
-                    ListItemComponent {
-                        type: "item"
+                ListView {
+                    id: exercicesList
+                    focusRetentionPolicyFlags: FocusRetentionPolicy.LoseToFocusable
+                    
+                    dataModel: GroupDataModel {
+                        id: theModel
+                        sortingKeys: ["id"]
+                        grouping: ItemGrouping.None
+                        
+                        property bool empty: true
                         
                         
-                        Container {
-                            preferredHeight: ui.du(12)
-                            id: listItemContainer
-                            horizontalAlignment: HorizontalAlignment.Fill
-                            verticalAlignment: VerticalAlignment.Center
-                            layout: DockLayout {
-                            }
+                        onItemAdded: {
+                            empty = isEmpty();
+                        }
+                        onItemRemoved: {
+                            empty = isEmpty();
+                        }  
+                        onItemUpdated: empty = isEmpty()  
+                        
+                        // You might see an 'unknown signal' error  
+                        // in the QML-editor, guess it's a SDK bug.  
+                        onItemsChanged: empty = isEmpty()
+                    
+                    }
+                    
+                                    
+                    listItemComponents: [
+                        ListItemComponent {
+                            type: "item"
+                            
                             
                             Container {
+                                preferredHeight: ui.du(12)
+                                id: listItemContainer
+                                horizontalAlignment: HorizontalAlignment.Fill
                                 verticalAlignment: VerticalAlignment.Center
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.LeftToRight
+                                layout: DockLayout {
                                 }
+                                
                                 Container {
-                                    preferredWidth: ui.du(0.1)
-                                }
-                                Label {
-                                    text: ListItemData.title
                                     verticalAlignment: VerticalAlignment.Center
+                                    layout: StackLayout {
+                                        orientation: LayoutOrientation.LeftToRight
+                                    }
+                                    Container {
+                                        preferredWidth: ui.du(0.1)
+                                    }
+                                    Label {
+                                        text: ListItemData.title
+                                        verticalAlignment: VerticalAlignment.Center
+                                    }
                                 }
+                                
+                                
+                                Divider { }
+                            
                             }
-                            
-                            
-                            Divider { }
+                        }
+                    ]
+                    
+                    
+                    onTriggered: {
+                        var chosenItem = dataModel.data(indexPath);
                         
+                        if(!doNotCloseOnSelected) {
+                            exercisePickedId = chosenItem.id;
+                            nav.pop();
+                        } else {
+                            exerciseLabel = chosenItem.title;
+                            exercisePickedCategory = chosenItem.category;
+                            exercisePickedId = chosenItem.id;
                         }
                     }
-                ]
-                
-                
-                onTriggered: {
-                    var chosenItem = dataModel.data(indexPath);
-                    
-                    if(!doNotCloseOnSelected) {
-                        exercisePickedId = chosenItem.id;
-                        nav.pop();
-                    } else {
-                        exerciseLabel = chosenItem.title;
-                        exercisePickedCategory = chosenItem.category;
-                        exercisePickedId = chosenItem.id;
-                    }
                 }
+            
             }
-        
         }
     }
     
