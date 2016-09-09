@@ -37,7 +37,7 @@ Page {
             
             Label {
                 id: folder
-                text: practicePage.title
+                text: title
                 textStyle {
                     color: Color.White
                     fontSize: FontSize.Large 
@@ -885,6 +885,10 @@ Page {
             practiceController.weight = 0;
             practiceController.sets = 1;
         }    
+    }
+    
+    onTitleChanged: {
+        folder.text = title;
     }
     
     attachedObjects: [

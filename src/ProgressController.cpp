@@ -14,7 +14,7 @@
 #include <bb/cascades/GroupDataModel>
 #include <bb/system/SystemDialog>
 
-ProgressController::ProgressController(QObject *parent) : QObject(parent),  m_ListView(NULL), m_tmp_id(0) {
+ProgressController::ProgressController(QObject *parent) : QObject(parent),  m_ListView(NULL), m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
 
 }
 
@@ -90,7 +90,7 @@ void ProgressController::deleteRecord(int id) {
          SLOT(onPromptFinishedDeleteRecord(bb::system::SystemUiResult::Type)));
 
     if (success) {
-        m_tmp_id = id;
+        m_CacheId = id;
         // Signal was successfully connected.
         // Now show the dialog box in your UI.
         dialog->show();
@@ -111,7 +111,7 @@ void ProgressController::deleteRecordNoAsk(int id) {
 void ProgressController::onPromptFinishedDeleteRecord(bb::system::SystemUiResult::Type type) {
     if(type == bb::system::SystemUiResult::ConfirmButtonSelection) {
 
-        Database::get()->deleteBodyWeight(m_tmp_id);
+        Database::get()->deleteBodyWeight(m_CacheId);
 
         if(m_ListView == NULL) {
             qWarning() << "did not received the listview. quit.";
@@ -120,7 +120,7 @@ void ProgressController::onPromptFinishedDeleteRecord(bb::system::SystemUiResult
 
         using namespace bb::cascades;
         GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_ListView->dataModel());
-        QVariantList indexPath = dataModel->find(QVariantList() << m_tmp_id);
+        QVariantList indexPath = dataModel->find(QVariantList() << m_CacheId);
         dataModel->removeAt(indexPath);
 
     }
@@ -389,5 +389,57 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
     m_GraphController->plot(labels, datas);
 }
 
+
+void ProgressController::deleteEntry(int id, int category, int exercise_id) {
+    m_CacheId = id;
+    m_CacheCategory = category;
+    m_CacheExerciseId = exercise_id;
+
+    using namespace bb::cascades;
+    using namespace bb::system;
+
+    SystemDialog *dialog = new SystemDialog("Yes", "No");
+
+    dialog->setTitle(tr("Delete record"));
+    dialog->setBody(tr("Are you sure you want to delete this record?"));
+
+    bool success = connect(dialog,
+         SIGNAL(finished(bb::system::SystemUiResult::Type)),
+         this,
+         SLOT(onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type)));
+
+    if (success) {
+        dialog->show();
+    } else {
+        dialog->deleteLater();
+    }
+}
+
+
+void ProgressController::onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result) {
+
+    if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
+        deleteRecord(m_CacheId, m_CacheCategory);
+
+        switch(m_CacheCategory) {
+            case 1:
+                loadCardioHistory(m_CacheExerciseId);
+                break;
+
+            case 2:
+                loadStrengthHistory(m_CacheExerciseId);
+                break;
+        }
+    }
+}
+
+
+void ProgressController::deleteRecord(int id, int category) {
+    if(category == 1) {
+        Database::get()->deletePracticeCardioEntry(id);
+    } else {
+        Database::get()->deletePracticeStrengthEntry(id);
+    }
+}
 
 

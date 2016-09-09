@@ -1,4 +1,5 @@
 import bb.cascades 1.3
+import bb.system 1.0
 import Utility.ProgressController 1.0
 import Utility.Graph 1.0
 
@@ -127,6 +128,52 @@ Page {
                     onItemsChanged: empty = isEmpty()      
                 }
                 
+                multiSelectAction: MultiSelectActionItem {}
+                
+                multiSelectHandler {
+                    // These actions will be shown during multiple selection, while this 
+                    // multiSelectHandler is active
+                    actions: [
+                        DeleteActionItem {
+                            property variant selectionList
+                            property variant selectedItem
+                            id: deleteActionItem
+                            onTriggered: {
+                                deleteActionItem.selectionList = recordsList.selectionList()
+                                deleteActionItem.selectedItem = histModel.data(selectionList);
+                                multiSelectDeleteDialog.show()
+                            }
+                            attachedObjects: [
+                                SystemDialog {
+                                    id: multiSelectDeleteDialog
+                                    title: qsTr("Delete records") + Retranslate.onLocaleOrLanguageChanged
+                                    body: qsTr("Are you sure you want to delete these records?") + Retranslate.onLocaleOrLanguageChanged
+                                    onFinished: {
+                                        if (result == 3) {
+                                        } else {
+                                            for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
+                                                progressController.deleteRecord(histModel.data(deleteActionItem.selectionList[i]).id, category);
+                                            }
+                                            
+                                            switch(category) {
+                                                case 1:
+                                                    progressController.loadCardioHistory(exercise_id);
+                                                    break;
+                                                
+                                                case 2:
+                                                    progressController.loadStrengthHistory(exercise_id);
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                    
+                    status: qsTr("Delete")
+                }
+                
                 listItemComponents: [
                     ListItemComponent {
                         type: "header"
@@ -138,6 +185,7 @@ Page {
                         type: "item"
                         
                         Container {
+                            id: listItemContainer
                             preferredHeight: ui.du(12)
                             horizontalAlignment: HorizontalAlignment.Fill
                             verticalAlignment: VerticalAlignment.Center
@@ -155,10 +203,27 @@ Page {
                             }
                             
                             Divider { }
-                        
+                            
+                            contextActions: [
+                                ActionSet {
+                                    title: qsTr("Previous records")
+                                                                        
+                                    DeleteActionItem {
+                                        title: qsTr("Delete")
+                                        onTriggered: {
+                                            listItemContainer.ListItem.view.deleteEntry(ListItemData.id);
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 ]
+                
+                function deleteEntry(id) {
+                    progressController.deleteEntry(id, category, exercise_id);
+                   
+                }
             }
             
             

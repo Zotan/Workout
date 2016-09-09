@@ -24,9 +24,9 @@ private:
     bb::cascades::ListView          *m_ListView;
     Graph                           *m_GraphController;
 
-    int                              m_tmp_id;
-
-
+    int                              m_CacheId;
+    int                              m_CacheCategory;
+    int                              m_CacheExerciseId;
 
 public:
     ProgressController              (QObject *parent = 0);
@@ -56,6 +56,10 @@ public Q_SLOTS:
     void plotCardio                  (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
     void plotStrength                (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
 
+
+    void deleteEntry                 (int id, int category, int exercise_id);
+    void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result);
+    void deleteRecord                (int id, int category);
 
 
 Q_SIGNALS:

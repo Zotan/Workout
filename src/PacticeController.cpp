@@ -297,7 +297,6 @@ void PracticeController::loadPrevious(int exercise_id) {
     QList<Set*> sets = Database::get()->getLastHistoryStrength(exercise_id);
     QList<QObject*> ex;
 
-
     for(int i = m_LastSets.size() ; i < sets.size() ; ++i) {
         m_LastSets.push_back(sets.at(i));
     }

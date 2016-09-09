@@ -262,6 +262,7 @@ NavigationPane {
                     if(!practicePage)
                         practicePage = practice.createObject();
                     
+
                     practicePage.category = 2;
                     practicePage.playlistMode = true;
                     practicePage.title = title;
