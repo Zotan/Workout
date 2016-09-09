@@ -19,7 +19,7 @@
 #include "Graph.hpp"
 
 
-PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_GraphController(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0), m_CacheIsSaved(0) {
+PracticeController::PracticeController(QObject *parent) : QObject(parent), m_ListView(NULL), m_Weight(0), m_Repetition(0), m_SetsNumber(1), m_TimeStopWatchSec(60),m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0), m_CacheIsSaved(0) {
 
     updateDateTime();
 
@@ -235,39 +235,6 @@ void PracticeController::updatePractice(int id, int isSaved, int category) {
     }
 }
 
-void PracticeController::loadStrengthHistory(int exercise_id) {
-
-    // ----------------------------------------------------------------------------------------------
-     // get the dataModel of the listview if not already available
-     using namespace bb::cascades;
-
-
-     if(m_HistoryListView == NULL) {
-         qWarning() << "(loadStrengthHistory) did not received the listview. quit.";
-         return;
-     }
-
-     GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_HistoryListView->dataModel());
-     if (!dataModel) {
-         qDebug() << "create new model";
-         dataModel = new GroupDataModel(
-                 QStringList() << "id"
-                               << "title"
-                               << "category"
-                 );
-         m_HistoryListView->setDataModel(dataModel);
-     }
-     dataModel->clear();
-
-     QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id);
-
-     QList<QObject *> datas;
-     for(int i = sets.length()-1 ; i >= 0 ; --i) {
-         sets[i]->setTime(floor(sets[i]->getTime()/(1000*60*60*4))*1000*60*60*4);
-         datas.push_back(sets.at(i));
-     }
-     dataModel->insertList(datas);
-}
 
 void PracticeController::restoreSession(int exercise_id) {
 
@@ -349,41 +316,6 @@ void PracticeController::loadPrevious(int exercise_id) {
     setSets(numberSetDone);
 }
 
-void PracticeController::loadHistory(int exercise_id) {
-
-
-    // ----------------------------------------------------------------------------------------------
-     // get the dataModel of the listview if not already available
-     using namespace bb::cascades;
-
-
-     if(m_HistoryListView == NULL) {
-         qWarning() << "(loadHistory) did not received the listview. quit.";
-         return;
-     }
-
-     GroupDataModel* dataModel = dynamic_cast<GroupDataModel*>(m_HistoryListView->dataModel());
-     if (!dataModel) {
-         qDebug() << "create new model";
-         dataModel = new GroupDataModel(
-                 QStringList() << "id"
-                               << "title"
-                               << "category"
-                 );
-         m_HistoryListView->setDataModel(dataModel);
-     }
-     dataModel->clear();
-
-     QList<Cardio*> cardios = Database::get()->getHistoryCardio(exercise_id);
-
-     QList<QObject *> datas;
-     for(int i = 0 ; i < cardios.size() ; ++i) {
-         cardios[i]->setDuration(cardios.at(i)->getDuration()/60);
-         datas.push_back(cardios.at(i));
-     }
-     dataModel->insertList(datas);
-}
-
 
 QString PracticeController::getDateFromTime(qint64 time) {
     QString str;
@@ -392,168 +324,6 @@ QString PracticeController::getDateFromTime(qint64 time) {
 
     return str;
 }
-
-void PracticeController::plotCardio(int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria) {
-
-    if(m_GraphController == NULL) return;
-
-    QList<Cardio*> cardios = Database::get()->getHistoryCardio(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
-
-    QList<QString> labels;
-    QList<float>   datas;
-
-    for(int i = cardios.length()-1 ; i >= 0 ; --i) {
-        labels.push_back(QDateTime::fromMSecsSinceEpoch(cardios.at(i)->getTime()).toString(Qt::SystemLocaleShortDate));
-    }
-
-    for(int i = cardios.length()-1 ; i >= 0 ; --i) {
-
-        switch(criteria) {
-            case 0:
-                datas.push_back((static_cast<float>(cardios.at(i)->getDuration())/60));
-                break;
-
-            case 1:
-                datas.push_back((static_cast<int>(cardios.at(i)->getDistance())));
-                break;
-
-            case 2:
-                datas.push_back((static_cast<int>(cardios.at(i)->getHeartRate())));
-                break;
-
-            case 3:
-                datas.push_back((static_cast<int>(cardios.at(i)->getCalories())));
-                break;
-        }
-    }
-
-    m_GraphController->plot(labels, datas);
-}
-
-
-void PracticeController::plotStrength(int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria) {
-
-    if(m_GraphController == NULL) return;
-
-    QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
-
-    QList<QString> labels;
-    QList<float>   datas;
-
-    if(sets.length() > 0) {
-        labels.push_back(QDateTime::fromMSecsSinceEpoch(sets.last()->getTime()).toString(Qt::SystemLocaleShortDate));
-    }
-
-    for(int i = sets.length()-2 ; i >= 0 ; --i) {
-        if((sets.at(i)->getTime() - sets.at(i+1)->getTime()) > 1000*60*60*4) {
-            labels.push_back(QDateTime::fromMSecsSinceEpoch(sets.at(i)->getTime()).toString(Qt::SystemLocaleShortDate));
-        }
-    }
-
-
-    QList<double> feature;
-    if(sets.length() > 0) {
-        if(criteria < 4)
-            feature.push_back(sets.last()->getWeight());
-        else
-            feature.push_back(sets.last()->getRepetition());
-    }
-
-    for(int i = sets.length()-2 ; i >= 0 ; --i) {
-        if((sets.at(i)->getTime() - sets.at(i+1)->getTime()) > 1000*60*60*4) {
-            switch(criteria % 4) {
-                case 0: {
-                    double mx = 0;
-                    for(int n = 0 ; n < feature.size() ; ++n) {
-                        mx = mx >  feature.at(n) ? mx : feature.at(n);
-                    }
-                    datas.push_back(mx);
-                    break;
-                }
-
-                case 1: {
-                    double mn = 10000000000.;
-                    for(int n = 0 ; n < feature.size() ; ++n) {
-                        mn = mn <  feature.at(n) ? mn : feature.at(n);
-                    }
-                    datas.push_back(mn);
-                    break;
-                }
-
-                case 2: {
-                    double avg = 0.;
-                    for(int n = 0 ; n < feature.size() ; ++n) {
-                        avg += feature.at(n);
-                    }
-                    datas.push_back(avg / feature.size());
-                    break;
-                }
-
-                case 3: {
-                    double avg = 0.;
-                    for(int n = 0 ; n < feature.size() ; ++n) {
-                        avg += feature.at(n);
-                    }
-                    datas.push_back(avg);
-                    break;
-                }
-            }
-
-            feature.clear();
-            if(criteria < 4)
-                feature.push_back(sets.at(i)->getWeight());
-            else
-                feature.push_back(sets.at(i)->getRepetition());
-
-        } else {
-            if(criteria < 4)
-                feature.push_back(sets.at(i)->getWeight());
-            else
-                feature.push_back(sets.at(i)->getRepetition());
-        }
-    }
-
-    switch(criteria % 4) {
-        case 0: {
-            double mx = 0;
-            for(int n = 0 ; n < feature.size() ; ++n) {
-                mx = mx >  feature.at(n) ? mx : feature.at(n);
-            }
-            datas.push_back(mx);
-            break;
-        }
-
-        case 1: {
-            double mn = 10000000000.;
-            for(int n = 0 ; n < feature.size() ; ++n) {
-                mn = mn <  feature.at(n) ? mn : feature.at(n);
-            }
-            datas.push_back(mn);
-            break;
-        }
-
-        case 2: {
-            double avg = 0.;
-            for(int n = 0 ; n < feature.size() ; ++n) {
-                avg += feature.at(n);
-            }
-            datas.push_back(avg / feature.size());
-            break;
-        }
-
-        case 3: {
-            double avg = 0.;
-            for(int n = 0 ; n < feature.size() ; ++n) {
-                avg += feature.at(n);
-            }
-            datas.push_back(avg);
-            break;
-        }
-    }
-
-    m_GraphController->plot(labels, datas);
-}
-
 
 
 

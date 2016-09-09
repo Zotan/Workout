@@ -29,6 +29,7 @@
 #include "RoutineController.hpp"
 #include "AppSettings.hpp"
 #include "BalanceController.hpp"
+#include "ProgressController.hpp"
 
 #include "BugReportController.hpp"
 #include "Graph.hpp"
@@ -58,6 +59,7 @@ ApplicationUI::ApplicationUI() :
     qmlRegisterType<SummaryController>("Utility.SummaryController", 1, 0, "SummaryController");
     qmlRegisterType<RoutineController>("Utility.RoutineController", 1, 0, "RoutineController");
     qmlRegisterType<BalanceController>("Utility.BalanceController", 1, 0, "BalanceController");
+    qmlRegisterType<ProgressController>("Utility.ProgressController", 1, 0, "ProgressController");
     qmlRegisterType<AppSettings>("Utility.AppSettings", 1, 0, "AppSettings");
 
     qmlRegisterType<BugReportController>("Lib.BugReport", 1, 0, "BugReport");

@@ -82,12 +82,12 @@
 <context>
     <name>BalanceController</name>
     <message>
-        <location filename="../src/BalanceController.cpp" line="90"/>
+        <location filename="../src/BalanceController.cpp" line="70"/>
         <source>Delete record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/BalanceController.cpp" line="91"/>
+        <location filename="../src/BalanceController.cpp" line="71"/>
         <source>Are you sure you want to delete this record? </source>
         <translation type="unfinished"></translation>
     </message>
@@ -448,78 +448,93 @@
 <context>
     <name>PlotProgress</name>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="63"/>
+        <location filename="../assets/PlotProgress.qml" line="33"/>
+        <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/PlotProgress.qml" line="39"/>
+        <source>Graph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/PlotProgress.qml" line="166"/>
+        <source>No previous records available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/PlotProgress.qml" line="185"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="85"/>
+        <location filename="../assets/PlotProgress.qml" line="207"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="110"/>
-        <location filename="../assets/PlotProgress.qml" line="140"/>
+        <location filename="../assets/PlotProgress.qml" line="232"/>
+        <location filename="../assets/PlotProgress.qml" line="264"/>
         <source>Criteria</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="114"/>
+        <location filename="../assets/PlotProgress.qml" line="236"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="118"/>
+        <location filename="../assets/PlotProgress.qml" line="240"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="123"/>
+        <location filename="../assets/PlotProgress.qml" line="245"/>
         <source>Heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="127"/>
+        <location filename="../assets/PlotProgress.qml" line="249"/>
         <source>Calories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="144"/>
+        <location filename="../assets/PlotProgress.qml" line="268"/>
         <source>Max weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="149"/>
+        <location filename="../assets/PlotProgress.qml" line="273"/>
         <source>Min weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="153"/>
+        <location filename="../assets/PlotProgress.qml" line="277"/>
         <source>Avg. weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="157"/>
+        <location filename="../assets/PlotProgress.qml" line="281"/>
         <source>Total weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="161"/>
+        <location filename="../assets/PlotProgress.qml" line="285"/>
         <source>Max reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="165"/>
+        <location filename="../assets/PlotProgress.qml" line="289"/>
         <source>Min reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="169"/>
+        <location filename="../assets/PlotProgress.qml" line="293"/>
         <source>Avg. reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="173"/>
+        <location filename="../assets/PlotProgress.qml" line="297"/>
         <source>Total reps</source>
         <translation type="unfinished"></translation>
     </message>
@@ -691,13 +706,64 @@
 <context>
     <name>PracticeController</name>
     <message>
-        <location filename="../src/PacticeController.cpp" line="571"/>
+        <location filename="../src/PacticeController.cpp" line="341"/>
         <source>Delete practice record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PacticeController.cpp" line="572"/>
+        <location filename="../src/PacticeController.cpp" line="342"/>
         <source>Are you sure you want to delete this record?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgressController</name>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="84"/>
+        <source>Delete record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="85"/>
+        <source>Are you sure you want to delete this record? </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="170"/>
+        <location filename="../src/ProgressController.cpp" line="172"/>
+        <source>SET </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="170"/>
+        <location filename="../src/ProgressController.cpp" line="172"/>
+        <source> REPS @ </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="170"/>
+        <source>Kg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="172"/>
+        <source>lbs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="219"/>
+        <source>m in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="219"/>
+        <location filename="../src/ProgressController.cpp" line="221"/>
+        <source>min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ProgressController.cpp" line="221"/>
+        <source>ft in </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

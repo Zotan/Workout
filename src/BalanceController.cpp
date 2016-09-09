@@ -60,26 +60,6 @@ void BalanceController::saveWeight(float value, const QString& notes) {
 }
 
 
-void BalanceController::plotBodyWeights(const QDateTime &begin, const QDateTime &end) {
-
-    if(m_GraphController == NULL) return;
-
-    QList< BodyWeight* > bodyweights = Database::get()->getBodyWeights(begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
-
-    QList<QString> labels;
-    QList<float>   datas;
-
-    for(int i = bodyweights.length()-1 ; i >= 0 ; --i) {
-        labels.push_back(bodyweights.at(i)->getTime());
-    }
-
-
-    for(int i = bodyweights.length()-1 ; i >= 0 ; --i) {
-        datas.push_back(bodyweights.at(i)->getWeight());
-    }
-
-    m_GraphController->plot(labels, datas);
-}
 
 void BalanceController::deleteRecord(int id) {
     using namespace bb::cascades;

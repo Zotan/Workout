@@ -22,7 +22,6 @@ class BalanceController : public QObject {
 private:
 
     bb::cascades::ListView          *m_ListView;
-    Graph                           *m_GraphController;
 
     int                              m_tmp_id;
 
@@ -37,15 +36,12 @@ public:
 public Q_SLOTS:
 
     inline void setListView          (QObject *list)                  { m_ListView = dynamic_cast<bb::cascades::ListView*>(list); };
-    inline void setGraph             (QObject *gr)                    { m_GraphController = dynamic_cast<Graph*>(gr); };
 
     void getWeightsList              ();
     void saveWeight                  (float value, const QString& notes);
     void deleteRecord                (int id);
     void deleteRecordNoAsk           (int id);
     void onPromptFinishedDeleteRecord(bb::system::SystemUiResult::Type);
-
-    void plotBodyWeights             (const QDateTime &begin, const QDateTime &end);
 
 
 Q_SIGNALS:

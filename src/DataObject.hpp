@@ -245,6 +245,7 @@ class Detail : public QObject {
 
     Q_PROPERTY( QString title       READ getTitle       WRITE setTitle        NOTIFY titleChanged)
     Q_PROPERTY( QString text        READ getText        WRITE setText         NOTIFY textChanged)
+    Q_PROPERTY( int id              READ getId          WRITE setId           NOTIFY idChanged)
 
     // ----------------------------------------------------------------------------------------------
 
@@ -252,27 +253,32 @@ class Detail : public QObject {
 private:
     QString m_Title;
     QString m_Text;
+    int m_Id;
 
 
     // ----------------------------------------------------------------------------------------------
 
 public:
-    Detail(QObject *parent = 0) : QObject(parent) {}
+    Detail(QObject *parent = 0) : QObject(parent), m_Id(0) {}
     virtual ~Detail() {}
 
 
 
     inline const QString &getTitle() const                  { return m_Title; }
-    inline void           setTitle(const QString &s)        { m_Title = s; }
+    inline void           setTitle(const QString &s)        { if(m_Title != s) {m_Title = s; emit titleChanged();} }
 
     inline const QString &getText() const                   { return m_Text; }
-    inline void           setText(const QString &s)         { m_Text = s; }
+    inline void           setText(const QString &s)         { if(m_Text != s) {m_Text = s; emit textChanged();} }
+
+    inline int            getId() const                     { return m_Id; }
+    inline void           setId(const int &s)               { if(m_Id != s) {m_Id = s; emit idChanged();} }
 
 
     // ----------------------------------------------------------------------------------------------
     Q_SIGNALS:
         void titleChanged();
         void textChanged();
+        void idChanged();
 };
 
 

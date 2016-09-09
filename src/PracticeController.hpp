@@ -16,8 +16,6 @@
 #include <bb/platform/Notification>
 #include <bb/system/SystemUiResult>
 
-#include "Graph.hpp"
-
 class Set;
 
 
@@ -47,8 +45,6 @@ class PracticeController : public QObject {
 private:
 
     bb::cascades::ListView          *m_ListView;
-    bb::cascades::ListView          *m_HistoryListView;
-    Graph                           *m_GraphController;
     bb::device::Led                 *m_Led;
     bb::platform::Notification      *notif;
 
@@ -117,25 +113,17 @@ public:
 public Q_SLOTS:
 
     inline void setListView          (QObject *list)                  { m_ListView = dynamic_cast<bb::cascades::ListView*>(list); };
-    inline void setHistoryListView   (QObject *list)                  { m_HistoryListView = dynamic_cast<bb::cascades::ListView*>(list); };
-    inline void setGraph             (QObject *gr)                    { m_GraphController = dynamic_cast<Graph*>(gr); };
 
     void saveSet                     (const QString &note);
     void updateDateTime              ();
 
-    QDateTime initDate               () const                          { return QDateTime::currentDateTime().addYears(-1); }
 
     void pushToDB                    (int exerciseId);
     void pushCardioToDB              (int exerciseId, const QString &notes);
 
     void loadPractice                (int exercise_id, int category);
-    void loadHistory                 (int exercise_id);
-    void loadStrengthHistory         (int exercise_id);
     void restoreSession              (int exercise_id);
     void loadPrevious                (int exercise_id);
-
-    void plotCardio                  (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
-    void plotStrength                (int exercise_id, const QDateTime &begin, const QDateTime &end, int criteria);
 
     QString getDateFromTime          (qint64 time);
 
