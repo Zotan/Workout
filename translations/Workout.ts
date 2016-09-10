@@ -807,42 +807,42 @@
 <context>
     <name>Routine</name>
     <message>
-        <location filename="../assets/Routine.qml" line="33"/>
+        <location filename="../assets/Routine.qml" line="34"/>
         <source>List of routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="78"/>
+        <location filename="../assets/Routine.qml" line="98"/>
         <source>No routines available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="128"/>
+        <location filename="../assets/Routine.qml" line="148"/>
         <source>Delete routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="129"/>
+        <location filename="../assets/Routine.qml" line="149"/>
         <source>Are you sure you want to delete these routines?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="146"/>
+        <location filename="../assets/Routine.qml" line="166"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="184"/>
+        <location filename="../assets/Routine.qml" line="204"/>
         <source>Routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="187"/>
+        <location filename="../assets/Routine.qml" line="207"/>
         <source>Rename routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="195"/>
+        <location filename="../assets/Routine.qml" line="215"/>
         <source>Delete routine</source>
         <translation type="unfinished"></translation>
     </message>

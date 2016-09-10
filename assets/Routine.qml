@@ -9,6 +9,7 @@ NavigationPane {
     property variant cardioPage
     property variant strengthPage
     property variant practicePage
+    property variant sampleRoutinePage
     property int navDepth
 
     
@@ -39,18 +40,26 @@ NavigationPane {
                     horizontalAlignment: HorizontalAlignment.Center
                 }
                 
-                
-                ImageButton {
+                Container {
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.LeftToRight
+                    }
                     verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Right
-                    defaultImageSource: "asset:///images/icon_add_white.png" 
-                    preferredHeight: ui.du(7)
-                    preferredWidth: ui.du(7)
-                    onClicked: {
-                        routineController.createRoutine();
+                    
+                    ImageButton {
+                        verticalAlignment: VerticalAlignment.Center
+                        defaultImageSource: "asset:///images/icon_add_white.png" 
+                        preferredHeight: ui.du(7)
+                        preferredWidth: ui.du(7)
+                        onClicked: {
+                            routineController.createRoutine();
+                        }
+                    
                     }
-                
+                                        
                 }
+                
                 
                 attachedObjects: [
                     ImagePaintDefinition {

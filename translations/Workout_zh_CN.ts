@@ -931,42 +931,42 @@
 <context>
     <name>Routine</name>
     <message>
-        <location filename="../assets/Routine.qml" line="33"/>
+        <location filename="../assets/Routine.qml" line="34"/>
         <source>List of routines</source>
         <translation>日程列表</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="78"/>
+        <location filename="../assets/Routine.qml" line="98"/>
         <source>No routines available.</source>
         <translation>无可用日程。</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="128"/>
+        <location filename="../assets/Routine.qml" line="148"/>
         <source>Delete routines</source>
         <translation>删除日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="129"/>
+        <location filename="../assets/Routine.qml" line="149"/>
         <source>Are you sure you want to delete these routines?</source>
         <translation>您确定要删除这些日程吗？</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="146"/>
+        <location filename="../assets/Routine.qml" line="166"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="184"/>
+        <location filename="../assets/Routine.qml" line="204"/>
         <source>Routines</source>
         <translation>日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="187"/>
+        <location filename="../assets/Routine.qml" line="207"/>
         <source>Rename routine</source>
         <translation>重命名日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="195"/>
+        <location filename="../assets/Routine.qml" line="215"/>
         <source>Delete routine</source>
         <translation>删除日程</translation>
     </message>
