@@ -474,18 +474,18 @@
         <translation type="unfinished">图表</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="149"/>
+        <location filename="../assets/PlotProgress.qml" line="156"/>
         <source>Delete records</source>
         <translation type="unfinished">删除记录</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="150"/>
+        <location filename="../assets/PlotProgress.qml" line="157"/>
         <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished">您确定要删除这些记录吗？</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="174"/>
-        <location filename="../assets/PlotProgress.qml" line="212"/>
+        <location filename="../assets/PlotProgress.qml" line="183"/>
+        <location filename="../assets/PlotProgress.qml" line="221"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -498,90 +498,100 @@
         <translation type="obsolete">编辑</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="209"/>
+        <location filename="../assets/PlotProgress.qml" line="99"/>
+        <source>Nothing to plot yet. You should have at least worked out on two different days to plot a progresion!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/PlotProgress.qml" line="218"/>
         <source>Previous records</source>
         <translation type="unfinished">过去记录</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="231"/>
+        <location filename="../assets/PlotProgress.qml" line="239"/>
         <source>No previous records available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="250"/>
+        <location filename="../assets/PlotProgress.qml" line="258"/>
         <source>Start</source>
         <translation>开始</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="272"/>
+        <location filename="../assets/PlotProgress.qml" line="282"/>
         <source>End</source>
         <translation>结束</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="297"/>
-        <location filename="../assets/PlotProgress.qml" line="329"/>
+        <location filename="../assets/PlotProgress.qml" line="310"/>
+        <location filename="../assets/PlotProgress.qml" line="343"/>
         <source>Criteria</source>
         <translation>标准</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="301"/>
+        <location filename="../assets/PlotProgress.qml" line="315"/>
         <source>Time</source>
         <translation>时间</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="305"/>
+        <location filename="../assets/PlotProgress.qml" line="319"/>
         <source>Distance</source>
         <translation>距离</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="310"/>
+        <location filename="../assets/PlotProgress.qml" line="323"/>
         <source>Heart rate</source>
         <translation>心率</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="314"/>
+        <location filename="../assets/PlotProgress.qml" line="327"/>
         <source>Calories</source>
         <translation>卡路里</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="333"/>
+        <location filename="../assets/PlotProgress.qml" line="348"/>
         <source>Max weight</source>
         <translation>最大重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="338"/>
+        <location filename="../assets/PlotProgress.qml" line="352"/>
         <source>Min weight</source>
         <translation>最小重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="342"/>
+        <location filename="../assets/PlotProgress.qml" line="356"/>
         <source>Avg. weight</source>
         <translation>平均重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="346"/>
+        <location filename="../assets/PlotProgress.qml" line="360"/>
         <source>Total weight</source>
         <translation>总重量</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="350"/>
+        <location filename="../assets/PlotProgress.qml" line="364"/>
         <source>Max reps</source>
         <translation>最大次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="354"/>
+        <location filename="../assets/PlotProgress.qml" line="368"/>
         <source>Min reps</source>
         <translation>最小次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="358"/>
+        <location filename="../assets/PlotProgress.qml" line="372"/>
         <source>Avg. reps</source>
         <translation>平均次数</translation>
     </message>
     <message>
-        <location filename="../assets/PlotProgress.qml" line="362"/>
+        <location filename="../assets/PlotProgress.qml" line="376"/>
         <source>Total reps</source>
         <translation>总次数</translation>
+    </message>
+    <message>
+        <location filename="../assets/PlotProgress.qml" line="392"/>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -864,56 +874,56 @@
 <context>
     <name>ProgressController</name>
     <message>
-        <location filename="../src/ProgressController.cpp" line="84"/>
-        <location filename="../src/ProgressController.cpp" line="403"/>
+        <location filename="../src/ProgressController.cpp" line="103"/>
+        <location filename="../src/ProgressController.cpp" line="446"/>
         <source>Delete record</source>
         <translation type="unfinished">删除记录</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="85"/>
+        <location filename="../src/ProgressController.cpp" line="104"/>
         <source>Are you sure you want to delete this record? </source>
         <translation type="unfinished">您确定要删除该记录吗？</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="170"/>
-        <location filename="../src/ProgressController.cpp" line="172"/>
+        <location filename="../src/ProgressController.cpp" line="189"/>
+        <location filename="../src/ProgressController.cpp" line="191"/>
         <source>SET </source>
         <translation type="unfinished">设置 </translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="170"/>
-        <location filename="../src/ProgressController.cpp" line="172"/>
+        <location filename="../src/ProgressController.cpp" line="189"/>
+        <location filename="../src/ProgressController.cpp" line="191"/>
         <source> REPS @ </source>
         <translation type="unfinished">次@</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="170"/>
+        <location filename="../src/ProgressController.cpp" line="189"/>
         <source>Kg</source>
         <translation type="unfinished">千克</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="172"/>
+        <location filename="../src/ProgressController.cpp" line="191"/>
         <source>lbs</source>
         <translation type="unfinished">磅</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="219"/>
+        <location filename="../src/ProgressController.cpp" line="241"/>
         <source>m in </source>
         <translation type="unfinished">米 在 </translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="219"/>
-        <location filename="../src/ProgressController.cpp" line="221"/>
+        <location filename="../src/ProgressController.cpp" line="241"/>
+        <location filename="../src/ProgressController.cpp" line="243"/>
         <source>min</source>
         <translation type="unfinished">分钟</translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="221"/>
+        <location filename="../src/ProgressController.cpp" line="243"/>
         <source>ft in </source>
         <translation type="unfinished">英尺 在 </translation>
     </message>
     <message>
-        <location filename="../src/ProgressController.cpp" line="404"/>
+        <location filename="../src/ProgressController.cpp" line="447"/>
         <source>Are you sure you want to delete this record?</source>
         <translation type="unfinished">您确定要删除该记录吗？</translation>
     </message>
@@ -1420,14 +1430,12 @@ You can add some using the &quot;add&quot; button.</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="39"/>
         <source>Report</source>
-        <translation>报告</translation>
+        <translation type="obsolete">报告</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="46"/>
         <source>Donate</source>
-        <translation>捐赠</translation>
+        <translation type="obsolete">捐赠</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="60"/>

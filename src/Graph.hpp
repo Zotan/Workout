@@ -19,6 +19,7 @@ class Graph : public QObject {
     Q_PROPERTY( const bb::cascades::Image& image    READ getImage                               NOTIFY imageChanged)
     Q_PROPERTY( int width                           READ getWidth       WRITE setWidth          NOTIFY widthChanged)
     Q_PROPERTY( int height                          READ getHeight      WRITE setHeight         NOTIFY heightChanged)
+    Q_PROPERTY( bool empty                          READ isEmpty                                NOTIFY emptyChanged)
 
 
 private:
@@ -54,6 +55,9 @@ public Q_SLOTS:
     inline int  getHeight   () const                        { return m_Height; }
     inline void setHeight   (int c)                         { if(c != m_Height) {m_Height = c; emit  heightChanged(); }}
 
+    inline bool isEmpty     () const                        { return (m_Labels.size() == 0); }
+
+
     void draw               ();
 
     void clear              ();
@@ -71,6 +75,7 @@ Q_SIGNALS:
     void imageChanged();
     void widthChanged();
     void heightChanged();
+    void emptyChanged();
 
 
 

@@ -13,8 +13,12 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/GroupDataModel>
 #include <bb/system/SystemDialog>
+#include <limits>
 
 ProgressController::ProgressController(QObject *parent) : QObject(parent),  m_ListView(NULL), m_CacheId(0), m_CacheCategory(0), m_CacheExerciseId(0) {
+    m_Criteria = 0;
+    m_StartGraph = initDate();
+    m_EndGraph = initDateNow();
 
 }
 
@@ -41,11 +45,26 @@ void ProgressController::getWeightsList() {
 
 
     QList<QObject*> datas;
+    QSettings settings("Amonchakai", "Workout");
+    bool metric = settings.value("unit", 2).toInt() == 2;
 
     QList< BodyWeight* > bodyweights = Database::get()->getBodyWeights();
     for(int i = 0 ; i < bodyweights.size() ; ++i) {
-        datas.push_back(bodyweights[i]);
+        Detail *d = new Detail();
+
+        BodyWeight* bodyweight = bodyweights.at(i);
+
+        d->setTitle(bodyweight->getTime());
+        d->setId(bodyweight->getId());
+        if(metric)
+            d->setText( QString::number(bodyweight->getWeight()) + " Kg" );
+        else
+            d->setText( QString::number(bodyweight->getWeight()) + " lbs" );
+
+        datas.push_back(d);
     }
+
+
 
     dataModel->insertList(datas);
 
@@ -175,6 +194,9 @@ void ProgressController::loadStrengthHistory(int exercise_id) {
      }
 
      dataModel->insertList(datas);
+
+
+     plotStrength(exercise_id, m_StartGraph, m_EndGraph, m_Criteria);
 }
 
 
@@ -224,6 +246,8 @@ void ProgressController::loadCardioHistory(int exercise_id) {
      }
 
      dataModel->insertList(datas);
+
+     plotCardio(exercise_id, m_StartGraph, m_EndGraph, m_Criteria);
 }
 
 
@@ -272,6 +296,7 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
 
     QList<Set*> sets = Database::get()->getHistoryStrength(exercise_id, begin.toMSecsSinceEpoch(), end.toMSecsSinceEpoch());
 
+
     QList<QString> labels;
     QList<float>   datas;
 
@@ -288,28 +313,37 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
 
     QList<double> feature;
     if(sets.length() > 0) {
-        if(criteria < 4)
-            feature.push_back(sets.last()->getWeight());
-        else
+        if(criteria < 4) {
+            if(criteria < 2)
+                feature.push_back(sets.last()->getWeight());
+            else {
+                feature.push_back(sets.last()->getWeight() * sets.last()->getRepetition());
+            }
+        } else
             feature.push_back(sets.last()->getRepetition());
     }
 
+    qDebug() << "Plot generate features: " << criteria;
+
     for(int i = sets.length()-2 ; i >= 0 ; --i) {
+
+        // if the time difference is larger than 4h, then compute the index on the features
         if((sets.at(i)->getTime() - sets.at(i+1)->getTime()) > 1000*60*60*4) {
+
             switch(criteria % 4) {
                 case 0: {
                     double mx = 0;
                     for(int n = 0 ; n < feature.size() ; ++n) {
-                        mx = mx >  feature.at(n) ? mx : feature.at(n);
+                        mx = std::max(mx, feature.at(n));
                     }
                     datas.push_back(mx);
                     break;
                 }
 
                 case 1: {
-                    double mn = 10000000000.;
+                    double mn = std::numeric_limits<double>::max();
                     for(int n = 0 ; n < feature.size() ; ++n) {
-                        mn = mn <  feature.at(n) ? mn : feature.at(n);
+                        mn = std::min(mn, feature.at(n));
                     }
                     datas.push_back(mn);
                     break;
@@ -335,15 +369,24 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
             }
 
             feature.clear();
-            if(criteria < 4)
-                feature.push_back(sets.at(i)->getWeight());
-            else
+            if(criteria < 4) {
+                if(criteria < 2)
+                    feature.push_back(sets.at(i)->getWeight());
+                else {
+                    feature.push_back(sets.at(i)->getWeight() * sets.at(i)->getRepetition());
+                }
+            } else
                 feature.push_back(sets.at(i)->getRepetition());
 
+        // if the time difference between two sets is less than 4h, then build the array features
         } else {
-            if(criteria < 4)
-                feature.push_back(sets.at(i)->getWeight());
-            else
+            if(criteria < 4) {
+                if(criteria < 2)
+                    feature.push_back(sets.at(i)->getWeight());
+                else {
+                    feature.push_back(sets.at(i)->getWeight() * sets.at(i)->getRepetition());
+                }
+            } else
                 feature.push_back(sets.at(i)->getRepetition());
         }
     }
@@ -352,16 +395,16 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
         case 0: {
             double mx = 0;
             for(int n = 0 ; n < feature.size() ; ++n) {
-                mx = mx >  feature.at(n) ? mx : feature.at(n);
+                mx = std::max(mx, feature.at(n));
             }
             datas.push_back(mx);
             break;
         }
 
         case 1: {
-            double mn = 10000000000.;
+            double mn = std::numeric_limits<double>::max();
             for(int n = 0 ; n < feature.size() ; ++n) {
-                mn = mn <  feature.at(n) ? mn : feature.at(n);
+                mn = std::max(mn, feature.at(n));
             }
             datas.push_back(mn);
             break;
@@ -427,6 +470,7 @@ void ProgressController::onPromptFinishedDeletePractice(bb::system::SystemUiResu
                 break;
 
             case 2:
+                updateRepIds();
                 loadStrengthHistory(m_CacheExerciseId);
                 break;
         }
@@ -438,8 +482,26 @@ void ProgressController::deleteRecord(int id, int category) {
     if(category == 1) {
         Database::get()->deletePracticeCardioEntry(id);
     } else {
+
+        m_CacheTimestamp = Database::get()->getSet(id)->getTime();
+
         Database::get()->deletePracticeStrengthEntry(id);
     }
 }
+
+
+void ProgressController::updateRepIds() {
+    qDebug() << "updateRepIds() ";
+    QList<Set*> sets = Database::get()->getHistoryStrength(m_CacheExerciseId, m_CacheTimestamp-4*1000*60*60, m_CacheTimestamp+4*1000*60*60);
+
+    for(int i = sets.length()-1 ; i >= 0 ; --i) {
+        qDebug() << sets.at(i)->getRepId();
+
+        sets.at(i)->setRepId(sets.length()-i);
+        Database::get()->updatePractice(sets.at(i));
+    }
+}
+
+
 
 

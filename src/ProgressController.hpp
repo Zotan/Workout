@@ -18,6 +18,9 @@
 class ProgressController : public QObject {
     Q_OBJECT;
 
+    Q_PROPERTY( int criteria        READ getCriteria    WRITE setCriteria     NOTIFY criteriaChanged)
+    Q_PROPERTY( QDateTime startTime READ getStartTime   WRITE setStartTime    NOTIFY startTimeChanged)
+    Q_PROPERTY( QDateTime endTime   READ getEndTime     WRITE setEndTime      NOTIFY endTimeChanged)
 
 private:
 
@@ -27,11 +30,25 @@ private:
     int                              m_CacheId;
     int                              m_CacheCategory;
     int                              m_CacheExerciseId;
+    qint64                           m_CacheTimestamp;
+
+    int                              m_Criteria;
+    QDateTime                        m_StartGraph;
+    QDateTime                        m_EndGraph;
 
 public:
     ProgressController              (QObject *parent = 0);
     virtual ~ProgressController     ()                               {};
 
+
+    inline int  getCriteria() const                                    { return m_Criteria; };
+    inline void setCriteria(int v)                                     { if(m_Criteria != v) { m_Criteria = v; emit criteriaChanged();} };
+
+    inline const QDateTime&  getStartTime() const                      { return m_StartGraph; };
+    inline void setStartTime(const QDateTime& v)                       { if(m_StartGraph != v) { m_StartGraph = v; emit startTimeChanged();} };
+
+    inline const QDateTime&  getEndTime() const                        { return m_EndGraph; };
+    inline void setEndTime(const QDateTime& v)                         { if(m_EndGraph != v) { m_EndGraph = v; emit endTimeChanged();} };
 
 
 public Q_SLOTS:
@@ -40,6 +57,7 @@ public Q_SLOTS:
     inline void setGraph             (QObject *gr)                    { m_GraphController = dynamic_cast<Graph*>(gr); };
 
     QDateTime initDate               () const                          { return QDateTime::currentDateTime().addYears(-1); }
+    QDateTime initDateNow            () const                          { return QDateTime::currentDateTime(); }
 
 
     void getWeightsList              ();
@@ -60,11 +78,15 @@ public Q_SLOTS:
     void deleteEntry                 (int id, int category, int exercise_id);
     void onPromptFinishedDeletePractice(bb::system::SystemUiResult::Type result);
     void deleteRecord                (int id, int category);
+    void updateRepIds                ();
 
 
 Q_SIGNALS:
 
     void completed();
+    void criteriaChanged();
+    void startTimeChanged();
+    void endTimeChanged();
 
 
 

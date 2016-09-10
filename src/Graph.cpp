@@ -53,10 +53,12 @@ void Graph::clear() {
     m_Image = QImage(QSize(m_Width, m_Height), QImage::Format_RGB32);
 
     if(bb::cascades::Application::instance()->themeSupport()->theme()->colorTheme()->style() == bb::cascades::VisualStyle::Dark) {
-        m_Image.fill(QColor("#2d2d2d"));
+        m_Image.fill(Qt::black); // QColor("#2d2d2d")
     } else {
         m_Image.fill(Qt::white);
     }
+
+    renderGraph();
 
     if(m_Container != NULL) {
         for(int i = 0 ; i < m_Labels.size() ; ++i) {
@@ -65,6 +67,8 @@ void Graph::clear() {
         }
         m_Labels.clear();
     }
+
+    emit emptyChanged();
 
 }
 
@@ -230,4 +234,6 @@ void Graph::renderGraph() {
 
     m_ImageGraph = bb::cascades::Image(imageData);
     emit imageChanged();
+
+    emit emptyChanged();
 }

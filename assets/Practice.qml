@@ -267,7 +267,7 @@ Page {
                  visible: category == 2
                  preferredHeight: ui.du(7)
                  horizontalAlignment: HorizontalAlignment.Fill
-                 background: Color.LightGray
+                 background: Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.LightGray : Color.DarkGray
                  
                  layout: StackLayout {
                      orientation: LayoutOrientation.LeftToRight
@@ -561,7 +561,7 @@ Page {
                                  text: qsTr("SET: ") + ListItemData.rep_id + "    " + ListItemData.repetition + qsTr(" REPS @ ") + ListItemData.weight + listItemContainer.ListItem.view.getUnitStr();
                                  verticalAlignment: VerticalAlignment.Center
                                  horizontalAlignment: HorizontalAlignment.Left
-                                 textStyle.color: ListItemData.done ? Color.Black : Color.LightGray
+                                 textStyle.color: ListItemData.done ? (Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.Black : Color.White) : (Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.LightGray : Color.DarkGray)
                              }
                              
                              Label {

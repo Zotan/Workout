@@ -34,7 +34,7 @@ TabbedPane {
                 onTriggered: {
                     settings.open();
                 }
-            },
+            }/*,
             ActionItem {
                 title: qsTr("Report")
                 imageSource: "asset:///bugReportIcons/BugReport_white.png"
@@ -48,7 +48,7 @@ TabbedPane {
                 onTriggered: {
                     payment.open();
                 }
-            }
+            }*/
         ]
     }
 

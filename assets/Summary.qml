@@ -92,7 +92,7 @@ NavigationPane {
                             
                             Label {
                                 text: ListItemData.weekday
-                                textStyle.color: containerItem.ListItem.selected || containerItem.ListItem.active ? Color.create("#1ca9be") : Color.Black
+                                textStyle.color: containerItem.ListItem.selected || containerItem.ListItem.active ? Color.create("#1ca9be") :  (Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.Black : Color.White)
                                 textStyle.fontSize: FontSize.XSmall
                                 verticalAlignment: VerticalAlignment.Top
                                 horizontalAlignment: HorizontalAlignment.Center
@@ -124,7 +124,7 @@ NavigationPane {
                             Container {
                                 preferredHeight: ui.du(1)
                                 preferredWidth: ui.du(5)
-                                background: containerItem.ListItem.selected || containerItem.ListItem.active ? Color.create("#1ca9be") : Color.Black
+                                background: containerItem.ListItem.selected || containerItem.ListItem.active ? Color.create("#1ca9be") : (Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.Black : Color.White)
                                 verticalAlignment: VerticalAlignment.Bottom
                                 horizontalAlignment: HorizontalAlignment.Center
                                 visible: ListItemData.marker

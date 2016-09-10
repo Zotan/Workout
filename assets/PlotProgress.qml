@@ -71,9 +71,7 @@ Page {
         }
         
         Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
+            layout: DockLayout { }
             id: graphUtility
             
             ScrollView {
@@ -95,6 +93,15 @@ Page {
                         scalingMethod: ScalingMethod.AspectFit
                     }
                 }
+            }
+            
+            Label {
+                text: qsTr("Nothing to plot yet. You should have at least worked out on two different days to plot a progresion!")
+                multiline: true
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+                textStyle.textAlign: TextAlign.Center
+                visible: graphController.empty
             }
         }
         
@@ -154,6 +161,8 @@ Page {
                                             for (var i = 0; i < deleteActionItem.selectionList.length; ++ i) {
                                                 progressController.deleteRecord(histModel.data(deleteActionItem.selectionList[i]).id, category);
                                             }
+                                            if(category == 2)
+                                                progressController.updateRepIds();
                                             
                                             switch(category) {
                                                 case 1:
@@ -222,7 +231,6 @@ Page {
                 
                 function deleteEntry(id) {
                     progressController.deleteEntry(id, category, exercise_id);
-                   
                 }
             }
             
@@ -248,8 +256,10 @@ Page {
             DateTimePicker {
                 id: startDate
                 title: qsTr("Start")
-                value: progressController.initDate();
+                value: progressController.startTime
                 onValueChanged: {
+                    progressController.startTime = value;
+                    
                     switch(category) {
                         
                         case 1:
@@ -270,8 +280,11 @@ Page {
             DateTimePicker {
                 id: endDate
                 title: qsTr("End")
+                value: progressController.endTime
                 
                 onValueChanged: {
+                    progressController.endTime = value;
+                    
                     switch(category) {
                         
                         case 1:
@@ -289,12 +302,13 @@ Page {
                 }
             }
         }
-        
+                
         
         DropDown {
             id: criteriaCardio
             visible: category == 1
             title: qsTr("Criteria")
+            selectedIndex: progressController.criteria
             
             options: [
                 Option {
@@ -304,7 +318,6 @@ Page {
                 Option {
                     text: qsTr("Distance")
                     value: 1
-                    selected: true
                 },
                 Option {
                     text: qsTr("Heart rate")
@@ -317,6 +330,7 @@ Page {
             ]
             
             onSelectedIndexChanged: {
+                progressController.criteria = selectedIndex;
                 progressController.plotCardio(exercise_id, startDate.value, endDate.value, selectedIndex);
             }
         }
@@ -327,12 +341,12 @@ Page {
             id: criteriaStrength
             visible: category == 2
             title: qsTr("Criteria")
+            selectedIndex: progressController.criteria
             
             options: [
                 Option {
                     text: qsTr("Max weight")
                     value: 0
-                    selected: true
                 },
                 Option {
                     text: qsTr("Min weight")
@@ -365,23 +379,45 @@ Page {
             ]
             
             onSelectedIndexChanged: {
+                progressController.criteria = selectedIndex;
                 progressController.plotStrength(exercise_id, startDate.value, endDate.value, selectedIndex);
             }
         }
 
     }
     
+    actions: [
+        ActionItem {
+            id: refresh
+            title: qsTr("Refresh")
+            imageSource: "asset:///images/ic_reload.png"
+            onTriggered: {
+                switch(category) {
+                    case 1:
+                        progressController.loadCardioHistory(exercise_id);
+                        break;
+                    
+                    case 2:
+                        progressController.loadStrengthHistory(exercise_id);
+                        break;
+                    
+                    case 3:
+                        progressController.plotBodyWeights(startDate.value, endDate.value);
+                        break;
+                }
+            }
+        }
+    ]
+    
     onExercise_idChanged: {
         switch(category) {
             
             case 1:
                 progressController.loadCardioHistory(exercise_id);
-                progressController.plotCardio(exercise_id, startDate.value, endDate.value, criteriaCardio.selectedIndex);
                 break;
             
             case 2:
                 progressController.loadStrengthHistory(exercise_id);
-                progressController.plotStrength(exercise_id, startDate.value, endDate.value, criteriaStrength.selectedIndex);
                 break;
             
             case 3:
@@ -398,6 +434,7 @@ Page {
         progressController.setListView(recordsList);
         
         if(typeof balanceController !== 'undefined'){
+            progressController.getWeightsList();
             progressController.plotBodyWeights(startDate.value, endDate.value);
         }
         
