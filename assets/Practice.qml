@@ -265,7 +265,7 @@ Page {
              
              Container {
                  visible: category == 2
-                 preferredHeight: ui.du(7)
+                 preferredHeight: interfaceContainer.isPassport() ? ui.du(9) : ui.du(7)
                  horizontalAlignment: HorizontalAlignment.Fill
                  background: Application.themeSupport.theme.colorTheme.style != VisualStyle.Dark ? Color.LightGray : Color.DarkGray
                  
@@ -285,8 +285,8 @@ Page {
                  
                  ImageButton {
                      defaultImageSource: "asset:///images/ic_expand.png" 
-                     preferredHeight: ui.du(7)
-                     preferredWidth: ui.du(7)
+                     preferredHeight: interfaceContainer.isPassport() ? ui.du(8) : ui.du(7)
+                     preferredWidth: interfaceContainer.isPassport() ? ui.du(8) : ui.du(7)
                      verticalAlignment: VerticalAlignment.Center
                      onClicked: {
                          practiceController.loadPrevious(exercise_id);

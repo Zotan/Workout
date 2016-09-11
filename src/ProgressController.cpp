@@ -404,7 +404,7 @@ void ProgressController::plotStrength(int exercise_id, const QDateTime &begin, c
         case 1: {
             double mn = std::numeric_limits<double>::max();
             for(int n = 0 ; n < feature.size() ; ++n) {
-                mn = std::max(mn, feature.at(n));
+                mn = std::min(mn, feature.at(n));
             }
             datas.push_back(mn);
             break;

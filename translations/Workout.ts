@@ -812,37 +812,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="98"/>
+        <location filename="../assets/Routine.qml" line="87"/>
         <source>No routines available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="148"/>
+        <location filename="../assets/Routine.qml" line="137"/>
         <source>Delete routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="149"/>
+        <location filename="../assets/Routine.qml" line="138"/>
         <source>Are you sure you want to delete these routines?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="166"/>
+        <location filename="../assets/Routine.qml" line="155"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="204"/>
+        <location filename="../assets/Routine.qml" line="193"/>
         <source>Routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="207"/>
+        <location filename="../assets/Routine.qml" line="196"/>
         <source>Rename routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="215"/>
+        <location filename="../assets/Routine.qml" line="204"/>
         <source>Delete routine</source>
         <translation type="unfinished"></translation>
     </message>

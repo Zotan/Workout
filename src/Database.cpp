@@ -667,11 +667,30 @@ QList<Set*> Database::getLastHistoryStrength(int exerciseId) {
     QList<Set*> exercises;
 
     QSqlQuery query(m_Database);
-    query.prepare("SELECT * FROM Sets WHERE exercise_id = :exercise_id AND time > :bg_time AND time < :ed_time ORDER BY time DESC ");
+    query.prepare("SELECT time FROM Sets WHERE exercise_id = :exercise_id AND time > :bg_time AND time < :ed_time ORDER BY time DESC LIMIT 1");
     query.bindValue(":exercise_id", exerciseId);
     query.bindValue(":bg_time", QDateTime::currentDateTime().addDays(-30).toMSecsSinceEpoch());
     query.bindValue(":ed_time", QDateTime::currentDateTime().addSecs(-4*60*60).toMSecsSinceEpoch());
-    query.exec();
+    if (!query.exec()) {
+        const QSqlError error = query.lastError();
+        qDebug() << "query error:" << error.text();
+    }
+
+    qint64 lastExerciseTimestamp;
+    if (query.next()) {
+        lastExerciseTimestamp = static_cast<qint64>(query.value(0).toLongLong());
+    } else {
+        return exercises;
+    }
+
+    query.prepare("SELECT * FROM Sets WHERE exercise_id = :exercise_id AND time >= :bg_time AND time <= :ed_time ORDER BY time DESC ");
+    query.bindValue(":exercise_id", exerciseId);
+    query.bindValue(":bg_time", lastExerciseTimestamp - 4*60*60*1000);
+    query.bindValue(":ed_time", lastExerciseTimestamp);
+    if (!query.exec()) {
+        const QSqlError error = query.lastError();
+        qDebug() << "query error:" << error.text();
+    }
 
     // exercise_id, repetition_id, time, note, repetition, weight
     while (query.next()) {
