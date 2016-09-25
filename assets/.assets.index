@@ -1,5 +1,5 @@
 1
-94
+96
 Balance.qml
 BugReport.qml
 bugReportIcons/BlablaRequest.png
@@ -89,6 +89,8 @@ render_graph.html
 render_graph_black.html
 Routine.qml
 RoutineDetail.qml
+SampleRoutine.xml
+SampleRoutines.qml
 Settings.qml
 Summary.qml
 template.html

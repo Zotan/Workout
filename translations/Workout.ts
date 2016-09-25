@@ -812,37 +812,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="87"/>
+        <location filename="../assets/Routine.qml" line="100"/>
         <source>No routines available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="137"/>
+        <location filename="../assets/Routine.qml" line="150"/>
         <source>Delete routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="138"/>
+        <location filename="../assets/Routine.qml" line="151"/>
         <source>Are you sure you want to delete these routines?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="155"/>
+        <location filename="../assets/Routine.qml" line="168"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="193"/>
+        <location filename="../assets/Routine.qml" line="206"/>
         <source>Routines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="196"/>
+        <location filename="../assets/Routine.qml" line="209"/>
         <source>Rename routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="204"/>
+        <location filename="../assets/Routine.qml" line="217"/>
         <source>Delete routine</source>
         <translation type="unfinished"></translation>
     </message>
@@ -850,42 +850,57 @@
 <context>
     <name>RoutineController</name>
     <message>
-        <location filename="../src/RoutineController.cpp" line="67"/>
+        <location filename="../src/RoutineController.cpp" line="70"/>
         <source>Add a new routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="69"/>
+        <location filename="../src/RoutineController.cpp" line="72"/>
         <source>name of the template...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="110"/>
+        <location filename="../src/RoutineController.cpp" line="113"/>
         <source>Delete routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="111"/>
+        <location filename="../src/RoutineController.cpp" line="114"/>
         <source>Are you sure you want to delete this routine?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="160"/>
+        <location filename="../src/RoutineController.cpp" line="163"/>
         <source>Rename routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="319"/>
+        <location filename="../src/RoutineController.cpp" line="260"/>
+        <source>You already have a routine called: &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="260"/>
+        <source>&quot;. Please rename the existing one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="297"/>
+        <source>The routine was added!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="377"/>
         <source>End of routine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="320"/>
+        <location filename="../src/RoutineController.cpp" line="378"/>
         <source>You have completed all the exercises, quit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="347"/>
+        <location filename="../src/RoutineController.cpp" line="405"/>
         <source>You are already at the first exercise of the list!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -936,6 +951,19 @@ You can add some using the &quot;add&quot; button.</source>
     <message>
         <location filename="../assets/RoutineDetail.qml" line="307"/>
         <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SampleRoutines</name>
+    <message>
+        <location filename="../assets/SampleRoutines.qml" line="21"/>
+        <source>Find a program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SampleRoutines.qml" line="111"/>
+        <source>Explanation video</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -27,12 +27,13 @@ public:
     static Database* get            ();
     virtual ~Database               ();
 
-
+    int              getExerciseId  (const QString& name) const;
     QList<Exercise*> getExerciseList(int routine_id = -1);
     QList<Routine*>  getRoutines();
     QList<RoutineExercise*> getRoutineExercises(int routine_id);
 
     void addRoutine                 (const QString &label);
+    int  getRoutineId               (const QString &label);
     void deleteRoutine              (int id);
     void renameRoutine              (int id, const QString &label);
 

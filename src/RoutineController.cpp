@@ -12,6 +12,9 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/GroupDataModel>
 #include <bb/cascades/ArrayDataModel>
+#include <bb/system/InvokeManager>
+#include <bb/system/InvokeRequest>
+#include <bb/system/InvokeTargetReply>
 #include <QRegExp>
 
 #include "Database.hpp"
@@ -19,7 +22,7 @@
 
 
 
-RoutineController::RoutineController(QObject *parent) : QObject(parent), m_RoutineList(NULL), m_RoutineDetailList(NULL), m_tmp_id(0), m_PlayListIndex(0) {
+RoutineController::RoutineController(QObject *parent) : QObject(parent), m_RoutineList(NULL), m_RoutineDetailList(NULL), m_InvokeManager(NULL), m_tmp_id(0), m_PlayListIndex(0) {
 
 }
 
@@ -245,6 +248,61 @@ void RoutineController::saveOrder() {
     }
 }
 
+
+void RoutineController::addPlan(const QString& title, const QString& plan) {
+    QRegExp exercise("([^\n]+)");
+
+
+    int routine_id = Database::get()->getRoutineId(title);
+    if(routine_id != -1) {
+        bb::system::SystemToast *toast = new bb::system::SystemToast(this);
+
+        toast->setBody(tr("You already have a routine called: \"") + title + tr("\". Please rename the existing one."));
+        toast->setPosition(bb::system::SystemUiPosition::MiddleCenter);
+        toast->show();
+        return;
+    }
+
+
+    Database::get()->addRoutine(title);
+    routine_id = Database::get()->getRoutineId(title);
+
+
+    if(routine_id == -1) {
+        qWarning() << "addPlan(): Routine ID is null. Should not happen, quit.";
+        return;
+    }
+
+    int pos = exercise.indexIn(plan);
+    int ex_pos = 0;
+    while(pos != -1) {
+        qDebug() << exercise.cap(1);
+
+        int exercise_id = Database::get()->getExerciseId(exercise.cap(1));
+
+        if(exercise_id == -1) {
+            Database::get()->addExercise(exercise.cap(1), 2);
+            exercise_id = Database::get()->getExerciseId(exercise.cap(1));
+        }
+
+        Database::get()->addExerciseToRoutine(routine_id, exercise_id, ex_pos);
+
+        pos += exercise.matchedLength();
+        pos = exercise.indexIn(plan, pos);
+        ++ex_pos;
+    }
+
+    bb::system::SystemToast *toast = new bb::system::SystemToast(this);
+
+    toast->setBody(tr("The routine was added!"));
+    toast->setPosition(bb::system::SystemUiPosition::MiddleCenter);
+    toast->show();
+
+    updateRoutineList();
+
+}
+
+
 void RoutineController::addExerciseToRoutine(int routine_id, int exercise_id) {
     Database::get()->addExerciseToRoutine(routine_id, exercise_id);
 
@@ -358,6 +416,19 @@ void RoutineController::onPromptFinishedEndRoutine(bb::system::SystemUiResult::T
     if(result == bb::system::SystemUiResult::ConfirmButtonSelection) {
         emit closeCard();
     }
+}
+
+
+void RoutineController::invokeBrowser(const QString& url) {
+    if(m_InvokeManager == NULL) {
+        m_InvokeManager = new bb::system::InvokeManager(this);
+    }
+
+    bb::system::InvokeRequest request;
+    request.setAction("bb.action.OPEN");
+    request.setUri(url);
+
+    m_InvokeManager->invoke(request);
 }
 
 

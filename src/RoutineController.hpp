@@ -14,6 +14,15 @@
 
 class RoutineExercise;
 
+namespace bb
+{
+    namespace system {
+        class InvokeManager;
+    }
+
+}
+
+
 class RoutineController : public QObject {
     Q_OBJECT;
 
@@ -23,6 +32,7 @@ private:
 
     bb::cascades::ListView          *m_RoutineList;
     bb::cascades::ListView          *m_RoutineDetailList;
+    bb::system::InvokeManager       *m_InvokeManager;
     int                              m_tmp_id;
 
     QList<RoutineExercise*>          m_Routine;
@@ -56,6 +66,9 @@ public Q_SLOTS:
     void removeExerciseFromRoutineNoAsk(int routine_id, int routine_exercise_id);
 
     void saveOrder                  ();
+
+    void addPlan                    (const QString& title, const QString& plan);
+    void invokeBrowser              (const QString& url);
 
 
     // ------------------------------------------------------------------------

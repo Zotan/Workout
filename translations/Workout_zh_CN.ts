@@ -936,37 +936,37 @@
         <translation>日程列表</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="87"/>
+        <location filename="../assets/Routine.qml" line="100"/>
         <source>No routines available.</source>
         <translation>无可用日程。</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="137"/>
+        <location filename="../assets/Routine.qml" line="150"/>
         <source>Delete routines</source>
         <translation>删除日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="138"/>
+        <location filename="../assets/Routine.qml" line="151"/>
         <source>Are you sure you want to delete these routines?</source>
         <translation>您确定要删除这些日程吗？</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="155"/>
+        <location filename="../assets/Routine.qml" line="168"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="193"/>
+        <location filename="../assets/Routine.qml" line="206"/>
         <source>Routines</source>
         <translation>日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="196"/>
+        <location filename="../assets/Routine.qml" line="209"/>
         <source>Rename routine</source>
         <translation>重命名日程</translation>
     </message>
     <message>
-        <location filename="../assets/Routine.qml" line="204"/>
+        <location filename="../assets/Routine.qml" line="217"/>
         <source>Delete routine</source>
         <translation>删除日程</translation>
     </message>
@@ -974,42 +974,57 @@
 <context>
     <name>RoutineController</name>
     <message>
-        <location filename="../src/RoutineController.cpp" line="67"/>
+        <location filename="../src/RoutineController.cpp" line="70"/>
         <source>Add a new routine</source>
         <translation>添加新日程</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="69"/>
+        <location filename="../src/RoutineController.cpp" line="72"/>
         <source>name of the template...</source>
         <translation>模板名称...</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="110"/>
+        <location filename="../src/RoutineController.cpp" line="113"/>
         <source>Delete routine</source>
         <translation>删除日程</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="111"/>
+        <location filename="../src/RoutineController.cpp" line="114"/>
         <source>Are you sure you want to delete this routine?</source>
         <translation>您确定要删除该日程吗？</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="160"/>
+        <location filename="../src/RoutineController.cpp" line="163"/>
         <source>Rename routine</source>
         <translation>重命名日程</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="319"/>
+        <location filename="../src/RoutineController.cpp" line="260"/>
+        <source>You already have a routine called: &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="260"/>
+        <source>&quot;. Please rename the existing one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="297"/>
+        <source>The routine was added!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/RoutineController.cpp" line="377"/>
         <source>End of routine</source>
         <translation>结束日程</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="320"/>
+        <location filename="../src/RoutineController.cpp" line="378"/>
         <source>You have completed all the exercises, quit?</source>
         <translation>您必须完成所有锻炼，退出吗？</translation>
     </message>
     <message>
-        <location filename="../src/RoutineController.cpp" line="347"/>
+        <location filename="../src/RoutineController.cpp" line="405"/>
         <source>You are already at the first exercise of the list!</source>
         <translation>您已进行该列表中的第一个锻炼！</translation>
     </message>
@@ -1062,6 +1077,19 @@ You can add some using the &quot;add&quot; button.</source>
         <location filename="../assets/RoutineDetail.qml" line="307"/>
         <source>Order</source>
         <translation>顺序</translation>
+    </message>
+</context>
+<context>
+    <name>SampleRoutines</name>
+    <message>
+        <location filename="../assets/SampleRoutines.qml" line="21"/>
+        <source>Find a program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/SampleRoutines.qml" line="111"/>
+        <source>Explanation video</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

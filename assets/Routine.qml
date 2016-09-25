@@ -57,6 +57,19 @@ NavigationPane {
                         }
                     
                     }
+                    
+                    
+                    ImageButton {
+                        verticalAlignment: VerticalAlignment.Center
+                        defaultImageSource: "asset:///images/ic_help.png"
+                        preferredHeight: ui.du(8)
+                        preferredWidth: ui.du(8)
+                        onClicked: {
+                            if(!sampleRoutinePage)
+                                sampleRoutinePage = sampleRoutines.createObject();
+                            nav.push(sampleRoutinePage);
+                        }
+                    }
                                         
                 }
                 
@@ -291,6 +304,10 @@ NavigationPane {
             ComponentDefinition {
                 id: routineDetail
                 source: "RoutineDetail.qml"
+            },
+            ComponentDefinition {
+                id: sampleRoutines
+                source: "SampleRoutines.qml"
             },
             ComponentDefinition {
                 id: practice

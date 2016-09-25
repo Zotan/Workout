@@ -180,6 +180,34 @@ void Database::initDatabase() {
 }
 
 
+int Database::getExerciseId(const QString& name) const {
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT id FROM Exercises WHERE Title = :title; ");
+    query.bindValue(":title", name);
+    query.exec();
+
+    while (query.next()) {
+        return query.value(0).toInt();
+    }
+
+    return -1;
+}
+
+int  Database::getRoutineId(const QString &label) {
+    QSqlQuery query(m_Database);
+    query.prepare("SELECT id FROM Routines WHERE Title = :title; ");
+    query.bindValue(":title", label);
+    query.exec();
+
+    while (query.next()) {
+        return query.value(0).toInt();
+    }
+
+    return -1;
+}
+
+
+
 void Database::addRoutine(const QString &label) {
     QSqlQuery query(m_Database);
     query.prepare("INSERT INTO Routines (Title) VALUES(:title)");
