@@ -22,7 +22,13 @@ Page {
     Container {
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
-        }            
+        }         
+        
+        id: headerContainer   
+        
+        function isClassic() {
+            return DisplayInfo.width == 720;
+        }
         
         Container {
             background: back.imagePaint
@@ -33,7 +39,7 @@ Page {
             topPadding: 2
             
             horizontalAlignment: HorizontalAlignment.Fill
-            preferredHeight: ui.du(18)
+            preferredHeight: headerContainer.isClassic() ? ui.du(12) : ui.du(18)
             
             Label {
                 id: folder
@@ -122,7 +128,7 @@ Page {
              
              Container {
                  background: Color.Black
-                 preferredHeight: ui.du(20)
+                 preferredHeight: headerContainer.isClassic() ? ui.du(10) : ui.du(20)
                  leftPadding: ui.du(2)
                  rightPadding: ui.du(2)
                  bottomPadding: ui.du(5)

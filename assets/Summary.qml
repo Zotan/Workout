@@ -86,7 +86,7 @@ NavigationPane {
                         Container {
                             id: containerItem
                             preferredHeight: ui.du(9)
-                            preferredWidth: containerItem.ListItem.view.isPassport() ? ui.du(9.4) : ui.du(9)
+                            preferredWidth: (containerItem.ListItem.view.isPassport() || containerItem.ListItem.view.isClassic())  ? ui.du(9.4) : ui.du(9)
                             layout: DockLayout {}
                             
                             
@@ -136,7 +136,11 @@ NavigationPane {
                 ]
                 
                 function isPassport() {
-                    return DisplayInfo.width > 1000;
+                    return DisplayInfo.width > 1000 ;
+                }
+                
+                function isClassic() {
+                    return DisplayInfo.width == 720;
                 }
                 
                 onTriggered: {

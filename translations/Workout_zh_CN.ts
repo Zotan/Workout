@@ -622,22 +622,22 @@
         <translation type="obsolete">图表</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="311"/>
+        <location filename="../assets/Practice.qml" line="317"/>
         <source>Duration</source>
         <translation>持续时间</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="413"/>
+        <location filename="../assets/Practice.qml" line="419"/>
         <source>Distance</source>
         <translation>距离</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="442"/>
+        <location filename="../assets/Practice.qml" line="448"/>
         <source>Heart rate</source>
         <translation>心率</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="471"/>
+        <location filename="../assets/Practice.qml" line="477"/>
         <source>Calories</source>
         <translation>卡路里</translation>
     </message>
@@ -658,7 +658,7 @@
         <translation type="obsolete">磅</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="261"/>
+        <location filename="../assets/Practice.qml" line="267"/>
         <source>You have to perform at least one repetition!</source>
         <translation>您必须执行至少一次重复！</translation>
     </message>
@@ -671,22 +671,22 @@
         <translation type="obsolete">已完成</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="561"/>
+        <location filename="../assets/Practice.qml" line="567"/>
         <source>SET: </source>
         <translation>设置： </translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="561"/>
+        <location filename="../assets/Practice.qml" line="567"/>
         <source> REPS @ </source>
         <translation type="unfinished">次@</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="601"/>
+        <location filename="../assets/Practice.qml" line="607"/>
         <source> Kg</source>
         <translation> 千克</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="601"/>
+        <location filename="../assets/Practice.qml" line="607"/>
         <source> lbs</source>
         <translation> 磅</translation>
     </message>
@@ -695,12 +695,12 @@
         <translation type="obsolete">无可用历史纪录。您需要进行一些锻炼！</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="527"/>
+        <location filename="../assets/Practice.qml" line="533"/>
         <source>Delete records</source>
         <translation type="unfinished">删除记录</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="528"/>
+        <location filename="../assets/Practice.qml" line="534"/>
         <source>Are you sure you want to delete these records?</source>
         <translation type="unfinished">您确定要删除这些记录吗？</translation>
     </message>
@@ -709,18 +709,18 @@
         <translation type="obsolete"> 在 </translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="577"/>
+        <location filename="../assets/Practice.qml" line="583"/>
         <source>Practice</source>
         <translation type="unfinished">练习</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="580"/>
+        <location filename="../assets/Practice.qml" line="586"/>
         <source>Edit</source>
         <translation type="unfinished">编辑</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="544"/>
-        <location filename="../assets/Practice.qml" line="588"/>
+        <location filename="../assets/Practice.qml" line="550"/>
+        <location filename="../assets/Practice.qml" line="594"/>
         <source>Delete</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -781,79 +781,79 @@
         <translation type="obsolete">总次数</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="139"/>
+        <location filename="../assets/Practice.qml" line="145"/>
         <source>reps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="154"/>
+        <location filename="../assets/Practice.qml" line="160"/>
         <source>weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="201"/>
+        <location filename="../assets/Practice.qml" line="207"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="281"/>
+        <location filename="../assets/Practice.qml" line="287"/>
         <source>Sets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="701"/>
+        <location filename="../assets/Practice.qml" line="707"/>
         <source>Next</source>
         <translation>下一个</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="701"/>
-        <location filename="../assets/Practice.qml" line="831"/>
+        <location filename="../assets/Practice.qml" line="707"/>
+        <location filename="../assets/Practice.qml" line="837"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="733"/>
+        <location filename="../assets/Practice.qml" line="739"/>
         <source>You have to enter a duration!</source>
         <translation>您必须输入持续时间！</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="740"/>
+        <location filename="../assets/Practice.qml" line="746"/>
         <source>Prev</source>
         <translation>上一个</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="740"/>
+        <location filename="../assets/Practice.qml" line="746"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="761"/>
+        <location filename="../assets/Practice.qml" line="767"/>
         <source>Timer</source>
         <translation>计时器</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="798"/>
+        <location filename="../assets/Practice.qml" line="804"/>
         <source>Choose timer duration</source>
         <translation>选择计时器持续时间</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="822"/>
-        <location filename="../assets/Practice.qml" line="955"/>
+        <location filename="../assets/Practice.qml" line="828"/>
+        <location filename="../assets/Practice.qml" line="961"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="933"/>
+        <location filename="../assets/Practice.qml" line="939"/>
         <source>Create a new note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="941"/>
+        <location filename="../assets/Practice.qml" line="947"/>
         <source>Note attached to the next set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Practice.qml" line="963"/>
+        <location filename="../assets/Practice.qml" line="969"/>
         <source>Add to next set</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1168,7 +1168,7 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="obsolete">您的最近锻炼</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="180"/>
+        <location filename="../assets/Summary.qml" line="184"/>
         <source>STATS</source>
         <translation>统计</translation>
     </message>
@@ -1181,12 +1181,12 @@ You can add some using the &quot;add&quot; button.</source>
         <translation type="obsolete">图形进度</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="200"/>
+        <location filename="../assets/Summary.qml" line="204"/>
         <source>DETAILS</source>
         <translation>详情</translation>
     </message>
     <message>
-        <location filename="../assets/Summary.qml" line="223"/>
+        <location filename="../assets/Summary.qml" line="227"/>
         <source>No previous exercises available.</source>
         <translation>无可用锻炼。</translation>
     </message>
